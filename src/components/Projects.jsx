@@ -22,6 +22,13 @@ const projects = [
     desc: 'A university information project built as part of the Fundamentals of Programming 2 course.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Node.js', 'Express', 'REST API'],
   },
+  {
+    title: 'Bedrock - Nova Lite 2 Chatbot',
+    org: 'Live Demo',
+    link: 'https://bedrock-chatbot-1.onrender.com',
+    desc: 'A chatbot built with Amazon Bedrock - Nova Lite 2 project, showcasing natural language processing capabilities.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Python', 'AWS Lambda', 'API Gateway','Amazon Bedrock'],
+  }
 ]
 
 export default function Projects() {
