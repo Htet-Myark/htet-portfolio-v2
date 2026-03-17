@@ -1,8 +1,8 @@
 import React from 'react'
 
 const certs = [
-  { name: 'Certificate in Data & Analytics', issuer: 'Singapore Polytechnic' },
-  { name: 'AI Ethics & Governance (Associate Level)', issuer: 'Singapore Computer Society' },
+  { name: 'Certificate in Data & Analytics', issuer: 'Singapore Polytechnic',link: 'https://letters.gov.sg/i57jf-w3309-kq16n-rllq7' },
+  { name: 'AI Ethics & Governance (Associate Level)', issuer: 'Singapore Computer Society',link: 'https://drive.google.com/drive/folders/15zBT6Igfqlt80lvPuGblb2GBXtKv9vcw' },
 ]
 
 export default function Certificates() {
@@ -14,6 +14,13 @@ export default function Certificates() {
           <div className={`cert-card reveal-scale delay-${i + 1}`} key={i}>
             <div className="cert-name">{c.name}</div>
             <div className="cert-issuer">// {c.issuer}</div>
+            <div className='cert-link-container'>
+              {c.link && (
+                <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">
+                  View Credential
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>

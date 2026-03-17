@@ -9,7 +9,7 @@ export default function Nav() {
   }, [])
   return (
     <nav className={scrolled ? 'scrolled' : ''}>
-      <a href="#hero" className="nav-logo">HTET.DEV</a>
+      <a href="#hero" className="nav-logo">HTET MYARK AUNG</a>
       <ul className="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Experience</a></li>

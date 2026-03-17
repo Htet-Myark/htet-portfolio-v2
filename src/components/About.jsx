@@ -19,9 +19,9 @@ export default function About() {
           </p>
         </div>
         <ul className="detail-list">
-          <li className="reveal-left delay-1">Singapore Polytechnic — Dip. IT (Software Dev)</li>
+          <li className="reveal-left delay-1">Singapore Polytechnic — Diploma in IT (Software Dev)</li>
           <li className="reveal-left delay-2">Intern @ PSA Corporation Ltd</li>
-          <li className="reveal-left delay-3">Fluent in Burmese &amp; English</li>
+          <li className="reveal-left delay-3">Speak Burmese &amp; English</li>
         </ul>
       </div>
     </section>

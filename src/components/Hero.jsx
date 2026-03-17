@@ -17,9 +17,10 @@ export default function Hero() {
       </p>
 
       <p className="hero-sub reveal delay-3">
-        Final-year <strong>Diploma in Information Technology</strong> student at Singapore Polytechnic.
+        <strong>
+        Final-year Diploma in Information Technology student at Singapore Polytechnic.
         Hands-on experience across full-stack development, RPA automation, and AI systems.
-        Building at the intersection of code and craft.
+        Building at the intersection of code and craft.</strong>
       </p>
 
       <div className="hero-badges reveal delay-4">

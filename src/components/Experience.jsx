@@ -6,7 +6,7 @@ const experiences = [
     role: 'RPA Developer (Intern)',
     org: '// PSA Corporation Ltd',
     bullets: [
-      'Created and maintained RPA bots using UiPath and Power Automate',
+      'Created and maintained RPA solutions using UiPath and Power Automate',
       'Provided Level 1 helpdesk support and liaised with stakeholders to resolve issues',
       'Contributed to technical decisions on product features and improvements',
       'Conducted testing and technical development for project workflows',
