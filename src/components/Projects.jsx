@@ -8,13 +8,7 @@ const projects = [
     desc: 'A URL shortening service hosted with Render and NeonDB, built with Node.js, Express, and PostgreSQL.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
   },
-  {
-    title: 'Calculator',
-    org: 'Live Demo',
-    link: 'https://calculator-tyks.onrender.com/',
-    desc: 'A React calculator app hosted on Render. Supports basic arithmetic with a clean, responsive design.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'React'],
-  },
+  
   {
     title: 'FOP2 — University Info System',
     org: 'Live Demo',
