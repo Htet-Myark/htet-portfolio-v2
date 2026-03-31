@@ -3,6 +3,7 @@ import React from 'react'
 const certs = [
   { name: 'Certificate in Data & Analytics', issuer: 'Singapore Polytechnic',link: 'https://letters.gov.sg/i57jf-w3309-kq16n-rllq7' },
   { name: 'AI Ethics & Governance (Associate Level)', issuer: 'Singapore Computer Society',link: 'https://drive.google.com/drive/folders/15zBT6Igfqlt80lvPuGblb2GBXtKv9vcw' },
+  {name: 'Certificate in Teamwork', issuer:'Singapore Polytechnic',link: 'https://letters.gov.sg/ypvu4-dbfj8-e3ycy-g7muh'},
 ]
 
 export default function Certificates() {
