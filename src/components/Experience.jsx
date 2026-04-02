@@ -10,7 +10,6 @@ const experiences = [
       'Provided Level 1 helpdesk support and liaised with stakeholders to resolve issues',
       'Contributed to technical decisions on product features and improvements',
       'Conducted testing and technical development for project workflows',
-      'Supported decision-making in designing new features and modules',
       'Collaborated with cross-functional teams to ensure smooth project delivery',
     ],
   },
