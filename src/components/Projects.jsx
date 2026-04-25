@@ -19,9 +19,9 @@ const projects = [
   {
     title: 'Bedrock - Nova Lite 2 Chatbot',
     org: 'Live Demo',
-    link: 'https://bedrock-chatbot-1.onrender.com',
+    link: 'https://bedrock-nova-lite-2-sjon.vercel.app/',
     desc: 'A chatbot built with Amazon Bedrock - Nova Lite 2 project, showcasing natural language processing capabilities.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Python', 'AWS Lambda', 'API Gateway','Amazon Bedrock'],
+    tags: ['HTML', 'CSS', 'JavaScript', 'Python',  'Amazon Bedrock'],
   }
 ]
 
