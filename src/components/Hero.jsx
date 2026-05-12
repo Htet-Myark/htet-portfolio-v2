@@ -8,7 +8,7 @@ export default function Hero() {
       <h1 className="hero-name reveal delay-1">Htet Myark</h1>
 
       <p className="hero-title-line2 reveal delay-2">
-        IT Student &amp; Developer
+        Poly Graduate &amp; SoftwareDeveloper
       </p>
 
       <p className="hero-sub reveal delay-3">
