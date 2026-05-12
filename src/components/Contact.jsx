@@ -9,7 +9,7 @@ export default function Contact() {
       </p>
       <div className="contact-row">
         <a href="mailto:htetmyark@gmail.com" className="contact-link reveal delay-2">
-          MAIL → htetmyark@gmail.com
+          Email
         </a>
         <a href="https://github.com/htet-myark" target="_blank" rel="noopener noreferrer" className="contact-link reveal delay-3">
           GITHUB

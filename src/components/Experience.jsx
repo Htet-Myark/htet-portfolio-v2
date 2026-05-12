@@ -4,7 +4,7 @@ const experiences = [
   {
     date: 'APR 2025\n—\nFEB 2026',
     role: 'RPA Developer (Intern)',
-    org: '// PSA Corporation Ltd',
+    org: 'PSA Corporation Ltd',
     bullets: [
       'Created and maintained RPA solutions using UiPath and Power Automate',
       'Provided Level 1 helpdesk support and liaised with stakeholders to resolve issues',
