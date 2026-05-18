@@ -5,6 +5,7 @@ const certs = [
   { name: 'AI Ethics & Governance (Associate Level)', issuer: 'Singapore Computer Society',link: 'https://drive.google.com/drive/folders/15zBT6Igfqlt80lvPuGblb2GBXtKv9vcw' },
   {name: 'Certificate in Teamwork', issuer:'Singapore Polytechnic',link: 'https://letters.gov.sg/ypvu4-dbfj8-e3ycy-g7muh'},
   {name: 'Google AI Professional Certificate', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/professional-cert/certificate/V0T2EITRCPN8'},
+  {name: 'Google AI Essentials', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/professional-cert/certificate/9Z5K7Z3V2L8B'},
 ]
 
 export default function Certificates() {
