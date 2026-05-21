@@ -74,7 +74,7 @@ export default function ChatBot() {
       if (!apiKey) throw new Error('VITE_GEMINI_API_KEY is not set')
       const genAI = new GoogleGenerativeAI(apiKey)
       const model = genAI.getGenerativeModel({
-        model: 'gemini-2.0-flash',
+        model: 'gemini-3.5-flash',
         systemInstruction: KNOWLEDGE_BASE,
       })
       chatSessionRef.current = model.startChat({ history: [] })

@@ -12,6 +12,7 @@ export default function Nav() {
       <a href="#hero" className="nav-logo">HTET MYARK AUNG</a>
       <ul className="nav-links">
         <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
