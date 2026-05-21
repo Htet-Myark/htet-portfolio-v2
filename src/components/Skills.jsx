@@ -3,7 +3,7 @@ import React from 'react'
 const skills = [
   'HTML', 'CSS', 'JavaScript', 'Python', 'Java', 'SQL',
   'React', 'React Native', 'Vite', 'Node.js', 'Express', 'REST API',
-  'MySQL', 'PostgreSQL', 'UiPath', 'Power Automate',
+  'MySQL', 'PostgreSQL', 'UiPath', 'Power Automate', 'SharePoint',
   'Docker', 'AWS Basics', 'CI/CD', 'Git',
 ]
 
