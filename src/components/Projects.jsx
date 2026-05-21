@@ -4,7 +4,7 @@ const projects = [
   {
     title: 'Shrtner',
     org: 'Live Demo',
-    link: 'https://files-vkom.onrender.com',
+    link: 'https://shrtner.htetmyarkaung.com/',
     desc: 'A URL shortening service hosted with Render and NeonDB, built with Node.js, Express, and PostgreSQL.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'Express', 'PostgreSQL'],
   },
