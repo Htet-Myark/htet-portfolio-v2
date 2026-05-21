@@ -8,6 +8,7 @@ import Skills from './components/Skills'
 import Certificates from './components/Certificates'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ChatBot from './components/ChatBot'
 import './index.css'
 
 export default function App() {
@@ -41,6 +42,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <ChatBot />
     </>
   )
 }
