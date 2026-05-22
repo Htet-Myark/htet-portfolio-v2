@@ -7,7 +7,7 @@ export default function About() {
       <div className="about-grid">
         <div className="about-text">
           <p className="reveal delay-1">
-            I'm a <strong>software development student</strong> with a strong foundation in both
+            I'm a <strong>aspiring software developer</strong> with a strong foundation in both
             front-end and back-end technologies. My journey into IT was driven by
             a love for math and logic — I've since built experience across
             enterprise systems, RPA workflows, and web applications.
