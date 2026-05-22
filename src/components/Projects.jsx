@@ -15,6 +15,13 @@ const projects = [
     link: 'https://files-vkom.onrender.com/FOP2',
     desc: 'A university information project built as part of the Fundamentals of Programming 2 course.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Node.js', 'Express', 'REST API'],
+  },
+  {
+    title: 'Sar Kyi Tite - Library Management System',
+    org: 'Live Demo',
+    link: 'https://sarkyitite.htetmyarkaung.com/',
+    desc: 'A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.',
+    tags: ['React', 'Vite', 'React Router', 'Axios', 'Node.js', 'Express', 'MongoDB', 'JWT', 'bcrypt', 'Nodemailer'],
   }
   
 ]
