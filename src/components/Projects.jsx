@@ -22,9 +22,16 @@ const projects = [
     link: 'https://sarkyitite.htetmyarkaung.com/',
     desc: 'A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.',
     tags: ['React', 'Vite', 'React Router', 'Axios', 'Node.js', 'Express', 'MongoDB', 'JWT', 'bcrypt', 'Nodemailer'],
-  }
-  
+  },
+  {
+    title: 'AWS Bedrock Chatbot',
+    org: 'GitHub',
+    link: 'https://github.com/Htet-Myark/Bedrock-ChatBot',
+    desc: 'A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 — an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.',
+    tags: ['Python', 'AWS Bedrock', 'AWS Lambda', 'API Gateway', 'Amazon Nova Lite 2', 'AWS Guardrails'],
+  },
 ]
+
 
 export default function Projects() {
   return (
@@ -35,9 +42,10 @@ export default function Projects() {
           <div className={`project-card reveal delay-${i + 1}`} key={i}>
             <div className="project-top">
               <div className="project-title">{p.title}</div>
-              <a href={p.link} className="project-org" target="_blank" rel="noopener noreferrer">
-                {p.org}
-              </a>
+              {p.link
+                ? <a href={p.link} className="project-org" target="_blank" rel="noopener noreferrer">{p.org}</a>
+                : <span className="project-org" style={{ opacity: 0.4, cursor: 'default' }}>{p.org}</span>
+              }
             </div>
             <p className="project-desc">{p.desc}</p>
             <div className="tags">
