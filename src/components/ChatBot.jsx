@@ -17,27 +17,45 @@ Role: RPA Developer (Intern)
 Company: PSA Corporation Ltd
 Duration: April 2025 – February 2026
 Responsibilities:
+- Built an end-to-end Power Automate flow that reads 1,000+ row datasets from SharePoint Excel files, navigates an internal web portal, and submits each record via the system's REST API calls — all without manual intervention
+- Implemented structured error handling and result logging: each processed row is written back to the source Excel file with a success or failure status, providing a full audit trail for traceability
+- Configured automated Outlook email alerts to notify the intern and supervisor whenever an unrecoverable error halted the flow mid-run, enabling rapid response and minimising data loss
+- Eliminated repetitive manual data-entry work, saving significant man-hours per cycle and freeing the team to focus on higher-value tasks
+- Developed a UiPath RPA bot that scans a SharePoint Excel register of certificates, calculates days to expiry, and automatically sends Outlook email reminders to the team before certificates lapse
+- Acted as a user tester for a new internal system — submitted invalid and edge-case data to verify input validation, confirmed all API calls returned correct responses, and documented defects found
+- Participated in domain decision-making discussions, contributing technical input on system design and workflow feasibility for newly proposed features
 - Created and maintained RPA solutions using UiPath and Power Automate
 - Provided Level 1 helpdesk support and liaised with stakeholders to resolve issues
-- Contributed to technical decisions on product features and improvements
-- Conducted testing and technical development for project workflows
 - Collaborated with cross-functional teams to ensure smooth project delivery
 
 --- PROJECTS ---
 1. Shrtner
-   Description: A URL shortening service hosted with Render and NeonDB, built with Node.js, Express, and PostgreSQL.
-   Technologies: HTML, CSS, JavaScript, Node.js, Express, PostgreSQL
+   Description: A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. Supports custom aliases. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).
+   Technologies: HTML, CSS, JavaScript, Node.js, Express, PostgreSQL, NeonDB
+   Link: https://shrtner.htetmyarkaung.com/
 
 2. FOP2 — University Info System
    Description: A university information project built as part of the Fundamentals of Programming 2 course.
    Technologies: HTML, CSS, JavaScript, Bootstrap, Node.js, Express, REST API
+   Link: https://files-vkom.onrender.com/FOP2
+
+3. Sar Kyi Tite — Library Management System
+   Description: A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.
+   Technologies: React, Vite, React Router, Axios, Node.js, Express, MongoDB, JWT, bcrypt, Nodemailer
+   Link: https://sarkyitite.htetmyarkaung.com/
+
+4. AWS Bedrock Chatbot
+   Description: A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 — an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.
+   Technologies: Python, AWS Bedrock, AWS Lambda, API Gateway, Amazon Nova Lite 2, AWS Guardrails
+   Link: https://github.com/Htet-Myark/Bedrock-ChatBot
 
 --- SKILLS ---
 Frontend: HTML, CSS, JavaScript, React, React Native, Vite
 Backend: Node.js, Express, REST API, Python, Java
-Databases: SQL, MySQL, PostgreSQL
-Automation/RPA: UiPath, Power Automate
+Databases: SQL, MySQL, PostgreSQL, MongoDB
+Automation/RPA: UiPath, Power Automate, SharePoint
 DevOps/Cloud: Docker, AWS Basics, CI/CD, Git
+Other: UI/UX Design, Data Analysis, Excel, Secure Coding, Agile
 
 --- CERTIFICATIONS ---
 1. Certificate in Data & Analytics — Singapore Polytechnic
