@@ -5,7 +5,7 @@ const projects = [
     title: 'Shrtner',
     org: 'Live Demo',
     link: 'https://shrtner.htetmyarkaung.com/',
-    desc: 'A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. Supports custom aliases, click tracking, and link management. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).',
+    desc: 'A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. It supports custom aliases. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).',
     tags: [ 'HTML', 'CSS', 'JavaScript','Node.js', 'Express', 'PostgreSQL', 'NeonDB'],
   },
   
