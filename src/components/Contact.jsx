@@ -63,6 +63,16 @@ export default function Contact() {
         <a href="https://github.com/htet-myark" target="_blank" rel="noopener noreferrer" className="contact-link">GITHUB</a>
         <a href="https://sg.linkedin.com/in/htet-myark-aung" target="_blank" rel="noopener noreferrer" className="contact-link">LINKEDIN</a>
       </div>
+
+      <div className="reveal delay-3" style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+        <a
+          href="/Htet_Myark_Aung_Resume.pdf"
+          download="Htet_Myark_Aung_Resume.pdf"
+          className="btn-primary"
+        >
+          Download Resume
+        </a>
+      </div>
     </section>
   )
 }
