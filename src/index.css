@@ -563,6 +563,16 @@ section + section {
   transform: translateY(-1px);
 }
 
+.contact-link--resume {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.25);
+}
+
+.contact-link--resume:hover {
+  color: #86efac;
+  border-color: rgba(74, 222, 128, 0.5);
+}
+
 /* ── CONTACT FORM ───────────────────────────────────── */
 .contact-form { display: flex; flex-direction: column; gap: 1rem; max-width: 600px; }
 
