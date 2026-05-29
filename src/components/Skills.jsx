@@ -5,7 +5,7 @@ const skills = [
   'React', 'React Native', 'Vite', 'Node.js', 'Express', 'REST API',
   'MySQL', 'PostgreSQL', 'UiPath', 'Power Automate', 'SharePoint',
   'Docker', 'AWS Basics', 'CI/CD', 'Git',
-  'UI/UX Design', 'Data Analysis', 'Excel', 'Secure Coding', 'Agile',
+  'UI/UX Design', 'Data Analysis', 'Excel', 'Secure Coding', 'Agile','C#', 'Figma'
 ]
 
 export default function Skills() {
