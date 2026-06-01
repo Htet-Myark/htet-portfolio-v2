@@ -7,8 +7,9 @@ const LINKS = [
   { href: '#experience', label: 'Experience' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
+  { href: '#certs', label: 'Certificates' },
   { href: '#contact', label: 'Contact' },
-]
+] 
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
