@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-
 const LINKS = [
   { href: '#about', label: 'About' },
   { href: '#education', label: 'Education' },
@@ -9,7 +8,7 @@ const LINKS = [
   { href: '#skills', label: 'Skills' },
   { href: '#certs', label: 'Certificates' },
   { href: '#contact', label: 'Contact' },
-] 
+]
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -32,21 +31,39 @@ export default function Nav() {
     return () => observer.disconnect()
   }, [])
 
+  /* close menu on route change or resize */
+  useEffect(() => {
+    const close = () => setMenuOpen(false)
+    window.addEventListener('resize', close, { passive: true })
+    return () => window.removeEventListener('resize', close)
+  }, [])
+
   const close = () => setMenuOpen(false)
 
+  const navClass = [
+    scrolled ? 'scrolled' : '',
+    menuOpen ? 'nav-open' : '',
+  ].filter(Boolean).join(' ')
+
   return (
-    <div className={`nav-wrap${scrolled ? ' nav-scrolled' : ''}`}>
-      <nav className={`nav-pill${menuOpen ? ' nav-open' : ''}`}>
+    <>
+      <nav className={navClass || undefined}>
         <a href="#hero" className="nav-logo" onClick={close}>HTET MYARK</a>
+
         <ul className="nav-links">
           {LINKS.map(({ href, label }) => (
             <li key={href}>
-              <a href={href} className={active === href ? 'active' : ''} onClick={close}>
+              <a
+                href={href}
+                className={active === href ? 'active' : undefined}
+                onClick={close}
+              >
                 {label}
               </a>
             </li>
           ))}
         </ul>
+
         <button
           className="hamburger"
           onClick={() => setMenuOpen(o => !o)}
@@ -60,12 +77,17 @@ export default function Nav() {
       {menuOpen && (
         <div className="nav-mobile-menu">
           {LINKS.map(({ href, label }) => (
-            <a key={href} href={href} className={active === href ? 'active' : ''} onClick={close}>
+            <a
+              key={href}
+              href={href}
+              className={active === href ? 'active' : undefined}
+              onClick={close}
+            >
               {label}
             </a>
           ))}
         </div>
       )}
-    </div>
+    </>
   )
 }
