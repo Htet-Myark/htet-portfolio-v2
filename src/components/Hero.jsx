@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 const ROLES = [
   'Software Developer',
   'Full-Stack Builder',
-  'RPA Automation',
+  'RPA Developer',
   'Problem Solver',
 ]
 
