@@ -63,6 +63,7 @@ Other: UI/UX Design, Data Analysis, Excel, Secure Coding, Agile
 3. Certificate in Teamwork — Singapore Polytechnic
 4. Google AI Professional Certificate — Coursera
 5. Google AI Essentials — Coursera
+6. Manual Testing by TestMu AI (formerly LambdaTest) — TestMu AI
 `
 
 export default function ChatBot() {
