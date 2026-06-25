@@ -30,6 +30,13 @@ const projects = [
     desc: 'A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 — an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.',
     tags: ['Python', 'AWS Bedrock', 'AWS Lambda', 'API Gateway', 'Amazon Nova Lite 2', 'AWS Guardrails'],
   },
+  {
+    title: 'EduPlayground',
+    org: 'GitHub',
+    link: '',
+    desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller that reads aloud with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles across devices, a song-guessing game, sleep sounds, and a full kids section — no account required, works instantly in the browser.',
+    tags: ['React', 'Vite', 'Three.js', 'Node.js', 'Express', 'websockets',]
+  }
 ]
 
 
