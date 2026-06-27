@@ -34,12 +34,12 @@ Responsibilities:
    Technologies: HTML, CSS, JavaScript, Node.js, Express, PostgreSQL, NeonDB
    Link: https://shrtner.htetmyarkaung.com/
 
-2. FOP2 — University Info System
+2. FOP2 — University Info System (This module was from year 2 and later I deployed it as a personal project)
    Description: A university information project built as part of the Fundamentals of Programming 2 course.
    Technologies: HTML, CSS, JavaScript, Bootstrap, Node.js, Express, REST API
    Link: https://files-vkom.onrender.com/FOP2
 
-3. Sar Kyi Tite — Library Management System
+3. Sar Kyi Tite — Library Management System 
    Description: A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.
    Technologies: React, Vite, React Router, Axios, Node.js, Express, MongoDB, JWT, bcrypt, Nodemailer
    Link: https://sarkyitite.htetmyarkaung.com/
@@ -64,6 +64,8 @@ Other: UI/UX Design, Data Analysis, Excel, Secure Coding, Agile
 4. Google AI Professional Certificate — Coursera
 5. Google AI Essentials — Coursera
 6. Manual Testing by TestMu AI (formerly LambdaTest) — TestMu AI
+
+and now I am trying to the AWS solution architect associate certification.
 `
 
 export default function ChatBot() {
