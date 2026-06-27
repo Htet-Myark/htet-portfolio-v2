@@ -6,7 +6,7 @@ const certs = [
   {name: 'Certificate in Teamwork', issuer:'Singapore Polytechnic',link: 'https://letters.gov.sg/ypvu4-dbfj8-e3ycy-g7muh'},
   {name: 'Google AI Professional Certificate', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/professional-cert/certificate/V0T2EITRCPN8'},
   {name: 'Google AI Essentials', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/C6CKO497MDBN'},
-  {name: 'Manual Testing by TestMu AI (formerly LambdaTest)', issuer:'TestMu AI',link: 'https://www.testmuai.com/certified/LMT-8OROAL/'},
+  {name: 'Manual Testing Certificate', issuer:'TestMu AI',link: 'https://www.testmuai.com/certified/LMT-8OROAL/'},
 ]
 
 export default function Certificates() {
