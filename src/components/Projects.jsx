@@ -34,7 +34,7 @@ const projects = [
     title: 'EduPlayground',
     org: 'Live Demo',
     link: 'https://eduplayground-client-nuia.vercel.app/',
-    desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller that reads aloud with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles across devices, a song-guessing game, sleep sounds, and a full kids section — no account required, works instantly in the browser. Used github token for AI',
+    desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller that reads aloud with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles across devices, a song-guessing game, sleep sounds, and a full kids section — no account required, works instantly in the browser. Used github token for AI related dynamic task',
     tags: ['React', 'Vite', 'Three.js', 'Node.js', 'Express', 'websockets','']
   }
 ]
