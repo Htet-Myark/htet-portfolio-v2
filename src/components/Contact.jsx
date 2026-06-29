@@ -60,18 +60,6 @@ export default function Contact() {
 
       <div className="contact-row reveal delay-3" style={{ marginTop: '2.5rem' }}>
         <a href="mailto:htetmyark@gmail.com" className="contact-link">Email</a>
-        <a href="https://github.com/htet-myark" target="_blank" rel="noopener noreferrer" className="contact-link">GITHUB</a>
-        <a href="https://sg.linkedin.com/in/htet-myark-aung" target="_blank" rel="noopener noreferrer" className="contact-link">LINKEDIN</a>
-      </div>
-
-      <div className="contact-row reveal delay-3" style={{ marginTop: '1.5rem' }}>
-        <a
-          href="/Htet_Myark_Aung_Resume.pdf"
-          download="Htet_Myark_Aung_Resume.pdf"
-          className="contact-link contact-link--resume"
-        >
-          Download Resume
-        </a>
       </div>
     </section>
   )

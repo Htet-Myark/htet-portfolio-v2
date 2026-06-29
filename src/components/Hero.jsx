@@ -74,6 +74,18 @@ export default function Hero() {
         </a>
       </div>
 
+      <div className="contact-row reveal delay-5" style={{ marginTop: '1.75rem' }}>
+        <a href="https://github.com/htet-myark" target="_blank" rel="noopener noreferrer" className="contact-link">GITHUB</a>
+        <a href="https://sg.linkedin.com/in/htet-myark-aung" target="_blank" rel="noopener noreferrer" className="contact-link">LINKEDIN</a>
+        <a
+          href="/Htet_Myark_Aung_Resume.pdf"
+          download="Htet_Myark_Aung_Resume.pdf"
+          className="contact-link contact-link--resume"
+        >
+          Download Resume
+        </a>
+      </div>
+
       <div className="status-bar reveal delay-6">
         <span className="dot" aria-hidden="true" />
         Available for opportunities — Singapore
