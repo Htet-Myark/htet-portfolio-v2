@@ -65,7 +65,7 @@ Other: UI/UX Design, Data Analysis, Excel, Secure Coding, Agile
 5. Google AI Essentials — Coursera
 6. Manual Testing by TestMu AI (formerly LambdaTest) — TestMu AI
 
-and now I am trying to the AWS solution architect associate certification.
+and now I am trying to the AWS solution architect associate certification, but not really confident yet , so I am taking cloud practioner certification first to build a strong foundation before attempting the associate level exam. Now I also looking for a job as a fresher in Singapore, and I am open to any opportunities that match my skills and experience.
 `
 
 export default function ChatBot() {
