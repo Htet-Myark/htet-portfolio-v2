@@ -64,7 +64,7 @@ Other: UI/UX Design, Data Analysis, Excel, Secure Coding, Agile
 5. Google AI Essentials — Coursera
 6. Manual Testing by TestMu AI (formerly LambdaTest) — TestMu AI
 
-and now I am trying to the AWS solution architect associate certification, but not really confident yet , so I am taking cloud practioner certification first to build a strong foundation before attempting the associate level exam. Now I also looking for a job as a fresher in Singapore, and I am open to any opportunities that match my skills and experience. I have already passed the AWS AI practitioner certification on 1st July 2026.
+and now I am trying to the AWS solution architect associate certification, but not really confident yet , so I am taking cloud practioner certification first to build a strong foundation before attempting the associate level exam. Now I also looking for a job as a fresher in Singapore, and I am open to any opportunities that match my skills and experience. I have already passed the AWS AI practitioner certification on 1st July 2026 with 782/1000 marks, and I am planning to take the AWS solution architect associate certification in the next 2-3 months. I am also interested in learning more about cloud computing and AI/ML technologies, and I am willing to take on any projects or tasks that can help me grow my skills and knowledge.
 `
 
 // Gemini chat history must begin with a 'user' turn and alternate user/model.

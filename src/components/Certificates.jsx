@@ -7,6 +7,7 @@ const certs = [
   {name: 'Google AI Professional Certificate', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/professional-cert/certificate/V0T2EITRCPN8'},
   {name: 'Google AI Essentials', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/C6CKO497MDBN'},
   {name: 'Manual Testing Certificate', issuer:'TestMu AI',link: 'https://www.testmuai.com/certified/LMT-8OROAL/'},
+  {name: 'AWS AI Practitioner', issuer:'Amazon Web Services',link: 'https://www.credly.com/badges/ccf30247-4cd4-4827-b557-8375385dcdbf/public_url'},
 ]
 
 export default function Certificates() {
