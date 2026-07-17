@@ -2,7 +2,7 @@ import React from 'react'
 
 const experiences = [
   {
-    date: 'APR 2025\n—\nFEB 2026',
+    date: 'APR 2025\n-\nFEB 2026',
     role: 'RPA Developer (Intern)',
     org: 'PSA Corporation Ltd',
     bullets: [
@@ -19,7 +19,7 @@ const experiences = [
 export default function Experience() {
   return (
     <section id="experience">
-      <p className="section-heading reveal">Experience</p>
+      <h2 className="section-heading reveal">Experience</h2>
       {experiences.map((exp, i) => (
         <div className="exp-item reveal" key={i}>
           <div className="exp-date" style={{ whiteSpace: 'pre-line' }}>{exp.date}</div>

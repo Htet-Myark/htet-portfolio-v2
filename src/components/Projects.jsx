@@ -10,7 +10,7 @@ const projects = [
   },
   
   {
-    title: 'FOP2 — University Info System',
+    title: 'FOP2: University Info System',
     org: 'Live Demo',
     link: 'https://files-vkom.onrender.com/FOP2',
     desc: 'A university information project built as part of the Fundamentals of Programming 2 course.',
@@ -27,15 +27,15 @@ const projects = [
     title: 'AWS Bedrock Chatbot',
     org: 'GitHub',
     link: 'https://github.com/Htet-Myark/Bedrock-ChatBot',
-    desc: 'A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 — an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.',
+    desc: 'A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2, an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.',
     tags: ['Python', 'AWS Bedrock', 'AWS Lambda', 'API Gateway', 'Amazon Nova Lite 2', 'AWS Guardrails'],
   },
   {
     title: 'EduPlayground',
     org: 'Live Demo',
     link: 'https://eduplayground-client-nuia.vercel.app/',
-    desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller that reads aloud with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles across devices, a song-guessing game, sleep sounds, and a full kids section — no account required, works instantly in the browser. Used github token for AI related dynamic task',
-    tags: ['React', 'Vite', 'Three.js', 'Node.js', 'Express', 'websockets','']
+    desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles, a song-guessing game, sleep sounds, and a full kids section. No account required, works instantly in the browser.',
+    tags: ['React', 'Vite', 'Three.js', 'Node.js', 'Express', 'WebSockets']
   }
 ]
 
@@ -43,10 +43,10 @@ const projects = [
 export default function Projects() {
   return (
     <section id="projects">
-      <p className="section-heading reveal">Projects</p>
+      <h2 className="section-heading reveal">Projects</h2>
       <div className="projects-grid">
         {projects.map((p, i) => (
-          <div className={`project-card reveal delay-${i + 1}`} key={i}>
+          <div className={`project-card glow-card tilt-card reveal delay-${i + 1}`} key={i}>
             <div className="project-top">
               <div className="project-title">{p.title}</div>
               {p.link

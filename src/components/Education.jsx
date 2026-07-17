@@ -2,7 +2,7 @@ import React from 'react'
 
 const education = [
   {
-    date: 'APR 2023\n—\nAPR 2026',
+    date: 'APR 2023\n-\nAPR 2026',
     degree: 'Diploma in Information Technology',
     field: 'Software Development',
     org: 'Singapore Polytechnic',
@@ -12,7 +12,7 @@ const education = [
 export default function Education() {
   return (
     <section id="education">
-      <p className="section-heading reveal">Education</p>
+      <h2 className="section-heading reveal">Education</h2>
       {education.map((edu, i) => (
         <div className="exp-item reveal" key={i}>
           <div className="exp-date" style={{ whiteSpace: 'pre-line' }}>{edu.date}</div>

@@ -13,7 +13,6 @@ import ChatBot from './components/ChatBot'
 import './index.css'
 
 export default function App() {
-  const progressRef = useRef(null)
   const spotlightRef = useRef(null)
 
   /* scroll reveal */
@@ -33,16 +32,26 @@ export default function App() {
     return () => observer.disconnect()
   }, [])
 
-  /* scroll progress bar */
+  /* cursor-tracking glow + tilt on cards — delegated, only on pointer devices */
   useEffect(() => {
-    const el = progressRef.current
-    if (!el) return
-    const onScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight
-      el.style.transform = `scaleX(${total > 0 ? window.scrollY / total : 0})`
+    if (window.matchMedia('(hover: none)').matches) return
+
+    const onMove = (e) => {
+      const card = e.target.closest?.('.glow-card')
+      if (!card) return
+      const r = card.getBoundingClientRect()
+      const x = e.clientX - r.left
+      const y = e.clientY - r.top
+      card.style.setProperty('--mx', `${x}px`)
+      card.style.setProperty('--my', `${y}px`)
+      if (card.classList.contains('tilt-card')) {
+        card.style.setProperty('--rx', `${(y / r.height - 0.5) * -4}deg`)
+        card.style.setProperty('--ry', `${(x / r.width - 0.5) * 4}deg`)
+      }
     }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+
+    document.addEventListener('mousemove', onMove, { passive: true })
+    return () => document.removeEventListener('mousemove', onMove)
   }, [])
 
   /* cursor spotlight — smooth lerp via rAF, only on pointer devices */
@@ -73,7 +82,8 @@ export default function App() {
 
   return (
     <>
-      <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
+      {/* progress driven by CSS animation-timeline: scroll(root) */}
+      <div className="scroll-progress" aria-hidden="true" />
       <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
       <Nav />
       <main>

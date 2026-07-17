@@ -14,10 +14,10 @@ const certs = [
 export default function Certificates() {
   return (
     <section id="certs">
-      <p className="section-heading reveal">Certifications</p>
+      <h2 className="section-heading reveal">Certifications</h2>
       <div className="certs-list">
         {certs.map((c, i) => (
-          <div className={`cert-card reveal-scale delay-${i + 1}`} key={i}>
+          <div className={`cert-card glow-card reveal-scale delay-${i + 1}`} key={i}>
             <div className="cert-name">{c.name}</div>
             <div className="cert-issuer">{c.issuer}</div>
             <div className='cert-link-container'>

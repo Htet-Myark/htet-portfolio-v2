@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 const LINKS = [
   { href: '#about', label: 'About' },
@@ -14,11 +14,17 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [active, setActive] = useState('')
+  const sentinelRef = useRef(null)
 
+  /* scrolled state via IntersectionObserver on a top-of-page sentinel */
   useEffect(() => {
-    const handle = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', handle, { passive: true })
-    return () => window.removeEventListener('scroll', handle)
+    const el = sentinelRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting)
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   useEffect(() => {
@@ -47,6 +53,7 @@ export default function Nav() {
 
   return (
     <>
+      <div ref={sentinelRef} className="nav-sentinel" aria-hidden="true" />
       <nav className={navClass || undefined}>
         <a href="#hero" className="nav-logo" onClick={close}>HTET MYARK</a>
 

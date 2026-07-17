@@ -29,7 +29,7 @@ export default function ChatBot() {
     setMessages(prev => [...prev, { role: 'user', text: userText }])
     setIsLoading(true)
 
-    const QUOTA_REPLY = "Hey! Thanks so much for your interest. I'm a little overwhelmed with questions right now — but feel free to reach out to Htet directly through the contact section below. He'd love to hear from you!"
+    const QUOTA_REPLY = "Hey! Thanks so much for your interest. I'm a little overwhelmed with questions right now, but feel free to reach out to Htet directly through the contact section below. He'd love to hear from you!"
 
     try {
       const res = await fetch('/api/chat', {
