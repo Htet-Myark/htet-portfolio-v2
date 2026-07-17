@@ -46,17 +46,19 @@ export default function Projects() {
       <h2 className="section-heading reveal">Projects</h2>
       <div className="projects-grid">
         {projects.map((p, i) => (
-          <div className={`project-card glow-card tilt-card reveal delay-${i + 1}`} key={i}>
-            <div className="project-top">
-              <div className="project-title">{p.title}</div>
-              {p.link
-                ? <a href={p.link} className="project-org" target="_blank" rel="noopener noreferrer">{p.org}</a>
-                : <span className="project-org" style={{ opacity: 0.4, cursor: 'default' }}>{p.org}</span>
-              }
-            </div>
-            <p className="project-desc">{p.desc}</p>
-            <div className="tags">
-              {p.tags.map((t, j) => <span className="tag" key={j}>{t}</span>)}
+          <div className={`project-card reveal delay-${i + 1}`} key={i}>
+            <div className="card-core">
+              <div className="project-top">
+                <div className="project-title">{p.title}</div>
+                {p.link
+                  ? <a href={p.link} className="project-org" target="_blank" rel="noopener noreferrer">{p.org}</a>
+                  : <span className="project-org" style={{ opacity: 0.4, cursor: 'default' }}>{p.org}</span>
+                }
+              </div>
+              <p className="project-desc">{p.desc}</p>
+              <div className="tags">
+                {p.tags.map((t, j) => <span className="tag" key={j}>{t}</span>)}
+              </div>
             </div>
           </div>
         ))}

@@ -83,12 +83,14 @@ export default function Nav() {
 
       {menuOpen && (
         <div className="nav-mobile-menu">
-          {LINKS.map(({ href, label }) => (
+          {LINKS.map(({ href, label }, i) => (
             <a
               key={href}
               href={href}
               className={active === href ? 'active' : undefined}
               onClick={close}
+              /* staggered mask reveal */
+              style={{ animationDelay: `${0.08 + i * 0.06}s` }}
             >
               {label}
             </a>

@@ -17,16 +17,17 @@ export default function Certificates() {
       <h2 className="section-heading reveal">Certifications</h2>
       <div className="certs-list">
         {certs.map((c, i) => (
-          <div className={`cert-card glow-card reveal-scale delay-${i + 1}`} key={i}>
-            <div className="cert-name">{c.name}</div>
-            <div className="cert-issuer">{c.issuer}</div>
-            <div className='cert-link-container'>
-              {c.link && (
-                <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">
-                  View Credential
-                </a>
-                
-              )}
+          <div className={`cert-card reveal-scale delay-${i + 1}`} key={i}>
+            <div className="card-core">
+              <div className="cert-name">{c.name}</div>
+              <div className="cert-issuer">{c.issuer}</div>
+              <div className='cert-link-container'>
+                {c.link && (
+                  <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">
+                    View Credential
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}

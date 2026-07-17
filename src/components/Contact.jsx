@@ -29,7 +29,7 @@ export default function Contact() {
     <section id="contact">
       <h2 className="section-heading reveal">Contact</h2>
       <p className="contact-intro reveal delay-1">
-        I'm always open to connecting with fellow developers, recruiters, or anyone interested in chatting about tech. Feel free to reach out via the form below or connect with me directly!
+        I'm always open to connecting with fellow developers, recruiters, or anyone interested in chatting about tech. Drop a message below and I'll get back to you soon.
       </p>
 
       <form ref={formRef} onSubmit={handleSubmit} className="contact-form reveal delay-2">
@@ -58,18 +58,6 @@ export default function Contact() {
         )}
       </form>
 
-      <div className="contact-row reveal delay-3" style={{ marginTop: '2.5rem' }}>
-        <a href="mailto:htetmyark@gmail.com" className="contact-link">Email</a>
-        <a href="https://github.com/htet-myark" target="_blank" rel="noopener noreferrer" className="contact-link">GitHub</a>
-        <a href="https://sg.linkedin.com/in/htet-myark-aung" target="_blank" rel="noopener noreferrer" className="contact-link">LinkedIn</a>
-        <a
-          href="/Htet_Myark_Aung_Resume.pdf"
-          download="Htet_Myark_Aung_Resume.pdf"
-          className="contact-link contact-link--resume"
-        >
-          Download Resume
-        </a>
-      </div>
     </section>
   )
 }

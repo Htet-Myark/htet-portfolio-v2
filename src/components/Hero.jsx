@@ -32,17 +32,14 @@ export default function Hero() {
 
   return (
     <section id="hero">
-      {/* ambient background blobs */}
-      <div className="hero-blob hero-blob--1" aria-hidden="true" />
-      <div className="hero-blob hero-blob--2" aria-hidden="true" />
-      <div className="hero-blob hero-blob--3" aria-hidden="true" />
+      {/* ambient mesh orbs */}
+      <div className="hero-orb hero-orb--emerald" aria-hidden="true" />
+      <div className="hero-orb hero-orb--violet" aria-hidden="true" />
 
-      {/* rising accent sparks */}
-      <div className="hero-particles" aria-hidden="true">
-        {Array.from({ length: 9 }).map((_, i) => (
-          <span key={i} />
-        ))}
-      </div>
+      <p className="hero-eyebrow reveal">
+        <span className="dot" aria-hidden="true" />
+        Software Developer · Singapore
+      </p>
 
       <h1 className="hero-name">Htet Myark</h1>
 
@@ -63,18 +60,33 @@ export default function Hero() {
       <div className="hero-cta reveal delay-4">
         <a href="#projects" className="btn-primary">
           View Projects
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
+          <span className="btn-icon" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M7 17L17 7M9 7h8v8" />
+            </svg>
+          </span>
         </a>
         <a href="#contact" className="btn-secondary">
           Connect
         </a>
       </div>
 
-      <div className="status-bar reveal delay-5">
+      <div className="hero-links reveal delay-5">
+        <a
+          href="/Htet_Myark_Aung_Resume.pdf"
+          download="Htet_Myark_Aung_Resume.pdf"
+          className="link-resume"
+        >
+          Download Resume
+        </a>
+        <a href="https://github.com/htet-myark" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://sg.linkedin.com/in/htet-myark-aung" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:htetmyark@gmail.com">Email</a>
+      </div>
+
+      <div className="status-bar reveal delay-6">
         <span className="dot" aria-hidden="true" />
-        Open to opportunities in Singapore
+        Open to opportunities
       </div>
     </section>
   )
