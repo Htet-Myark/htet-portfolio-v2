@@ -35,7 +35,7 @@ const projects = [
     org: 'Live Demo',
     link: 'https://eduplayground-client-nuia.vercel.app/',
     desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles, a song-guessing game, sleep sounds, and a full kids section. No account required, works instantly in the browser.',
-    tags: ['React', 'Vite', 'Three.js', 'Node.js', 'Express', 'WebSockets','microsoft foundry']
+    tags: ['React', 'Vite', 'Three.js', 'Node.js', 'Express', 'WebSockets','Microsoft Foundry']
   }
 ]
 
