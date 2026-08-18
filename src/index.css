@@ -830,36 +830,15 @@ section {
   .tag:hover { color: var(--fg); border-color: var(--hairline); }
 }
 
-/* ── SKILLS: marquee ────────────────────────────────── */
-.marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-}
-
-.marquee + .marquee { margin-top: .85rem; }
-
-.marquee-track {
+/* ── SKILLS: static pill list ───────────────────────── */
+.skills-list {
   display: flex;
-  width: max-content;
-  animation: marquee-scroll 38s linear infinite;
-  will-change: transform;
-}
-
-.marquee-track .skill-pill { margin-right: .6rem; white-space: nowrap; }
-
-.marquee--reverse .marquee-track {
-  animation-direction: reverse;
-  animation-duration: 44s;
-}
-
-.marquee:hover .marquee-track { animation-play-state: paused; }
-
-@keyframes marquee-scroll {
-  to { transform: translateX(-50%); }
+  flex-wrap: wrap;
+  gap: .6rem;
 }
 
 .skill-pill {
+  white-space: nowrap;
   font-size: 13px;
   font-weight: 500;
   padding: 9px 18px;
@@ -1323,17 +1302,4 @@ footer span { color: var(--fg); font-weight: 500; }
   }
   .hero-orb { display: none; }
   body { animation: none; }
-
-  /* marquee falls back to a static wrapped list */
-  .marquee-track {
-    animation: none !important;
-    flex-wrap: wrap;
-    width: auto;
-    row-gap: .6rem;
-  }
-  .marquee-dup { display: none; }
-  .marquee {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
 }
