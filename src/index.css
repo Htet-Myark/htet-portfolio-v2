@@ -1258,20 +1258,104 @@ section {
 }
 
 /* ── FOOTER ─────────────────────────────────────────── */
-footer {
-  padding: 3rem 2rem;
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  margin-top: 3rem;
+  /* right padding clears the fixed chatbot bubble (54px + 2rem inset) */
+  padding: 4rem 6rem 3rem;
   text-align: center;
-  font-size: 13px;
-  color: var(--muted);
   border-top: 1px solid var(--hairline2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 60%);
 }
 
-footer span { color: var(--fg); font-weight: 500; }
+/* ambient emerald wash bleeding up from the bottom edge */
+.footer-glow {
+  position: absolute;
+  bottom: -220px;
+  left: 50%;
+  width: 620px; height: 380px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(110px);
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.13), transparent 70%);
+}
+
+/* social pills — same language as .hero-links */
+.footer-links {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: color 0.3s var(--ease), background 0.3s var(--ease),
+              border-color 0.3s, transform 0.5s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-links a:hover {
+    color: var(--fg);
+    background: var(--surface2);
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+  }
+}
+
+.footer-links a:active { transform: scale(0.97); transition-duration: 0.15s; }
+
+.footer-links a.footer-link--accent {
+  color: var(--accent);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-links a.footer-link--accent:hover {
+    color: #6ee7b7;
+    background: rgba(52, 211, 153, 0.08);
+    border-color: rgba(52, 211, 153, 0.5);
+  }
+}
+
+.footer-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--hairline2);
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.footer-copy span { color: var(--fg); font-weight: 500; }
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 1024px) {
   .nav-links { display: none !important; }
   .hamburger { display: flex; }
+}
+
+/* below ~900px the centered credit line reaches the chatbot bubble's column,
+   so lift it above the bubble's band instead of relying on side clearance */
+@media (max-width: 900px) {
+  .site-footer { padding-right: 2rem; padding-left: 2rem; padding-bottom: 5.5rem; }
 }
 
 @media (max-width: 640px) {
@@ -1285,6 +1369,9 @@ footer span { color: var(--fg); font-weight: 500; }
   .hero-name { font-size: clamp(2.4rem, 11vw, 3.6rem); }
   .hero-orb--emerald { width: 300px; height: 300px; right: -100px; }
   .hero-orb--violet { width: 260px; height: 260px; left: -100px; }
+  /* extra bottom clearance so the chatbot bubble never sits on the credit line */
+  .site-footer { padding: 3rem 1.25rem 5.5rem; }
+  .footer-links { margin-bottom: 2rem; }
 }
 
 /* ── REDUCED MOTION ─────────────────────────────────── */
@@ -1301,5 +1388,6 @@ footer span { color: var(--fg); font-weight: 500; }
     clip-path: none;
   }
   .hero-orb { display: none; }
+  .footer-glow { display: none; }
   body { animation: none; }
 }
