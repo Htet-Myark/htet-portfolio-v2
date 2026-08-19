@@ -7,6 +7,11 @@ export default function ChatBot() {
   ])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  /* first-visit nudge so people know the bubble is an AI assistant */
+  const [showHint, setShowHint] = useState(false)
+  const [hintDone, setHintDone] = useState(() => {
+    try { return sessionStorage.getItem('chatbot-hint-seen') === '1' } catch { return false }
+  })
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -15,6 +20,24 @@ export default function ChatBot() {
       inputRef.current.focus()
     }
   }, [isOpen])
+
+  /* surface the hint a beat after landing, once per session */
+  useEffect(() => {
+    if (hintDone || isOpen) return
+    const t = setTimeout(() => setShowHint(true), 2600)
+    return () => clearTimeout(t)
+  }, [hintDone, isOpen])
+
+  const dismissHint = () => {
+    setShowHint(false)
+    setHintDone(true)
+    try { sessionStorage.setItem('chatbot-hint-seen', '1') } catch { /* private mode */ }
+  }
+
+  const openChat = () => {
+    setIsOpen(true)
+    dismissHint()
+  }
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -115,10 +138,28 @@ export default function ChatBot() {
         </div>
       )}
 
+      {showHint && !isOpen && (
+        <div className="chatbot-hint">
+          <button className="chatbot-hint-open" onClick={openChat}>
+            <span className="chatbot-hint-dot" aria-hidden="true" />
+            Ask me anything about Htet
+          </button>
+          <button className="chatbot-hint-close" onClick={dismissHint} aria-label="Dismiss">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            </svg>
+          </button>
+        </div>
+      )}
+
       <button
-        className={`chatbot-bubble ${isOpen ? 'chatbot-bubble--open' : ''}`}
-        onClick={() => setIsOpen(o => !o)}
-        aria-label="Toggle chat"
+        className={[
+          'chatbot-bubble',
+          isOpen ? 'chatbot-bubble--open' : '',
+          !isOpen && !hintDone ? 'chatbot-bubble--attention' : '',
+        ].filter(Boolean).join(' ')}
+        onClick={() => { isOpen ? setIsOpen(false) : openChat() }}
+        aria-label={isOpen ? 'Close chat' : "Open AI assistant — ask about Htet"}
       >
         {isOpen ? (
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">

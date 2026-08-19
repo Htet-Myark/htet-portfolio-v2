@@ -1257,6 +1257,100 @@ section {
   .chatbot-bubble { bottom: 1.25rem; right: 1.25rem; }
 }
 
+/* ── CHATBOT HINT: tells people the bubble is an AI ──── */
+.chatbot-hint {
+  position: fixed;
+  bottom: 2.5rem;
+  right: calc(2rem + 64px);
+  z-index: 1100;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 4px 4px 6px;
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--hairline);
+  box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.8),
+              inset 0 1px 1px rgba(255, 255, 255, 0.06);
+  animation: hint-in 0.6s var(--ease-out) both;
+}
+
+@keyframes hint-in {
+  from { opacity: 0; transform: translateX(10px) scale(0.94); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.chatbot-hint-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s var(--ease);
+}
+
+.chatbot-hint-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+.chatbot-hint-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chatbot-hint-open:hover { color: var(--accent); }
+  .chatbot-hint-close:hover { color: var(--fg); background: var(--surface2); }
+}
+
+/* halo on the bubble until the visitor has engaged once */
+.chatbot-bubble--attention::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: bubble-halo 2.8s ease-out infinite;
+}
+
+@keyframes bubble-halo {
+  0%        { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+  70%, 100% { box-shadow: 0 0 0 14px rgba(52, 211, 153, 0); }
+}
+
+@media (max-width: 640px) {
+  /* stack the hint above the bubble instead of beside it */
+  .chatbot-hint {
+    right: 1.25rem;
+    bottom: calc(1.25rem + 64px);
+    max-width: calc(100vw - 2.5rem);
+  }
+  .chatbot-hint-open { font-size: 12px; }
+}
+
 /* ── FOOTER ─────────────────────────────────────────── */
 .site-footer {
   position: relative;
