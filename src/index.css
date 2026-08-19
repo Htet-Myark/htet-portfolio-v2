@@ -477,7 +477,8 @@ section {
   width: 32px;
   height: 32px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.07);
+  background: var(--accent);
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -486,9 +487,10 @@ section {
 
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
-    box-shadow: 0 20px 45px -12px rgba(245, 245, 244, 0.25);
+    box-shadow: 0 20px 45px -12px rgba(52, 211, 153, 0.35);
     transform: translateY(-2px);
   }
+  .btn-primary:hover .btn-icon { background: #6ee7b7; }
   .btn-primary:hover .btn-icon {
     transform: translate(2px, -1px) scale(1.05);
   }
