@@ -1,10 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react'
 
+const GREETING = "Hi! I'm Htet's AI assistant. Ask me anything about his experience, skills, or projects."
+
+/* conversation starters, shown only before the visitor's first message */
+const STARTERS = [
+  'What is his background?',
+  'Which projects stand out?',
+  'What tools does he use?',
+]
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([
-    { role: 'assistant', text: "Hi! I'm Htet's AI assistant. Ask me anything about his experience, skills, or projects." }
-  ])
+  const [messages, setMessages] = useState([{ role: 'assistant', text: GREETING }])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   /* first-visit nudge so people know the bubble is an AI assistant */
@@ -28,6 +35,14 @@ export default function ChatBot() {
     return () => clearTimeout(t)
   }, [hintDone, isOpen])
 
+  /* esc closes the panel from anywhere */
+  useEffect(() => {
+    if (!isOpen) return
+    const onKey = (e) => { if (e.key === 'Escape') setIsOpen(false) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isOpen])
+
   const dismissHint = () => {
     setShowHint(false)
     setHintDone(true)
@@ -43,12 +58,20 @@ export default function ChatBot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages, isLoading])
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return
+  /* textarea grows with its content up to the css max-height */
+  const autoGrow = (el) => {
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = Math.min(el.scrollHeight, 132) + 'px'
+  }
 
-    const userText = input.trim()
+  const sendMessage = async (override) => {
+    const userText = (override ?? input).trim()
+    if (!userText || isLoading) return
+
     const history = messages // prior conversation, sent to the server for context
     setInput('')
+    if (inputRef.current) inputRef.current.style.height = 'auto'
     setMessages(prev => [...prev, { role: 'user', text: userText }])
     setIsLoading(true)
 
@@ -84,56 +107,83 @@ export default function ChatBot() {
     }
   }
 
+  const showStarters = messages.length === 1 && !isLoading
+
   return (
     <>
       {isOpen && (
-        <div className="chatbot-panel">
-          <div className="chatbot-header">
-            <div className="chatbot-header-info">
-              <span className="chatbot-status-dot" />
-              <span>Ask about Htet</span>
+        <div className="chatbot-panel" role="dialog" aria-label="AI assistant">
+          <span className="chatbot-glow" aria-hidden="true" />
+          <div className="chatbot-core">
+            <div className="chatbot-header">
+              <div className="chatbot-header-info">
+                <span className="chatbot-avatar" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1.2l1.5 4.05a2 2 0 001.25 1.2L14.8 8l-4.05 1.55a2 2 0 00-1.25 1.2L8 14.8l-1.5-4.05a2 2 0 00-1.25-1.2L1.2 8l4.05-1.55a2 2 0 001.25-1.2L8 1.2z"
+                      fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                <span className="chatbot-titles">
+                  <span className="chatbot-title">Htet's AI assistant</span>
+                  <span className="chatbot-subtitle">
+                    <span className="chatbot-status-dot" />
+                    Online
+                  </span>
+                </span>
+              </div>
+              <button className="chatbot-close" onClick={() => setIsOpen(false)} aria-label="Close chat">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                </svg>
+              </button>
             </div>
-            <button className="chatbot-close" onClick={() => setIsOpen(false)} aria-label="Close chat">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-              </svg>
-            </button>
-          </div>
 
-          <div className="chatbot-messages">
-            {messages.map((msg, i) => (
-              <div key={i} className={`chatbot-msg chatbot-msg--${msg.role}`}>
-                {msg.text}
-              </div>
-            ))}
-            {isLoading && (
-              <div className="chatbot-msg chatbot-msg--assistant chatbot-typing">
-                <span /><span /><span />
-              </div>
-            )}
-            <div ref={messagesEndRef} />
-          </div>
+            <div className="chatbot-messages">
+              {messages.map((msg, i) => (
+                <div key={i} className={`chatbot-msg chatbot-msg--${msg.role}`}>
+                  {msg.text}
+                </div>
+              ))}
 
-          <div className="chatbot-input-row">
-            <textarea
-              ref={inputRef}
-              className="chatbot-input"
-              rows={1}
-              placeholder="Ask a question..."
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-            <button
-              className="chatbot-send"
-              onClick={sendMessage}
-              disabled={!input.trim() || isLoading}
-              aria-label="Send message"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M8 14V2M2 8l6-6 6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
+              {showStarters && (
+                <div className="chatbot-starters">
+                  {STARTERS.map(s => (
+                    <button key={s} className="chatbot-starter" onClick={() => sendMessage(s)}>
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {isLoading && (
+                <div className="chatbot-msg chatbot-msg--assistant chatbot-typing">
+                  <span /><span /><span />
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            <div className="chatbot-input-row">
+              <textarea
+                ref={inputRef}
+                className="chatbot-input"
+                rows={1}
+                placeholder="Ask a question..."
+                value={input}
+                onChange={e => { setInput(e.target.value); autoGrow(e.target) }}
+                onKeyDown={handleKeyDown}
+              />
+              <button
+                className="chatbot-send"
+                onClick={() => sendMessage()}
+                disabled={!input.trim() || isLoading}
+                aria-label="Send message"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M8 14V2M2 8l6-6 6 6" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -159,7 +209,7 @@ export default function ChatBot() {
           !isOpen && !hintDone ? 'chatbot-bubble--attention' : '',
         ].filter(Boolean).join(' ')}
         onClick={() => { isOpen ? setIsOpen(false) : openChat() }}
-        aria-label={isOpen ? 'Close chat' : "Open AI assistant — ask about Htet"}
+        aria-label={isOpen ? 'Close chat' : 'Open AI assistant, ask about Htet'}
       >
         {isOpen ? (
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
