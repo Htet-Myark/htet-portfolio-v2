@@ -9,7 +9,7 @@ const certs = [
   {name: 'Manual Testing Certificate', issuer:'TestMu AI',link: 'https://www.testmuai.com/certified/LMT-8OROAL/'},
   {name: 'AWS AI Practitioner', issuer:'Amazon Web Services',link: 'https://www.credly.com/badges/ccf30247-4cd4-4827-b557-8375385dcdbf/public_url'},
   {name: 'AWS Cloud Practitioner', issuer:'Amazon Web Services',link: 'https://www.credly.com/badges/2dd76b2b-8a3f-4194-a6cf-740bd063bb07/public_url'},
-  {name:'First Line Support', issuer:'Servicedesk-simulator',link: 'https://servicedesk-simulator.com/verify/e8wCQUE8ZDguYxF3g00RGyJEFDZ2/first_line_support'},
+  {name:'IT Support Foundations', issuer:'Servicedesk-simulator',link: 'https://servicedesk-simulator.com/verify/e8wCQUE8ZDguYxF3g00RGyJEFDZ2/it_support_foundations'},
 ]
 
 export default function Certificates() {
