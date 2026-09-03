@@ -43,6 +43,15 @@ const projects = [
     link: 'https://cross-road-chaos.vercel.app',
     desc: 'A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a thief who steals your parcel off the ground. Written in plain JavaScript on HTML5 Canvas with no build step and no dependencies, so it runs straight from a file. It ships with a password-protected analytics dashboard: a serverless collector writes anonymous visit and run statistics to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Node.js', 'Vercel Functions', 'PostgreSQL', 'NeonDB'],
+  },
+  {
+    title: '3-Tier Serverless Web App on AWS',
+    links: [
+      { org: 'Live Demo', link: 'https://d3vebm23m2k9w6.cloudfront.net/' },
+      { org: 'Write-up', link: 'https://3tierdocs-226748456235-us-east-1-an.s3.us-east-1.amazonaws.com/index.html' },
+    ],
+    desc: 'A serverless three-tier application that looks up a user by ID: a static front end in S3 served over HTTPS through CloudFront with origin access control, an API Gateway route calling a Node.js Lambda, and DynamoDB behind it. The write-up walks through the six errors I hit wiring the services together, what each one actually meant, plus the running cost and the teardown steps.',
+    tags: ['AWS S3', 'CloudFront', 'API Gateway', 'AWS Lambda', 'DynamoDB', 'Node.js', 'JavaScript', 'IAM'],
   }
 ]
 
@@ -52,15 +61,20 @@ export default function Projects() {
     <section id="projects">
       <h2 className="section-heading reveal">Projects</h2>
       <div className="projects-grid">
-        {projects.map((p, i) => (
-          <div className={`project-card reveal delay-${i + 1}`} key={i}>
+        {projects.map((p, i) => {
+          const links = p.links ?? [{ org: p.org, link: p.link }]
+          return (
+          <div className={`project-card reveal delay-${Math.min(i + 1, 6)}`} key={i}>
             <div className="card-core">
               <div className="project-top">
                 <div className="project-title">{p.title}</div>
-                {p.link
-                  ? <a href={p.link} className="project-org" target="_blank" rel="noopener noreferrer">{p.org}</a>
-                  : <span className="project-org" style={{ opacity: 0.4, cursor: 'default' }}>{p.org}</span>
-                }
+                <div className="project-orgs">
+                  {links.map((l, j) => (
+                    l.link
+                      ? <a href={l.link} className="project-org" target="_blank" rel="noopener noreferrer" key={j}>{l.org}</a>
+                      : <span className="project-org" style={{ opacity: 0.4, cursor: 'default' }} key={j}>{l.org}</span>
+                  ))}
+                </div>
               </div>
               <p className="project-desc">{p.desc}</p>
               <div className="tags">
@@ -68,7 +82,8 @@ export default function Projects() {
               </div>
             </div>
           </div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )

@@ -782,6 +782,14 @@ section {
   color: var(--fg);
 }
 
+
+.project-orgs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: .4rem;
+  flex-shrink: 0;
+}
 .project-org {
   font-size: 12px;
   font-weight: 500;
