@@ -1,4 +1,5 @@
 import React from 'react'
+import GitHubActivity from './GitHubActivity'
 
 export const projects = [
   {
@@ -85,6 +86,7 @@ export default function Projects() {
           )
         })}
       </div>
+      <GitHubActivity />
     </section>
   )
 }
