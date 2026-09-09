@@ -1,6 +1,6 @@
 import React from 'react'
 
-const projects = [
+export const projects = [
   {
     title: 'Shrtner',
     org: 'Live Demo',

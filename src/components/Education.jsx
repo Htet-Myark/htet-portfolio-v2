@@ -6,6 +6,7 @@ const education = [
     degree: 'Diploma in Information Technology',
     field: 'Software Development',
     org: 'Singapore Polytechnic',
+    gpa: '3.6 / 4.0',
   },
 ]
 
@@ -19,6 +20,7 @@ export default function Education() {
           <div>
             <div className="exp-role">{edu.degree}</div>
             <div className="exp-org">{edu.field} · {edu.org}</div>
+            {edu.gpa && <div className="exp-gpa">GPA <strong>{edu.gpa}</strong></div>}
           </div>
         </div>
       ))}
