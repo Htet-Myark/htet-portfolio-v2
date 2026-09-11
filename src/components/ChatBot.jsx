@@ -118,9 +118,14 @@ export default function ChatBot() {
             <div className="chatbot-header">
               <div className="chatbot-header-info">
                 <span className="chatbot-avatar" aria-hidden="true">
-                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 1.2l1.5 4.05a2 2 0 001.25 1.2L14.8 8l-4.05 1.55a2 2 0 00-1.25 1.2L8 14.8l-1.5-4.05a2 2 0 00-1.25-1.2L1.2 8l4.05-1.55a2 2 0 001.25-1.2L8 1.2z"
-                      fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.1" strokeLinejoin="round"/>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="2.6" r="1.5" fill="currentColor"/>
+                    <path d="M12 4.1v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                    <rect x="3.6" y="6.1" width="16.8" height="13" rx="4.6" fill="currentColor" fillOpacity=".18" stroke="currentColor" strokeWidth="1.8"/>
+                    <path d="M1.7 11.1v3.2M22.3 11.1v3.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                    <circle cx="9" cy="11.9" r="1.5" fill="currentColor"/>
+                    <circle cx="15" cy="11.9" r="1.5" fill="currentColor"/>
+                    <path d="M9.6 15.6h4.8" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
                   </svg>
                 </span>
                 <span className="chatbot-titles">
@@ -216,8 +221,14 @@ export default function ChatBot() {
             <path d="M1 1l16 16M17 1L1 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         ) : (
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M18 13a2 2 0 01-2 2H6l-4 4V4a2 2 0 012-2h12a2 2 0 012 2v9z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="2.5" r="1.4" fill="currentColor"/>
+            <path d="M12 3.9v2.2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+            <rect x="3.4" y="6.1" width="17.2" height="13" rx="4.6" fill="currentColor" fillOpacity=".12" stroke="currentColor" strokeWidth="1.7"/>
+            <path d="M1.5 11v3.3M22.5 11v3.3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+            <circle cx="9" cy="11.9" r="1.45" fill="currentColor"/>
+            <circle cx="15" cy="11.9" r="1.45" fill="currentColor"/>
+            <path d="M9.6 15.6h4.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
           </svg>
         )}
       </button>
