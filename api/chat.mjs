@@ -49,12 +49,15 @@ Responsibilities:
    Link: https://github.com/Htet-Myark/Bedrock-ChatBot
 
 --- SKILLS ---
-Frontend: HTML, CSS, JavaScript, React, React Native, Vite
-Backend: Node.js, Express, REST API, Python, Java
-Databases: SQL, MySQL, PostgreSQL, MongoDB
-Automation/RPA: UiPath, Power Automate, SharePoint
-DevOps/Cloud: Docker, AWS Basics, CI/CD, Git
-Other: UI/UX Design, Data Analysis, Excel, Secure Coding, Agile
+Frontend: HTML, CSS, JavaScript, React, React Native, Vite, Three.js, UI/UX Design, Figma
+Backend: Java, J2EE, C#, Python, Node.js, Express, REST API, WebSockets
+Database: SQL, MySQL, PostgreSQL, MongoDB
+Cloud: AWS (EC2, Lambda, S3, CloudFront, API Gateway, Bedrock, CloudFormation), Azure basics, Docker, Kubernetes basics, CI/CD, Linux basics
+Security: OWASP Top 10, Secure Coding
+Automation: UiPath, Power Automate, SharePoint, Selenium, Katalon Studio
+Tools: Git, Jira, Postman, Power BI, Excel, Data Analysis, Agile
+
+Note on AWS: Htet is AWS Certified Cloud Practitioner and AWS Certified AI Practitioner — do not describe his AWS knowledge as "basic".
 
 --- CERTIFICATIONS ---
 1. Certificate in Data & Analytics — Singapore Polytechnic
