@@ -1103,16 +1103,36 @@ section {
 .gh-legend span:first-child { margin-right: 2px; }
 .gh-legend span:last-child { margin-left: 2px; }
 
-/* compact variant — the hero strip. It drops the legend and the third stat and
-   sizes itself to its content. The hero card is pinned to 320px, which leaves
-   ~263px of grid once the 6px shell and 1.35rem core padding are removed, so
-   26 columns only fit on a 10px pitch: 26 * 10 - 2 = 258px. */
+/* compact variant — the hero strip. It drops the legend and the third stat.
+   The hero pins this card to 320px, so rather than sizing the cells in pixels
+   and hoping half a year clears the chrome, the columns divide whatever width
+   is left and aspect-ratio keeps them square. The graph then fits any card
+   width with no scrollbar, and the month labels flex on the same track so they
+   cannot drift out of register with the columns underneath. */
 .gh-card--compact {
-  --cell: 8px;
   --cell-gap: 2px;
   max-width: fit-content;
   position: relative;
   z-index: 2;
+}
+
+.gh-card--compact .gh-scroll { overflow: visible; padding-bottom: 0; }
+
+.gh-card--compact .gh-months,
+.gh-card--compact .gh-grid { width: 100%; min-width: 0; }
+
+/* the full-size card offsets the label track to let the last month overflow;
+   here that padding would shorten the track and skew every label left */
+.gh-card--compact .gh-months { padding-right: 0; }
+
+.gh-card--compact .gh-week,
+.gh-card--compact .gh-month { flex: 1 1 0; min-width: 0; }
+
+.gh-card--compact .gh-day {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
 }
 
 .gh-card.gh-card--compact .card-core { padding: 1.1rem 1.35rem; }
