@@ -86,7 +86,7 @@ export default function Projects() {
           )
         })}
       </div>
-      <GitHubActivity />
+      <GitHubActivity className="reveal" />
     </section>
   )
 }

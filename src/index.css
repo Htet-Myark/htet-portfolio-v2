@@ -314,6 +314,7 @@ section {
 
 /* ── HERO ────────────────────────────────────────────── */
 #hero {
+  --name-size: clamp(3rem, 8vw, 6.5rem);
   position: relative;
   overflow: visible;
   padding-top: 8rem;
@@ -390,7 +391,7 @@ section {
 
 .hero-name {
   font-family: var(--display);
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-size: var(--name-size);
   font-weight: 700;
   line-height: 1.0;
   letter-spacing: -.03em;
@@ -452,6 +453,49 @@ section {
   align-items: center;
   position: relative;
   z-index: 2;
+}
+
+/* .hero-sub caps at 540px, so everything below the name left the right half of
+   the hero empty; the activity strip fills it. The heading spans both columns —
+   inside the ~544px left column the name would wrap onto two lines — and the
+   strip is placed over that span deliberately: at its largest the name is about
+   555px wide and the right column starts at 600px, so they never collide. */
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: 3.5rem;
+  row-gap: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-head { grid-column: 1 / -1; grid-row: 1; }
+.hero-copy { grid-column: 1; grid-row: 2; min-width: 0; }
+
+/* the paragraph's own max-width is what sizes the left column now */
+.hero-copy .hero-sub { margin-bottom: 2.25rem; }
+
+/* spans from the heading row so it can sit level with the name. The offset
+   clears the eyebrow pill (31px tall + 2rem margin) and the cap-height gap the
+   name's line-height: 1 leaves above its glyphs (~0.15em), so the card's top
+   border lands on the top of the "H". */
+.hero-aside {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: 320px;
+  margin-top: calc(3.94rem + 0.15 * var(--name-size));
+}
+
+.hero-aside .gh-card--compact { max-width: none; }
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-head,
+  .hero-copy,
+  .hero-aside { grid-column: 1; grid-row: auto; }
+  .hero-aside { width: auto; margin-top: 2.5rem; }
+  .hero-aside .gh-card--compact { max-width: fit-content; }
 }
 
 /* ── BUTTONS: island pills ──────────────────────────── */
@@ -917,6 +961,8 @@ section {
 /* ── GITHUB CONTRIBUTION GRAPH ───────────── */
 /* outer shell of the double-bezel, matching .project-card architecture */
 .gh-card {
+  --cell: 11px;
+  --cell-gap: 3px;
   margin-top: 1.5rem;
   padding: 6px;
   background: var(--surface);
@@ -983,12 +1029,12 @@ section {
 }
 
 .gh-months,
-.gh-grid { display: flex; gap: 3px; min-width: max-content; }
+.gh-grid { display: flex; gap: var(--cell-gap); min-width: max-content; }
 
 .gh-months { margin-bottom: 5px; padding-right: 24px; }
 
 .gh-month {
-  flex: 0 0 11px;
+  flex: 0 0 var(--cell);
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: .04em;
@@ -997,13 +1043,13 @@ section {
   overflow: visible;
 }
 
-.gh-week { display: flex; flex-direction: column; gap: 3px; }
+.gh-week { display: flex; flex-direction: column; gap: var(--cell-gap); }
 
 .gh-day {
-  width: 11px;
-  height: 11px;
+  width: var(--cell);
+  height: var(--cell);
   border-radius: 2px;
-  flex: 0 0 11px;
+  flex: 0 0 var(--cell);
   transition: transform 0.2s var(--ease);
 }
 
@@ -1056,6 +1102,31 @@ section {
 
 .gh-legend span:first-child { margin-right: 2px; }
 .gh-legend span:last-child { margin-left: 2px; }
+
+/* compact variant — the hero strip. It drops the legend and the third stat and
+   sizes itself to its content. The hero card is pinned to 320px, which leaves
+   ~263px of grid once the 6px shell and 1.35rem core padding are removed, so
+   26 columns only fit on a 10px pitch: 26 * 10 - 2 = 258px. */
+.gh-card--compact {
+  --cell: 8px;
+  --cell-gap: 2px;
+  max-width: fit-content;
+  position: relative;
+  z-index: 2;
+}
+
+.gh-card.gh-card--compact .card-core { padding: 1.1rem 1.35rem; }
+.gh-card--compact .gh-head { margin-bottom: .7rem; }
+.gh-card--compact .gh-profile { margin-left: 1.5rem; }
+
+.gh-card--compact .gh-stats {
+  gap: .35rem 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 12.5px;
+}
+
+/* no legend below the grid, so the skeleton only stands in for the graph */
+.gh-card--compact .gh-skeleton { height: 90px; }
 
 /* ── SKILLS: grouped pill rows ───────────────────────── */
 .skills-groups {
@@ -1888,7 +1959,7 @@ section {
   #hero { padding-top: 7rem; min-height: auto; }
   .hero-cta { flex-direction: column; align-items: stretch; }
   .btn-primary, .btn-secondary { justify-content: center; }
-  .hero-name { font-size: clamp(2.4rem, 11vw, 3.6rem); }
+  #hero { --name-size: clamp(2.4rem, 11vw, 3.6rem); }
   .hero-orb--emerald { width: 300px; height: 300px; right: -100px; }
   .hero-orb--violet { width: 260px; height: 260px; left: -100px; }
   /* extra bottom clearance so the chatbot bubble never sits on the credit line */

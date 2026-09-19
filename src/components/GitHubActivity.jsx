@@ -5,6 +5,16 @@ const API = `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`
 
 const parseDay = (iso) => new Date(`${iso}T00:00:00`)
 
+/* The hero strip and the Projects card want the same year of data, so fetch it
+   once per page load and hand the same promise to every instance. */
+let request = null
+function loadDays() {
+  request ||= fetch(API)
+    .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
+    .then((d) => d.contributions ?? [])
+  return request
+}
+
 /* Pad the run of days so every column starts on a Sunday, then slice into weeks. */
 function toWeeks(days) {
   const cells = [...Array(parseDay(days[0].date).getDay()).fill(null), ...days]
@@ -13,17 +23,30 @@ function toWeeks(days) {
   return weeks
 }
 
-/* One label per week whose month differs from the week before it. */
-function monthLabels(weeks) {
+/* One label per week whose month differs from the week before it — minus any
+   that would collide with the next one. A label is ~20px wide and the compact
+   cells are on a 10px pitch, so it needs three columns of clearance; the window
+   almost always opens mid-month, which otherwise stacks a one-week stub label
+   right on top of the month after it. The later, fuller month wins. */
+function monthLabels(weeks, minGap = 3) {
+  const changes = []
   let previous = null
-  return weeks.map((week) => {
+  weeks.forEach((week, i) => {
     const day = week.find(Boolean)
-    if (!day) return ''
+    if (!day) return
     const date = parseDay(day.date)
-    if (date.getMonth() === previous) return ''
+    if (date.getMonth() === previous) return
     previous = date.getMonth()
-    return date.toLocaleDateString('en-US', { month: 'short' })
+    changes.push([i, date.toLocaleDateString('en-US', { month: 'short' })])
   })
+
+  const labels = weeks.map(() => '')
+  changes.forEach(([i, text], n) => {
+    const next = changes[n + 1]
+    if (next && next[0] - i < minGap) return
+    labels[i] = text
+  })
+  return labels
 }
 
 function streaks(days) {
@@ -49,32 +72,42 @@ const tooltip = (day) =>
     weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
   })
 
-export default function GitHubActivity() {
+/* `weeks` trims the graph to that many trailing weeks (default: the full year).
+   `compact` is the hero variant — tighter, two stats, no legend. */
+export default function GitHubActivity({ weeks: weekCount = null, compact = false, className = '' }) {
   const [days, setDays] = useState(null)
   const [failed, setFailed] = useState(false)
 
   useEffect(() => {
-    const controller = new AbortController()
-    fetch(API, { signal: controller.signal })
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
-      .then((d) => setDays(d.contributions ?? []))
-      .catch((e) => { if (e.name !== 'AbortError') setFailed(true) })
-    return () => controller.abort()
+    let alive = true
+    loadDays()
+      .then((d) => { if (alive) setDays(d) })
+      .catch(() => { if (alive) setFailed(true) })
+    return () => { alive = false }
   }, [])
 
   /* A third-party outage shouldn't leave a broken panel on the page. */
   if (failed) return null
 
-  const weeks = days?.length ? toWeeks(days) : []
+  const allWeeks = days?.length ? toWeeks(days) : []
+  const weeks = weekCount ? allWeeks.slice(-weekCount) : allWeeks
   const labels = monthLabels(weeks)
-  const total = days?.reduce((sum, d) => sum + d.count, 0) ?? 0
-  const { current, longest } = days?.length ? streaks(days) : { current: 0, longest: 0 }
+
+  /* Stats describe the window on screen, not the year behind it. */
+  const shownDays = weeks.flat().filter(Boolean)
+  const total = shownDays.reduce((sum, d) => sum + d.count, 0)
+  const { current, longest } = shownDays.length ? streaks(shownDays) : { current: 0, longest: 0 }
+  const period = !weekCount
+    ? 'the last year'
+    : weekCount >= 8
+      ? `the last ${Math.round(weekCount / 4.345)} months`
+      : `the last ${weekCount} weeks`
 
   return (
-    <div className="gh-card reveal">
+    <div className={['gh-card', compact && 'gh-card--compact', className].filter(Boolean).join(' ')}>
       <div className="card-core">
         <div className="gh-head">
-          <span className="gh-title">Contribution activity</span>
+          <span className="gh-title">{compact ? 'Recent activity' : 'Contribution activity'}</span>
           <a
             className="gh-profile"
             href={`https://github.com/${USER}`}
@@ -86,9 +119,9 @@ export default function GitHubActivity() {
         </div>
 
         <div className="gh-stats">
-          <span><strong>{total.toLocaleString('en-US')}</strong> in the last year</span>
+          <span><strong>{total.toLocaleString('en-US')}</strong> in {period}</span>
           <span><strong>{current}</strong>-day current streak</span>
-          <span><strong>{longest}</strong>-day longest streak</span>
+          {!compact && <span><strong>{longest}</strong>-day longest streak</span>}
         </div>
 
         <div className="gh-scroll">
@@ -102,7 +135,7 @@ export default function GitHubActivity() {
               <div
                 className="gh-grid"
                 role="img"
-                aria-label={`GitHub contribution graph: ${total} contributions in the last year`}
+                aria-label={`GitHub contribution graph: ${total} contributions in ${period}`}
               >
                 {weeks.map((week, w) => (
                   <div className="gh-week" key={w}>
@@ -118,11 +151,13 @@ export default function GitHubActivity() {
           )}
         </div>
 
-        <div className="gh-legend" aria-hidden="true">
-          <span>Less</span>
-          {[0, 1, 2, 3, 4].map((l) => <i className={`gh-day lvl-${l}`} key={l} />)}
-          <span>More</span>
-        </div>
+        {!compact && (
+          <div className="gh-legend" aria-hidden="true">
+            <span>Less</span>
+            {[0, 1, 2, 3, 4].map((l) => <i className={`gh-day lvl-${l}`} key={l} />)}
+            <span>More</span>
+          </div>
+        )}
       </div>
     </div>
   )
