@@ -23,16 +23,23 @@ function toWeeks(days) {
   return weeks
 }
 
-/* One label per week whose month differs from the week before it — minus any
-   that would collide with the next one. A label is ~20px wide and the compact
-   cells are on a 10px pitch, so it needs three columns of clearance; the window
-   almost always opens mid-month, which otherwise stacks a one-week stub label
-   right on top of the month after it. The later, fuller month wins. */
+const lastDay = (week) => [...week].reverse().find(Boolean)
+
+/* A label sits over the column whose week contains the 1st of that month, which
+   is why the month is read off the week's last day: keying off its first day
+   instead pushes every label a column to the right, since the week a month
+   starts in almost always begins in the month before.
+
+   Then any label with less than `minGap` columns before the next one is
+   dropped. A label is ~20px wide against a 10px column pitch, so it needs three
+   columns of clearance, and the window opens mid-month — only ever a stub of a
+   leading month can be that close, so the fuller month after it is the one to
+   keep. No two real month starts are within three weeks of each other. */
 function monthLabels(weeks, minGap = 3) {
   const changes = []
   let previous = null
   weeks.forEach((week, i) => {
-    const day = week.find(Boolean)
+    const day = lastDay(week)
     if (!day) return
     const date = parseDay(day.date)
     if (date.getMonth() === previous) return
