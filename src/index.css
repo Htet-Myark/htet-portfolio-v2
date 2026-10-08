@@ -57,6 +57,33 @@ a { color: inherit; text-decoration: none; }
 
 ::selection { background: var(--accent); color: var(--ink); }
 
+/* ── BACKGROUND VIDEO (fixed, behind everything) ────────── */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* dark scrim keeps text legible over the footage */
+.bg-video::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(5, 5, 5, 0.55), rgba(5, 5, 5, 0.75));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-video video { display: none; }
+}
+
 /* ── FILM GRAIN (fixed, pointer-events-none) ────────────── */
 .grain-overlay {
   position: fixed;

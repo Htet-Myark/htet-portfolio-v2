@@ -34,6 +34,10 @@ export default function App() {
     <>
       {/* progress driven by CSS animation-timeline: scroll(root) */}
       <div className="scroll-progress" aria-hidden="true" />
+      {/* fixed background video + readability scrim */}
+      <div className="bg-video" aria-hidden="true">
+        <video src="/bg-video.mp4" autoPlay muted loop playsInline preload="auto" />
+      </div>
       {/* film-grain overlay */}
       <div className="grain-overlay" aria-hidden="true" />
       <Nav />
