@@ -84,6 +84,15 @@ a { color: inherit; text-decoration: none; }
   .bg-video video { display: none; }
 }
 
+/* ── FLOATING DRONE (fixed full-viewport canvas, click-through) ── */
+.drone-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 900;          /* over the content, under the nav (1000) */
+  pointer-events: none;
+}
+.drone-layer canvas { display: block; }
+
 /* ── FILM GRAIN (fixed, pointer-events-none) ────────────── */
 .grain-overlay {
   position: fixed;
