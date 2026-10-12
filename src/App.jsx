@@ -27,9 +27,19 @@ export default function App() {
       },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     )
-    const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-scale, .reveal-clip')
-    elements.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
+    const SELECTOR = '.reveal, .reveal-left, .reveal-scale, .reveal-clip'
+    const observeAll = () =>
+      document.querySelectorAll(SELECTOR).forEach((el) => {
+        if (!el.classList.contains('visible')) observer.observe(el)
+      })
+    observeAll()
+    // pick up elements mounted later (hot reload, lazily rendered content)
+    const mutations = new MutationObserver(observeAll)
+    mutations.observe(document.body, { childList: true, subtree: true })
+    return () => {
+      observer.disconnect()
+      mutations.disconnect()
+    }
   }, [])
 
   return (
