@@ -11,6 +11,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
 import Drone from './components/Drone'
+import TechFloaters from './components/TechFloaters'
 import './index.css'
 
 export default function App() {
@@ -39,6 +40,8 @@ export default function App() {
       <div className="bg-video" aria-hidden="true">
         <video src="/bg-video.mp4" autoPlay muted loop playsInline preload="auto" />
       </div>
+      {/* IT-themed 3D objects drifting behind the content */}
+      <TechFloaters />
       {/* 3D drone floating over the whole page (click-through) */}
       <Drone />
       {/* film-grain overlay */}
