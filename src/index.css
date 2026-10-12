@@ -84,14 +84,28 @@ a { color: inherit; text-decoration: none; }
   .bg-video video { display: none; }
 }
 
-/* ── FLOATING TECH OBJECTS (above the video, behind content) ── */
-.tech-layer {
+/* ── 3D CITY BACKGROUND (fixed, behind everything) ──────── */
+.city-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;           /* same layer as .bg-video but later in the DOM */
+  z-index: -1;
   pointer-events: none;
+  background: var(--bg);   /* shown until three.js loads */
 }
-.tech-layer canvas { display: block; }
+.city-bg canvas {
+  display: block;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.city-bg.is-ready canvas { opacity: 1; }
+
+/* lighter scrim than the old video's: the city is already dark */
+.city-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(5, 5, 5, 0.3), rgba(5, 5, 5, 0.6));
+}
 
 /* ── FLOATING DRONE (fixed full-viewport canvas, click-through) ── */
 .drone-layer {
@@ -1976,6 +1990,18 @@ section {
 }
 
 .footer-copy span { color: var(--fg); font-weight: 500; }
+
+.footer-credit {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.6rem;
+  font-size: 11px;
+  color: var(--muted);
+  opacity: 0.7;
+  text-align: center;
+}
+.footer-credit a { text-decoration: underline; text-underline-offset: 2px; }
+.footer-credit a:hover { color: var(--accent); }
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 1024px) {

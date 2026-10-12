@@ -11,7 +11,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
 import Drone from './components/Drone'
-import TechFloaters from './components/TechFloaters'
+import CityBackground from './components/CityBackground'
 import './index.css'
 
 export default function App() {
@@ -36,12 +36,8 @@ export default function App() {
     <>
       {/* progress driven by CSS animation-timeline: scroll(root) */}
       <div className="scroll-progress" aria-hidden="true" />
-      {/* fixed background video + readability scrim */}
-      <div className="bg-video" aria-hidden="true">
-        <video src="/bg-video.mp4" autoPlay muted loop playsInline preload="auto" />
-      </div>
-      {/* IT-themed 3D objects drifting behind the content */}
-      <TechFloaters />
+      {/* 3D night city behind everything; scrolling flies the camera through it */}
+      <CityBackground />
       {/* 3D drone floating over the whole page (click-through) */}
       <Drone />
       {/* film-grain overlay */}

@@ -57,6 +57,12 @@ export default function Footer() {
       <p className="footer-copy reveal delay-1">
         <span>Htet Myark Aung</span> · Built with React + Vite · {new Date().getFullYear()}
       </p>
+      <p className="footer-credit">
+        Background: Downtown Singapore · Map data ©{' '}
+        <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">
+          OpenStreetMap contributors
+        </a>
+      </p>
     </footer>
   )
 }
