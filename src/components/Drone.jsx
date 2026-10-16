@@ -11,26 +11,26 @@ const SCALE = 0.55        // drone size in world units
 
 function build(THREE, scene) {
   /* ---------- lights ---------- */
-  scene.add(new THREE.HemisphereLight(0xbff7ef, 0x0a0a0a, 0.7))
+  scene.add(new THREE.HemisphereLight(0xf2eee6, 0x0a0a0a, 0.7))
   const key = new THREE.DirectionalLight(0xffffff, 2)
   key.position.set(5, 10, 8)
   scene.add(key)
-  const emerald = new THREE.PointLight(0x34d399, 8, 18)
-  scene.add(emerald)
-  const violet = new THREE.PointLight(0xa78bfa, 4, 14)
-  scene.add(violet)
+  const accentLight = new THREE.PointLight(0xe5533d, 6, 18)
+  scene.add(accentLight)
+  const fillLight = new THREE.PointLight(0xfff1e0, 3, 14)
+  scene.add(fillLight)
 
   /* ---------- materials ---------- */
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0xdfe6e4, metalness: 0.5, roughness: 0.3 })
   const darkMat = new THREE.MeshStandardMaterial({ color: 0x1b2326, metalness: 0.7, roughness: 0.4 })
   const accentMat = new THREE.MeshStandardMaterial({
-    color: 0x34d399, emissive: 0x34d399, emissiveIntensity: 0.7, metalness: 0.3, roughness: 0.3,
+    color: 0xe5533d, emissive: 0xe5533d, emissiveIntensity: 0.6, metalness: 0.3, roughness: 0.3,
   })
   const rotorMat = new THREE.MeshStandardMaterial({
-    color: 0xa78bfa, transparent: true, opacity: 0.55, metalness: 0.2, roughness: 0.4, side: THREE.DoubleSide,
+    color: 0x9a958b, transparent: true, opacity: 0.45, metalness: 0.2, roughness: 0.4, side: THREE.DoubleSide,
   })
   const lensMat = new THREE.MeshStandardMaterial({
-    color: 0x0a2a2c, metalness: 0.9, roughness: 0.1, emissive: 0x34d399, emissiveIntensity: 0.4,
+    color: 0x161514, metalness: 0.9, roughness: 0.1, emissive: 0xe5533d, emissiveIntensity: 0.25,
   })
 
   /* ---------- drone ---------- */
@@ -59,7 +59,7 @@ function build(THREE, scene) {
   gimbal.add(lens)
 
   const bladeGeo = new THREE.BoxGeometry(0.85, 0.01, 0.11)
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0x9fe8df, transparent: true, opacity: 0.12, side: THREE.DoubleSide })
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0xebe7de, transparent: true, opacity: 0.1, side: THREE.DoubleSide })
   const spinDirs = [1, -1, -1, 1]
   const rotors = [
     [0.9, 0.9], [-0.9, 0.9], [0.9, -0.9], [-0.9, -0.9],
@@ -93,7 +93,7 @@ function build(THREE, scene) {
     return { blades, dir: spinDirs[i] }
   })
 
-  const beacon = new THREE.PointLight(0x9fe8df, 1.5, 3)
+  const beacon = new THREE.PointLight(0xebe7de, 1.5, 3)
   beacon.position.set(0, -0.3, 0)
   body.add(beacon)
 
@@ -143,8 +143,8 @@ function build(THREE, scene) {
     const spin = (18 + lateral * 10) * dt * 3
     rotors.forEach((r) => { r.blades.rotation.y += spin * r.dir })
 
-    emerald.position.set(p.x - 3, p.y + 2, p.z - 2)
-    violet.position.set(p.x + 3, p.y - 1, p.z + 2)
+    accentLight.position.set(p.x - 3, p.y + 2, p.z - 2)
+    fillLight.position.set(p.x + 3, p.y - 1, p.z + 2)
   }
 }
 

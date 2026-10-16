@@ -38,27 +38,18 @@ export default function Skills() {
   return (
     <section id="skills">
       <h2 className="section-heading reveal">Skills</h2>
-      <div className="skills-card reveal">
-        <div className="card-core skills-groups">
-          {skillGroups.map((group, g) => (
-            <div
-              className="skill-group reveal"
-              key={group.label}
-              style={{ transitionDelay: `${g * 70}ms` }}
-            >
-              <h3 className="skill-group-label">
-                {group.label}
-                <span className="skill-group-count">{group.items.length}</span>
-              </h3>
-              <div className="skills-list">
-                {group.items.map((skill) => (
-                  <div className="skill-pill" key={skill}>{skill}</div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <dl className="skills-table panel reveal">
+        {skillGroups.map((group) => (
+          <div className="skill-group" key={group.label}>
+            <dt className="skill-group-label">{group.label}</dt>
+            <dd className="skills-list">
+              {group.items.map((skill) => (
+                <span className="skill-item" key={skill}>{skill}</span>
+              ))}
+            </dd>
+          </div>
+        ))}
+      </dl>
     </section>
   )
 }

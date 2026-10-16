@@ -60,31 +60,35 @@ export default function Projects() {
   return (
     <section id="projects">
       <h2 className="section-heading reveal">Projects</h2>
-      <div className="projects-grid">
+      <ol className="projects-list panel">
         {projects.map((p, i) => {
           const links = p.links ?? [{ org: p.org, link: p.link }]
           return (
-          <div className={`project-card reveal delay-${Math.min(i + 1, 6)}`} key={i}>
-            <div className="card-core">
-              <div className="project-top">
-                <div className="project-title">{p.title}</div>
-                <div className="project-orgs">
-                  {links.map((l, j) => (
-                    l.link
-                      ? <a href={l.link} className="project-org" target="_blank" rel="noopener noreferrer" key={j}>{l.org}</a>
-                      : <span className="project-org" style={{ opacity: 0.4, cursor: 'default' }} key={j}>{l.org}</span>
-                  ))}
-                </div>
+            <li className="project reveal" key={i}>
+              <span className="project-index">{String(i + 1).padStart(2, '0')}</span>
+              <div className="project-body">
+                <h3 className="project-title">{p.title}</h3>
+                <p className="project-desc">{p.desc}</p>
+                <p className="project-tags">{p.tags.join(' / ')}</p>
               </div>
-              <p className="project-desc">{p.desc}</p>
-              <div className="tags">
-                {p.tags.map((t, j) => <span className="tag" key={j}>{t}</span>)}
+              <div className="project-links">
+                {links.map((l, j) => (
+                  l.link
+                    ? (
+                      <a href={l.link} className="project-link" target="_blank" rel="noopener noreferrer" key={j}>
+                        {l.org}
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
+                          <path d="M7 17L17 7M9 7h8v8" />
+                        </svg>
+                      </a>
+                    )
+                    : <span className="project-link project-link--off" key={j}>{l.org}</span>
+                ))}
               </div>
-            </div>
-          </div>
+            </li>
           )
         })}
-      </div>
+      </ol>
     </section>
   )
 }

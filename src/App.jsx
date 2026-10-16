@@ -11,7 +11,7 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
 import Drone from './components/Drone'
-import CityBackground from './components/CityBackground'
+import FieldBackground from './components/FieldBackground'
 import './index.css'
 
 export default function App() {
@@ -46,12 +46,10 @@ export default function App() {
     <>
       {/* progress driven by CSS animation-timeline: scroll(root) */}
       <div className="scroll-progress" aria-hidden="true" />
-      {/* 3D night city behind everything; scrolling flies the camera through it */}
-      <CityBackground />
+      {/* 3D contour field behind everything; scrolling carries the terrain past */}
+      <FieldBackground />
       {/* 3D drone floating over the whole page (click-through) */}
       <Drone />
-      {/* film-grain overlay */}
-      <div className="grain-overlay" aria-hidden="true" />
       <Nav />
       <main>
         <Hero />
