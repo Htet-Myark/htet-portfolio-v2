@@ -71,14 +71,23 @@ export default function Nav() {
           ))}
         </ul>
 
-        <button
-          className="hamburger"
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Toggle navigation"
-          aria-expanded={menuOpen}
-        >
-          <span /><span /><span />
-        </button>
+        <div className="nav-actions">
+          <a
+            href="/Htet_Myark_Aung_Resume.pdf"
+            download="Htet_Myark_Aung_Resume.pdf"
+            className="btn-primary btn-sm"
+          >
+            Resume
+          </a>
+          <button
+            className="hamburger"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+          >
+            <span /><span /><span />
+          </button>
+        </div>
       </nav>
 
       {menuOpen && (

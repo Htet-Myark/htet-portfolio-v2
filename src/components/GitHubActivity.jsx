@@ -8,7 +8,7 @@ const parseDay = (iso) => new Date(`${iso}T00:00:00`)
 /* The hero strip and the Projects card want the same year of data, so fetch it
    once per page load and hand the same promise to every instance. */
 let request = null
-function loadDays() {
+export function loadDays() {
   request ||= fetch(API)
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.status))))
     .then((d) => d.contributions ?? [])

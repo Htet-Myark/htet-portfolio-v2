@@ -113,7 +113,6 @@ export default function ChatBot() {
     <>
       {isOpen && (
         <div className="chatbot-panel" role="dialog" aria-label="AI assistant">
-          <span className="chatbot-glow" aria-hidden="true" />
           <div className="chatbot-core">
             <div className="chatbot-header">
               <div className="chatbot-header-info">

@@ -1,4 +1,5 @@
 import React from 'react'
+import SectionHead from './SectionHead'
 
 export const certs = [
   { name: 'Certificate in Data & Analytics', issuer: 'Singapore Polytechnic',link: 'https://letters.gov.sg/i57jf-w3309-kq16n-rllq7' },
@@ -15,24 +16,19 @@ export const certs = [
 export default function Certificates() {
   return (
     <section id="certs">
-      <h2 className="section-heading reveal">Certifications</h2>
-      <div className="certs-list">
+      <SectionHead eyebrow="Certifications" title="Verified, not just listed." />
+      <ol className="certs-list reveal">
         {certs.map((c, i) => (
-          <div className={`cert-card reveal-scale delay-${i + 1}`} key={i}>
-            <div className="card-core">
-              <div className="cert-name">{c.name}</div>
-              <div className="cert-issuer">{c.issuer}</div>
-              <div className='cert-link-container'>
-                {c.link && (
-                  <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">
-                    View Credential
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
+          <li className="cert" key={i}>
+            <span className="cert-index">{String(i + 1).padStart(2, '0')}</span>
+            <span className="cert-name">{c.name}</span>
+            <span className="cert-issuer">{c.issuer}</span>
+            {c.link
+              ? <a href={c.link} target="_blank" rel="noopener noreferrer" className="cert-link">Verify</a>
+              : <span />}
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   )
 }
