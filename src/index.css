@@ -1395,15 +1395,13 @@ section {
   align-items: center;
   justify-content: space-between;
   gap: 1rem 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--line);
+  padding-right: 4.5rem;   /* keep clear of the chatbot bubble */
 }
 
 .footer-name {
-  font-family: var(--display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--fg);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
 }
 
 .footer-links {
@@ -1417,13 +1415,6 @@ section {
 
 .footer-links a { color: var(--text); }
 .footer-links a:hover { color: var(--link); }
-
-.footer-credit {
-  margin-top: 1.25rem;
-  font-size: 13px;
-  color: var(--faint);
-  padding-right: 5rem;   /* keep clear of the chatbot bubble */
-}
 
 /* ── RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 1024px) {
@@ -1493,7 +1484,7 @@ section {
   .chatbot-hint { right: 1.1rem; bottom: calc(1.1rem + 66px); max-width: calc(100vw - 2.2rem); }
 
   .site-footer { padding: 2rem 1.25rem 5.5rem; }
-  .footer-credit { padding-right: 0; }
+  .footer-row { padding-right: 0; }
 }
 
 /* ── REDUCED MOTION ─────────────────────────────────── */
