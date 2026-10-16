@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import SectionHead from './SectionHead'
 
 export const projects = [
   {
@@ -56,34 +57,93 @@ export const projects = [
 ]
 
 
+/* flat cover tones, cycled per card */
+const COVERS = ['cover--blue', 'cover--black', 'cover--sky', 'cover--stone']
+
+const Arrow = ({ dir }) => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    {dir === 'prev' ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
+  </svg>
+)
+
 export default function Projects() {
+  const trackRef = useRef(null)
+  const [active, setActive] = useState(0)
+  const [atStart, setAtStart] = useState(true)
+  const [atEnd, setAtEnd] = useState(false)
+
+  /* which card is leftmost, and whether either end has been reached */
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+    const update = () => {
+      const cards = [...track.children]
+      const left = track.scrollLeft
+      let nearest = 0
+      cards.forEach((c, i) => {
+        if (Math.abs(c.offsetLeft - track.offsetLeft - left) < Math.abs(cards[nearest].offsetLeft - track.offsetLeft - left)) nearest = i
+      })
+      setActive(nearest)
+      setAtStart(left < 8)
+      setAtEnd(left + track.clientWidth > track.scrollWidth - 8)
+    }
+    update()
+    track.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      track.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [])
+
+  const step = (dir) => {
+    const track = trackRef.current
+    const card = track?.children[0]
+    if (!card) return
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 0
+    track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
+  }
+
+  const controls = (
+    <div className="carousel-controls">
+      <span className="carousel-count" aria-live="polite">
+        <strong>{String(active + 1).padStart(2, '0')}</strong> / {String(projects.length).padStart(2, '0')}
+      </span>
+      <button className="round-btn" onClick={() => step(-1)} disabled={atStart} aria-label="Previous project">
+        <Arrow dir="prev" />
+      </button>
+      <button className="round-btn" onClick={() => step(1)} disabled={atEnd} aria-label="Next project">
+        <Arrow dir="next" />
+      </button>
+    </div>
+  )
+
   return (
     <section id="projects">
-      <h2 className="section-heading reveal">Projects</h2>
-      <ol className="projects-list panel">
+      <SectionHead eyebrow="Projects" title="Things I've built and shipped." aside={controls} />
+
+      <ol className="carousel reveal" ref={trackRef}>
         {projects.map((p, i) => {
           const links = p.links ?? [{ org: p.org, link: p.link }]
           return (
-            <li className="project reveal" key={i}>
-              <span className="project-index">{String(i + 1).padStart(2, '0')}</span>
-              <div className="project-body">
+            <li className="project" key={i}>
+              <div className={`project-cover ${COVERS[i % COVERS.length]}`}>
+                <span className="project-index">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="project-title">{p.title}</h3>
-                <p className="project-desc">{p.desc}</p>
-                <p className="project-tags">{p.tags.join(' / ')}</p>
+                <span className="project-lead">{p.tags[0]}</span>
               </div>
-              <div className="project-links">
-                {links.map((l, j) => (
-                  l.link
-                    ? (
-                      <a href={l.link} className="project-link" target="_blank" rel="noopener noreferrer" key={j}>
-                        {l.org}
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="square" aria-hidden="true">
-                          <path d="M7 17L17 7M9 7h8v8" />
-                        </svg>
-                      </a>
-                    )
-                    : <span className="project-link project-link--off" key={j}>{l.org}</span>
-                ))}
+              <div className="project-body">
+                <p className="project-desc">{p.desc}</p>
+                <ul className="project-tags">
+                  {p.tags.map((t) => <li className="chip" key={t}>{t}</li>)}
+                </ul>
+                <div className="project-links">
+                  {links.map((l, j) => (
+                    l.link
+                      ? <a href={l.link} className={j === 0 ? 'btn-primary btn-sm' : 'btn-secondary btn-sm'} target="_blank" rel="noopener noreferrer" key={j}>{l.org}</a>
+                      : <span className="btn-secondary btn-sm is-off" key={j}>{l.org}</span>
+                  ))}
+                </div>
               </div>
             </li>
           )

@@ -15,7 +15,7 @@ function build(THREE, scene) {
   const key = new THREE.DirectionalLight(0xffffff, 2)
   key.position.set(5, 10, 8)
   scene.add(key)
-  const accentLight = new THREE.PointLight(0xe5533d, 6, 18)
+  const accentLight = new THREE.PointLight(0x1428a0, 6, 18)
   scene.add(accentLight)
   const fillLight = new THREE.PointLight(0xfff1e0, 3, 14)
   scene.add(fillLight)
@@ -24,13 +24,13 @@ function build(THREE, scene) {
   const bodyMat = new THREE.MeshStandardMaterial({ color: 0xdfe6e4, metalness: 0.5, roughness: 0.3 })
   const darkMat = new THREE.MeshStandardMaterial({ color: 0x1b2326, metalness: 0.7, roughness: 0.4 })
   const accentMat = new THREE.MeshStandardMaterial({
-    color: 0xe5533d, emissive: 0xe5533d, emissiveIntensity: 0.6, metalness: 0.3, roughness: 0.3,
+    color: 0x1428a0, emissive: 0x1428a0, emissiveIntensity: 0.6, metalness: 0.3, roughness: 0.3,
   })
   const rotorMat = new THREE.MeshStandardMaterial({
     color: 0x9a958b, transparent: true, opacity: 0.45, metalness: 0.2, roughness: 0.4, side: THREE.DoubleSide,
   })
   const lensMat = new THREE.MeshStandardMaterial({
-    color: 0x161514, metalness: 0.9, roughness: 0.1, emissive: 0xe5533d, emissiveIntensity: 0.25,
+    color: 0x161514, metalness: 0.9, roughness: 0.1, emissive: 0x1428a0, emissiveIntensity: 0.25,
   })
 
   /* ---------- drone ---------- */

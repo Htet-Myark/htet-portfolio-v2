@@ -1,4 +1,5 @@
 import React from 'react'
+import SectionHead from './SectionHead'
 
 export const certs = [
   { name: 'Certificate in Data & Analytics', issuer: 'Singapore Polytechnic',link: 'https://letters.gov.sg/i57jf-w3309-kq16n-rllq7' },
@@ -15,8 +16,8 @@ export const certs = [
 export default function Certificates() {
   return (
     <section id="certs">
-      <h2 className="section-heading reveal">Certifications</h2>
-      <ol className="certs-list panel reveal">
+      <SectionHead eyebrow="Certifications" title="Verified, not just listed." />
+      <ol className="certs-list reveal">
         {certs.map((c, i) => (
           <li className="cert" key={i}>
             <span className="cert-index">{String(i + 1).padStart(2, '0')}</span>

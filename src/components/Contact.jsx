@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import SectionHead from './SectionHead'
 import emailjs from '@emailjs/browser'
 
 export default function Contact() {
@@ -27,7 +28,7 @@ export default function Contact() {
 
   return (
     <section id="contact">
-      <h2 className="section-heading reveal">Contact</h2>
+      <SectionHead eyebrow="Contact" title="Let's build something." />
       <p className="contact-intro reveal delay-1">
         I'm always open to connecting with fellow developers, recruiters, or anyone interested in chatting about tech. Drop a message below and I'll get back to you soon.
       </p>

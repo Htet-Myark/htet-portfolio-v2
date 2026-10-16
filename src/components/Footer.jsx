@@ -14,7 +14,8 @@ export default function Footer() {
       </div>
 
       <p className="footer-credit">
-        Built with React, Vite and three.js, {new Date().getFullYear()}.
+        The background is my last year of GitHub contributions, drawn as terrain: recent weeks
+        nearest, the busiest days lit up. Built with React, Vite and three.js, {new Date().getFullYear()}.
       </p>
     </footer>
   )

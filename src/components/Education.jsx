@@ -1,4 +1,5 @@
 import React from 'react'
+import SectionHead from './SectionHead'
 
 const education = [
   {
@@ -13,16 +14,25 @@ const education = [
 export default function Education() {
   return (
     <section id="education">
-      <h2 className="section-heading reveal">Education</h2>
+      <SectionHead eyebrow="Education" title="Where the foundations were laid." />
       {education.map((edu, i) => (
-        <div className="exp-item reveal" key={i}>
-          <div className="exp-date">{edu.date}</div>
-          <div>
-            <div className="exp-role">{edu.degree}</div>
-            <div className="exp-org">{edu.field} · {edu.org}</div>
-            {edu.gpa && <div className="exp-gpa">GPA <strong>{edu.gpa}</strong></div>}
-          </div>
-        </div>
+        <article className="job job--compact reveal" key={i}>
+          <header className="job-head">
+            <div>
+              <h3 className="job-role">{edu.degree}</h3>
+              <p className="job-org">{edu.field}, {edu.org}</p>
+            </div>
+            <span className="chip chip--blue">{edu.date}</span>
+          </header>
+          {edu.gpa && (
+            <dl className="job-metrics job-metrics--single">
+              <div className="job-metric">
+                <dt>{edu.gpa.replace(' / 4.0', '')}</dt>
+                <dd>GPA out of 4.0</dd>
+              </div>
+            </dl>
+          )}
+        </article>
       ))}
     </section>
   )

@@ -46,7 +46,7 @@ export default function App() {
     <>
       {/* progress driven by CSS animation-timeline: scroll(root) */}
       <div className="scroll-progress" aria-hidden="true" />
-      {/* 3D contour field behind everything; scrolling carries the terrain past */}
+      {/* GitHub contribution year as 3D terrain; scrolling walks back through it */}
       <FieldBackground />
       {/* 3D drone floating over the whole page (click-through) */}
       <Drone />
