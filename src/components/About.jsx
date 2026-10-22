@@ -84,8 +84,10 @@ export default function About() {
           <p className="tile-body">
             Since then I've built across enterprise systems, RPA workflows and web
             applications. I enjoy the whole stack, from crafting clean UIs to
-            integrating APIs and deploying containerised services. Always learning,
-            always shipping.
+            integrating APIs and deploying containerised services. On AWS I design
+            and ship serverless architectures with Lambda, API Gateway, S3, CloudFront,
+            DynamoDB and Bedrock, backed by Solutions Architect, AI Practitioner and
+            Cloud Practitioner certifications. Always learning, always shipping.
           </p>
         </article>
 
@@ -101,7 +103,7 @@ export default function About() {
             <span className="live-dot" aria-hidden="true" />
             Open to opportunities
           </p>
-          <p className="tile-body">Based in Singapore. Looking for software developer and automation roles.</p>
+          <p className="tile-body">Based in Singapore. Looking for software developer, cloud and automation roles.</p>
         </article>
 
         <article className="tile reveal delay-3">

@@ -387,6 +387,48 @@ section {
   background: #1aa053;
 }
 
+/* AWS cert badges as floating background elements */
+#hero { position: relative; isolation: isolate; }
+
+.hero-badges {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-badge-bg {
+  --rot: 0deg;
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  opacity: 0.42;
+  filter: drop-shadow(0 10px 24px rgba(20, 30, 90, 0.25));
+  transform: rotate(var(--rot));
+  animation: hero-badge-float 9s ease-in-out infinite;
+}
+
+.hero-badge-bg--saa { --size: 180px; --rot: 12deg;  top: 6rem;  right: 0; }
+.hero-badge-bg--ai  { --size: 140px; --rot: -10deg; top: 9rem;  left: 0;  animation-delay: -3s; animation-duration: 11s; }
+.hero-badge-bg--ccp { --size: 125px; --rot: 8deg;   top: 22rem; right: 4%; animation-delay: -6s; animation-duration: 10s; }
+
+@keyframes hero-badge-float {
+  0%, 100% { transform: translateY(0) rotate(var(--rot)); }
+  50%      { transform: translateY(-14px) rotate(calc(var(--rot) - 3deg)); }
+}
+
+@media (max-width: 720px) {
+  .hero-badge-bg { opacity: 0.22; }
+  .hero-badge-bg--saa { --size: 110px; top: 4.5rem; right: -1rem; }
+  .hero-badge-bg--ai  { --size: 90px;  top: 5rem;   left: -1rem; }
+  .hero-badge-bg--ccp { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge-bg { animation: none; }
+}
+
 /* the contribution graph presented like a device on a stage */
 .hero-showcase {
   width: 100%;

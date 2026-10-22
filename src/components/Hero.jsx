@@ -4,14 +4,20 @@ import GitHubActivity from './GitHubActivity'
 export default function Hero() {
   return (
     <section id="hero">
+      <div className="hero-badges" aria-hidden="true">
+        <img className="hero-badge-bg hero-badge-bg--saa" src="/aws-saa-badge.png" alt="" />
+        <img className="hero-badge-bg hero-badge-bg--ai" src="/aws-ai-badge.png" alt="" />
+        <img className="hero-badge-bg hero-badge-bg--ccp" src="/aws-ccp-badge.png" alt="" />
+      </div>
+
       <p className="hero-eyebrow reveal">Software Developer, Singapore</p>
 
       <h1 className="hero-name">Htet Myark</h1>
 
       <p className="hero-lede reveal delay-1">
-        I build full-stack web apps, RPA workflows and small AI tools.
-        IT graduate of Singapore Polytechnic, with eleven months shipping
-        automation at PSA.
+        I build full-stack web apps, RPA workflows and serverless AI tools on AWS.
+        AWS Certified Solutions Architect and IT graduate of Singapore Polytechnic,
+        with eleven months shipping automation at PSA.
       </p>
 
       <div className="hero-cta reveal delay-2">
@@ -32,6 +38,7 @@ export default function Hero() {
         <i aria-hidden="true" />
         Open to opportunities
       </p>
+
 
       <div className="hero-showcase">
         <GitHubActivity weeks={52} compact className="reveal delay-4" />
