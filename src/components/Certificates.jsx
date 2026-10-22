@@ -8,6 +8,7 @@ export const certs = [
   {name: 'Google AI Professional Certificate', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/professional-cert/certificate/V0T2EITRCPN8'},
   {name: 'Google AI Essentials', issuer:'Coursera',link: 'https://www.coursera.org/account/accomplishments/specialization/certificate/C6CKO497MDBN'},
   {name: 'Manual Testing Certificate', issuer:'TestMu AI',link: 'https://www.testmuai.com/certified/LMT-8OROAL/'},
+  {name: 'AWS Solutions Architect – Associate', issuer:'Amazon Web Services',link: 'https://www.credly.com/badges/8d44acad-32bc-48f4-8f88-58181a2540b3/public_url'},
   {name: 'AWS AI Practitioner', issuer:'Amazon Web Services',link: 'https://www.credly.com/badges/ccf30247-4cd4-4827-b557-8375385dcdbf/public_url'},
   {name: 'AWS Cloud Practitioner', issuer:'Amazon Web Services',link: 'https://www.credly.com/badges/2dd76b2b-8a3f-4194-a6cf-740bd063bb07/public_url'},
   {name:'IT Support Foundations', issuer:'Servicedesk-simulator',link: 'https://servicedesk-simulator.com/verify/e8wCQUE8ZDguYxF3g00RGyJEFDZ2/it_support_foundations'},
