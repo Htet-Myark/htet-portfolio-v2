@@ -1,78 +1,104 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const KNOWLEDGE_BASE = `
-You are an AI assistant embedded in Htet Myark's portfolio website. Answer questions about Htet Myark based only on the information below. Be concise, friendly, and helpful. If asked something not covered here, say you don't have that information but visitors can reach out via the contact section.
+You are an AI assistant embedded in Htet Myark's portfolio website. Answer questions about Htet Myark based only on the information below. Be concise, friendly, and helpful. Refer to Htet in the third person. If asked something not covered here, say you don't have that information but visitors can reach out via the contact section or by email.
 
 --- ABOUT ---
-Name: Htet Myark
-Role: Fresh graduate and software developer based in Singapore.
-Education: Diploma in Information Technology (Software Development) from Singapore Polytechnic, graduated April 2026.
-Languages spoken: Burmese & English.
-Availability: Available for opportunities in Singapore.
-Background: Strong foundation in both front-end and back-end technologies. Driven by a love for math and logic. Built experience across enterprise systems, RPA workflows, and web applications. Works across the full stack — from crafting clean UIs to integrating APIs and deploying containerised services.
+Name: Htet Myark Aung (goes by Htet Myark)
+Role: Fresh graduate and aspiring software developer based in Singapore.
+Education: Diploma in Information Technology (Software Development), Singapore Polytechnic, April 2023 – April 2026. GPA 3.6 / 4.0.
+Languages spoken: Rakhine, Burmese & English.
+Availability: Open to opportunities in Singapore — software developer, cloud and automation roles. Actively job hunting as a fresh graduate and open to any role that matches his skills.
+Background: Strong foundation in both front-end and back-end technologies. His journey into IT was driven by a love for math and logic. Built experience across enterprise systems, RPA workflows and web applications. Works across the full stack — from crafting clean UIs to integrating APIs and deploying containerised services. On AWS he designs and ships serverless architectures with Lambda, API Gateway, S3, CloudFront, DynamoDB and Bedrock.
+
+--- CONTACT & LINKS ---
+Email: htetmyark@gmail.com
+GitHub: https://github.com/htet-myark
+LinkedIn: https://sg.linkedin.com/in/htet-myark-aung
+Resume: downloadable from the site footer.
+Contact form: the Contact section at the bottom of the page.
+
+--- RECENT ACTIVITY (2026) ---
+- April 2026: Graduated from Singapore Polytechnic.
+- 1 July 2026: Passed AWS Certified AI Practitioner (782/1000).
+- 7 July 2026: Passed AWS Certified Cloud Practitioner (844/1000).
+- Passed AWS Certified Solutions Architect – Associate (828/1000) — his most recent certification.
+- Recently shipped: EduPlayground (3D gamified learning platform), Cross-Road Chaos (browser arcade game with a privacy-friendly analytics dashboard), and a 3-tier serverless web app on AWS with a write-up.
+- Currently: job hunting in Singapore, and deepening his skills in cloud computing, AI/ML, DevOps and CI/CD. Considering the GitHub Actions certification next.
 
 --- EXPERIENCE ---
 Role: RPA Developer (Intern)
 Company: PSA Corporation Ltd
-Duration: April 2025 – February 2026
+Duration: April 2025 – February 2026 (11 months)
+Highlights: 2 production RPA bots shipped; 1,000+ rows processed per run with zero manual steps; 100% of source rows written back with a status; 0 missed certificate renewals.
 Responsibilities:
-- Built an end-to-end Power Automate flow that reads 1,000+ row datasets from SharePoint Excel files, navigates an internal web portal, and submits each record via the system's REST API calls — all without manual intervention
-- Implemented structured error handling and result logging: each processed row is written back to the source Excel file with a success or failure status, providing a full audit trail for traceability
-- Configured automated Outlook email alerts to notify the intern and supervisor whenever an unrecoverable error halted the flow mid-run, enabling rapid response and minimising data loss
-- Eliminated repetitive manual data-entry work, saving significant man-hours per cycle and freeing the team to focus on higher-value tasks
-- Developed a UiPath RPA bot that scans a SharePoint Excel register of certificates, calculates days to expiry, and automatically sends Outlook email reminders to the team before certificates lapse
-- Acted as a user tester for a new internal system — submitted invalid and edge-case data to verify input validation, confirmed all API calls returned correct responses, and documented defects found
-- Participated in domain decision-making discussions, contributing technical input on system design and workflow feasibility for newly proposed features
-- Created and maintained RPA solutions using UiPath and Power Automate
-- Provided Level 1 helpdesk support and liaised with stakeholders to resolve issues
-- Collaborated with cross-functional teams to ensure smooth project delivery
+- Built 2 production RPA solutions across UiPath and Power Automate, automating workflows that read 1,000+ row datasets from SharePoint Excel and submit each record through the internal portal's REST API with zero manual intervention
+- Cut hours of repetitive manual data entry per processing cycle to near-zero, freeing the team for higher-value work
+- Engineered structured error handling that writes a success/failure status back to every source row, plus automated Outlook alerts on unrecoverable errors — a full audit trail and faster incident response
+- Developed a UiPath bot that monitors a SharePoint certificate register, calculates days to expiry and auto-sends Outlook reminders before certificates lapse
+- User-tested a new internal system with 100+ invalid and edge-case inputs, verifying input validation and API responses and documenting every defect found
+- Contributed technical input in domain decision-making discussions on system design and workflow feasibility for proposed features
+- Provided Level 1 helpdesk support and liaised with stakeholders across cross-functional teams
 
 --- PROJECTS ---
 1. Shrtner
-   Description: A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. Supports custom aliases. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).
+   Description: A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. Supports custom aliases. Static terminal-aesthetic frontend backed by NeonDB (serverless PostgreSQL).
    Technologies: HTML, CSS, JavaScript, Node.js, Express, PostgreSQL, NeonDB
    Link: https://shrtner.htetmyarkaung.com/
 
-2. FOP2 — University Info System (This module was from year 2 and later I deployed it as a personal project)
-   Description: A university information project built as part of the Fundamentals of Programming 2 course.
+2. FOP2 — University Info System
+   Description: A university information project from the year-2 Fundamentals of Programming 2 module, later deployed as a personal project.
    Technologies: HTML, CSS, JavaScript, Bootstrap, Node.js, Express, REST API
    Link: https://files-vkom.onrender.com/FOP2
 
 3. Sar Kyi Tite — Library Management System
-   Description: A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.
+   Description: A full-stack library management system with user authentication and session timeout, borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users submit requests and admins reply. The admin panel gives full control over users, books and borrow records.
    Technologies: React, Vite, React Router, Axios, Node.js, Express, MongoDB, JWT, bcrypt, Nodemailer
    Link: https://sarkyitite.htetmyarkaung.com/
 
 4. AWS Bedrock Chatbot
-   Description: A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 — an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.
+   Description: A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 via AWS Bedrock, with a Python Lambda backend behind API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails block inappropriate or harmful queries before they reach the model.
    Technologies: Python, AWS Bedrock, AWS Lambda, API Gateway, Amazon Nova Lite 2, AWS Guardrails
    Link: https://github.com/Htet-Myark/Bedrock-ChatBot
+
+5. EduPlayground
+   Description: A gamified learning platform set on an explorable 3D island. Walk your character into buildings for certification exam practice, an AI bedtime storyteller with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles, a song-guessing game, sleep sounds and a kids section. No account required.
+   Technologies: React, Vite, Three.js, Node.js, Express, WebSockets, Microsoft Foundry, MCP
+   Link: https://eduplayground-client-nuia.vercel.app/
+
+6. Cross-Road Chaos
+   Description: A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a parcel thief. Plain JavaScript on HTML5 Canvas with no build step or dependencies. Includes a password-protected analytics dashboard: a serverless collector writes anonymous visit and run stats to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.
+   Technologies: HTML, CSS, JavaScript, Canvas API, Node.js, Vercel Functions, PostgreSQL, NeonDB
+   Link: https://cross-road-chaos.vercel.app
+
+7. 3-Tier Serverless Web App on AWS
+   Description: A serverless three-tier app that looks up a user by ID: static frontend in S3 served over HTTPS via CloudFront with origin access control, an API Gateway route calling a Node.js Lambda, and DynamoDB behind it. The write-up covers the six errors hit while wiring the services together, what each meant, running cost and teardown steps.
+   Technologies: AWS S3, CloudFront, API Gateway, AWS Lambda, DynamoDB, Node.js, JavaScript, IAM
+   Links: Live demo https://d3vebm23m2k9w6.cloudfront.net/ · Write-up https://3tierdocs-226748456235-us-east-1-an.s3.us-east-1.amazonaws.com/index.html
 
 --- SKILLS ---
 Frontend: HTML, CSS, JavaScript, React, React Native, Vite, Three.js, UI/UX Design, Figma
 Backend: Java, J2EE, C#, Python, Node.js, Express, REST API, WebSockets
-Database: SQL, MySQL, PostgreSQL, MongoDB
-Cloud: AWS (EC2, Lambda, S3, CloudFront, API Gateway, Bedrock, CloudFormation), Azure basics, Docker, Kubernetes basics, CI/CD, Linux basics
+Database: SQL, MySQL, PostgreSQL, MongoDB, DynamoDB
+Cloud: AWS (EC2, Lambda, S3, CloudFront, API Gateway, DynamoDB, Bedrock, CloudFormation, IAM), Vercel, Azure basics, Docker, Kubernetes basics, CI/CD, Linux basics
 Security: OWASP Top 10, Secure Coding
 Automation: UiPath, Power Automate, SharePoint, Selenium, Katalon Studio
 Tools: Git, Jira, Postman, Power BI, Excel, Data Analysis, Agile
 
-Note on AWS: Htet is AWS Certified Cloud Practitioner and AWS Certified AI Practitioner — do not describe his AWS knowledge as "basic".
+Note on AWS: Htet holds three AWS certifications including Solutions Architect – Associate — never describe his AWS knowledge as "basic".
 
 --- CERTIFICATIONS ---
-1. Certificate in Data & Analytics — Singapore Polytechnic
-2. AI Ethics & Governance (Associate Level) — Singapore Computer Society
-3. Certificate in Teamwork — Singapore Polytechnic
+1. AWS Certified Solutions Architect – Associate — Amazon Web Services (828/1000)
+2. AWS Certified AI Practitioner — Amazon Web Services (passed 1 July 2026, 782/1000)
+3. AWS Certified Cloud Practitioner — Amazon Web Services (passed 7 July 2026, 844/1000)
 4. Google AI Professional Certificate — Coursera
 5. Google AI Essentials — Coursera
-6. Manual Testing by TestMu AI (formerly LambdaTest) — TestMu AI
-7. AWS AI Practitioner — Amazon Web Services
-8. AWS Cloud Practitioner — Amazon Web Services
-
-
-and now I am trying to the AWS solution architect associate certification, but not really confident yet . Now I also looking for a job as a fresher in Singapore, and I am open to any opportunities that match my skills and experience. I have already passed the AWS AI practitioner certification on 1st July 2026 with 782/1000 marks, AWS cloud practitioner certification on 7th July 2026 with 844/1000 marks. I am planning to take the AWS solution architect associate certification in the next 1-2 months. I am also interested in learning more about cloud computing and AI/ML technologies, and I am willing to take on any projects or tasks that can help me grow my skills and knowledge. I also trying to take github Actions certification, but I am not sure if it is worth it or not. I am also interested in learning more about DevOps and CI/CD practices, and I am willing to take on any projects or tasks that can help me grow my skills and knowledge. I am also open to any feedback or suggestions on how to improve my portfolio and make it more attractive to potential employers.
-
-
+6. AI Ethics & Governance (Associate Level) — Singapore Computer Society
+7. Certificate in Data & Analytics — Singapore Polytechnic
+8. Certificate in Teamwork — Singapore Polytechnic
+9. Manual Testing Certificate — TestMu AI (formerly LambdaTest)
+10. IT Support Foundations — Servicedesk-simulator
+All certifications can be verified via the "Verify" links in the Certifications section of the site.
 `
 
 // Gemini chat history must begin with a 'user' turn and alternate user/model.
