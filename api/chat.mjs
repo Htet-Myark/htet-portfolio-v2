@@ -101,16 +101,51 @@ Note on AWS: Htet holds three AWS certifications including Solutions Architect â
 All certifications can be verified via the "Verify" links in the Certifications section of the site.
 `
 
+// Abuse limits: keep each request small so nobody can burn through the Gemini quota.
+const MAX_MESSAGE_CHARS = 1000
+const MAX_HISTORY_MESSAGES = 10
+const MAX_HISTORY_TEXT_CHARS = 2000
+const MAX_OUTPUT_TOKENS = 500
+const RATE_LIMIT = 10 // requests per IP...
+const RATE_WINDOW_MS = 60_000 // ...per minute
+
+// Best-effort per-IP limiter. State lives in this function instance only, so it
+// slows down scripted abuse but is not a hard guarantee across instances.
+const hits = new Map()
+
+function isRateLimited(ip) {
+  const now = Date.now()
+  const recent = (hits.get(ip) || []).filter(t => now - t < RATE_WINDOW_MS)
+  recent.push(now)
+  hits.set(ip, recent)
+  if (hits.size > 5000) {
+    for (const [key, times] of hits) {
+      if (now - times[times.length - 1] >= RATE_WINDOW_MS) hits.delete(key)
+    }
+  }
+  return recent.length > RATE_LIMIT
+}
+
+function clientIp(req) {
+  const forwarded = req.headers['x-forwarded-for']
+  return (typeof forwarded === 'string' && forwarded.split(',')[0].trim())
+    || req.headers['x-real-ip']
+    || req.socket?.remoteAddress
+    || 'unknown'
+}
+
 // Gemini chat history must begin with a 'user' turn and alternate user/model.
 // The client sends prior messages using role 'user' | 'assistant'; convert and
 // trim any leading non-user turns (e.g. the canned greeting) so the history is valid.
+// Only the most recent turns are kept, and each is truncated, to bound request size.
 function toGeminiHistory(messages) {
   if (!Array.isArray(messages)) return []
   const mapped = messages
     .filter(m => m && typeof m.text === 'string' && m.text.trim())
+    .slice(-MAX_HISTORY_MESSAGES)
     .map(m => ({
       role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.text }],
+      parts: [{ text: m.text.slice(0, MAX_HISTORY_TEXT_CHARS) }],
     }))
   while (mapped.length && mapped[0].role !== 'user') mapped.shift()
   return mapped
@@ -120,6 +155,11 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
     return res.status(405).json({ error: 'Method not allowed' })
+  }
+
+  if (isRateLimited(clientIp(req))) {
+    res.setHeader('Retry-After', String(RATE_WINDOW_MS / 1000))
+    return res.status(429).json({ error: 'quota' })
   }
 
   const apiKey = process.env.GEMINI_API_KEY
@@ -132,12 +172,16 @@ export default async function handler(req, res) {
   if (typeof message !== 'string' || !message.trim()) {
     return res.status(400).json({ error: 'Missing message' })
   }
+  if (message.length > MAX_MESSAGE_CHARS) {
+    return res.status(413).json({ error: 'message_too_long' })
+  }
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey)
     const model = genAI.getGenerativeModel({
       model: 'gemini-3.5-flash',
       systemInstruction: KNOWLEDGE_BASE,
+      generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS },
     })
     const chat = model.startChat({ history: toGeminiHistory(history) })
     const result = await chat.sendMessage(message)

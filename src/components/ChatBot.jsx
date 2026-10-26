@@ -173,6 +173,7 @@ export default function ChatBot() {
                 className="chatbot-input"
                 rows={1}
                 placeholder="Ask a question..."
+                maxLength={1000}
                 value={input}
                 onChange={e => { setInput(e.target.value); autoGrow(e.target) }}
                 onKeyDown={handleKeyDown}
