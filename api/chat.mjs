@@ -112,7 +112,7 @@ const MAX_HISTORY_MESSAGES = 10
 const MAX_HISTORY_TEXT_CHARS = 2000
 const MAX_OUTPUT_TOKENS = 500
 const MODELS = ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-3.5-flash-lite'] // tried in order
-const RETRYABLE = new Set([404, 429, 500, 502, 503, 504])
+const FATAL = new Set([400, 401, 403])   // a bad request or key: no other model will do better
 const HEDGE_AFTER_MS = 7_000    // no answer yet? ask the next model too
 const MODEL_TIMEOUT_MS = 45_000   // give up on any one model after this
 const RATE_LIMIT = 10 // requests per IP...
@@ -162,9 +162,10 @@ function toGeminiHistory(messages) {
 
 /* Gemini models get overloaded: some calls fail at once with 503 "high demand",
    others just hang. So ask the first model, and if it has not answered within
-   HEDGE_AFTER_MS -- or has failed with something another model could avoid --
-   ask the next one too, without cancelling the first. The first answer wins and
-   the rest are aborted. A failure no model can fix (a bad request) ends it. */
+   HEDGE_AFTER_MS -- or has failed -- ask the next one too, without cancelling
+   the first. The first answer wins and the rest are aborted. Only a failure no
+   model can fix (a bad request or key) ends it early; anything else, including
+   an empty or blocked reply or a dropped connection, moves on to the next model. */
 function askGemini(genAI, history, message) {
   return new Promise((resolve, reject) => {
     let next = 0, running = 0, done = false, lastErr, hedge
@@ -199,7 +200,7 @@ function askGemini(genAI, history, message) {
           lastErr = err
           const timedOut = err?.name === 'AbortError' || /abort|timed? ?out/i.test(err?.message || '')
           console.warn(`[api/chat] ${name} failed (${timedOut ? 'timeout' : err?.status}); trying the next model`)
-          if (!timedOut && !RETRYABLE.has(err?.status)) return finish(reject, err)
+          if (!timedOut && FATAL.has(err?.status)) return finish(reject, err)
           launch()
         })
     }
