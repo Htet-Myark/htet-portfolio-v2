@@ -3,6 +3,15 @@ import SectionHead from './SectionHead'
 
 export const projects = [
   {
+    title: 'Servio: IT Service Management',
+    links: [
+      { org: 'Live Demo', link: 'https://servio-snowy.vercel.app' },
+      { org: 'GitHub', link: 'https://github.com/Htet-Myark/servio' },
+    ],
+    desc: 'A self-hosted ITSM app modelled on how a real service desk runs: incidents, service requests, changes and problems, plus a self-service portal and knowledge base. Incident priority comes from impact × urgency with resolution SLAs that go on-track, at-risk and breached; catalog requests route to the requester’s manager for approval; changes need Change Advisory Board sign-off before they can be scheduled. Server-rendered with no JS framework, deployed on Vercel in Tokyo next to its Supabase database. Demo logins are on the sign-in page (e.g. alex / password).',
+    tags: ['Python', 'FastAPI', 'Jinja2', 'PostgreSQL', 'Supabase', 'Vercel', 'pytest'],
+  },
+  {
     title: 'Shrtner',
     org: 'Live Demo',
     link: 'https://shrtner.htetmyarkaung.com/',

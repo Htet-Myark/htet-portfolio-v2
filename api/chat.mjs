@@ -23,7 +23,7 @@ Contact form: the Contact section at the bottom of the page.
 - 1 July 2026: Passed AWS Certified AI Practitioner (782/1000).
 - 7 July 2026: Passed AWS Certified Cloud Practitioner (844/1000).
 - Passed AWS Certified Solutions Architect – Associate (828/1000) — his most recent certification.
-- Recently shipped: EduPlayground (3D gamified learning platform), Cross-Road Chaos (browser arcade game with a privacy-friendly analytics dashboard), and a 3-tier serverless web app on AWS with a write-up.
+- Recently shipped: Servio (self-hosted IT service management app on FastAPI and Supabase Postgres), EduPlayground (3D gamified learning platform), Cross-Road Chaos (browser arcade game with a privacy-friendly analytics dashboard), and a 3-tier serverless web app on AWS with a write-up.
 - Currently: job hunting in Singapore, and deepening his skills in cloud computing, AI/ML, DevOps and CI/CD. Considering the GitHub Actions certification next.
 
 --- EXPERIENCE ---
@@ -75,6 +75,11 @@ Responsibilities:
    Description: A serverless three-tier app that looks up a user by ID: static frontend in S3 served over HTTPS via CloudFront with origin access control, an API Gateway route calling a Node.js Lambda, and DynamoDB behind it. The write-up covers the six errors hit while wiring the services together, what each meant, running cost and teardown steps.
    Technologies: AWS S3, CloudFront, API Gateway, AWS Lambda, DynamoDB, Node.js, JavaScript, IAM
    Links: Live demo https://d3vebm23m2k9w6.cloudfront.net/ · Write-up https://3tierdocs-226748456235-us-east-1-an.s3.us-east-1.amazonaws.com/index.html
+
+8. Servio — IT Service Management
+   Description: A self-hosted ITSM app: agent workspace for incidents, service requests, changes and problems, a self-service portal and a knowledge base. Incident priority is impact × urgency with resolution SLAs (P1 4h to P5 5 days) tracked as on-track, at-risk or breached; categories auto-route to assignment groups; catalog requests go to the requester's manager for approval; changes need Change Advisory Board approval before scheduling; resolving a problem resolves its linked incidents. Every record has an activity stream with customer-visible comments, internal work notes and an automatic audit trail. Server-rendered Python with no JS framework, tested with pytest, deployed on Vercel (Tokyo region) next to its Supabase Postgres database.
+   Technologies: Python, FastAPI, Jinja2, PostgreSQL, Supabase, Vercel, pytest
+   Links: Live demo https://servio-snowy.vercel.app (demo login: alex / password, or admin / admin) · GitHub https://github.com/Htet-Myark/servio
 
 --- SKILLS ---
 Frontend: HTML, CSS, JavaScript, React, React Native, Vite, Three.js, UI/UX Design, Figma
