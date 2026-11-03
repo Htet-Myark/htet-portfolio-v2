@@ -4,6 +4,8 @@ import SectionHead from './SectionHead'
 export const projects = [
   {
     title: 'Servio: IT Service Management',
+    image: '/projects/servio.jpg',
+    imageAlt: 'Servio agent dashboard with open incidents by priority and SLA status',
     links: [
       { org: 'Live Demo', link: 'https://servio-snowy.vercel.app' },
       { org: 'GitHub', link: 'https://github.com/Htet-Myark/servio' },
@@ -13,6 +15,8 @@ export const projects = [
   },
   {
     title: 'Shrtner',
+    image: '/projects/shrtner.jpg',
+    imageAlt: 'Shrtner URL shortener with its terminal-style interface',
     org: 'Live Demo',
     link: 'https://shrtner.htetmyarkaung.com/',
     desc: 'A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. It supports custom aliases. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).',
@@ -21,6 +25,8 @@ export const projects = [
   
   {
     title: 'FOP2: University Info System',
+    image: '/projects/fop2.jpg',
+    imageAlt: 'FOP2 university information pages with salary and employment queries',
     org: 'Live Demo',
     link: 'https://files-vkom.onrender.com/FOP2',
     desc: 'A university information project built as part of the Fundamentals of Programming 2 course.',
@@ -28,6 +34,8 @@ export const projects = [
   },
   {
     title: 'Sar Kyi Tite - Library Management System',
+    image: '/projects/sarkyitite.jpg',
+    imageAlt: 'Sar Kyi Tite library management system sign-in page',
     org: 'Live Demo',
     link: 'https://sarkyitite.htetmyarkaung.com/',
     desc: 'A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.',
@@ -35,6 +43,8 @@ export const projects = [
   },
   {
     title: 'AWS Bedrock Chatbot',
+    image: '/projects/bedrock.jpg',
+    imageAlt: 'AWS Bedrock chatbot interface with suggested prompts',
     org: 'GitHub',
     link: 'https://github.com/Htet-Myark/Bedrock-ChatBot',
     desc: 'A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2, an AWS-owned, cost-effective foundation model via AWS Bedrock. Built with a Python Lambda backend exposed through API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails are applied to detect and block inappropriate or harmful queries before they reach the model.',
@@ -42,6 +52,8 @@ export const projects = [
   },
   {
     title: 'EduPlayground',
+    image: '/projects/eduplayground.jpg',
+    imageAlt: 'EduPlayground 3D island world with buildings and a player character',
     org: 'Live Demo',
     link: 'https://eduplayground-client-nuia.vercel.app/',
     desc: 'A gamified learning platform set on an explorable 3D island. Walk your character to a building and step inside: certification exam practice, an AI bedtime storyteller with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles, a song-guessing game, sleep sounds, and a full kids section. No account required, works instantly in the browser.',
@@ -49,6 +61,8 @@ export const projects = [
   },
   {
     title: 'Cross-Road Chaos',
+    image: '/projects/cross-road-chaos.jpg',
+    imageAlt: 'Cross-Road Chaos intersection with the autopilot planning its route',
     links: [
       { org: 'Live Demo', link: 'https://cross-road-chaos.vercel.app' },
       { org: 'Watch Autopilot', link: 'https://cross-road-chaos.vercel.app/?autopilot=1' },
@@ -58,6 +72,8 @@ export const projects = [
   },
   {
     title: '3-Tier Serverless Web App on AWS',
+    image: '/projects/three-tier.jpg',
+    imageAlt: 'Serverless web app returning a user record from DynamoDB',
     links: [
       { org: 'Live Demo', link: 'https://d3vebm23m2k9w6.cloudfront.net/' },
       { org: 'Write-up', link: 'https://3tierdocs-226748456235-us-east-1-an.s3.us-east-1.amazonaws.com/index.html' },
@@ -138,7 +154,11 @@ export default function Projects() {
           const links = p.links ?? [{ org: p.org, link: p.link }]
           return (
             <li className="project" key={i}>
-              <div className={`project-cover ${COVERS[i % COVERS.length]}`}>
+              <div className={`project-cover ${p.image ? 'has-photo' : COVERS[i % COVERS.length]}`}>
+                {p.image && (
+                  <img className="project-photo" src={p.image} alt={p.imageAlt ?? ''}
+                       width="1200" height="900" loading="lazy" decoding="async" />
+                )}
                 <span className="project-index">{String(i + 1).padStart(2, '0')}</span>
                 <h3 className="project-title">{p.title}</h3>
                 <span className="project-lead">{p.tags[0]}</span>
