@@ -113,7 +113,8 @@ const MAX_HISTORY_TEXT_CHARS = 2000
 const MAX_OUTPUT_TOKENS = 500
 const MODELS = ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-3.5-flash-lite'] // tried in order
 const RETRYABLE = new Set([404, 429, 500, 502, 503, 504])
-const MODEL_TIMEOUT_MS = 15_000
+const HEDGE_AFTER_MS = 7_000    // no answer yet? ask the next model too
+const MODEL_TIMEOUT_MS = 45_000   // give up on any one model after this
 const RATE_LIMIT = 10 // requests per IP...
 const RATE_WINDOW_MS = 60_000 // ...per minute
 
@@ -159,6 +160,53 @@ function toGeminiHistory(messages) {
   return mapped
 }
 
+/* Gemini models get overloaded: some calls fail at once with 503 "high demand",
+   others just hang. So ask the first model, and if it has not answered within
+   HEDGE_AFTER_MS -- or has failed with something another model could avoid --
+   ask the next one too, without cancelling the first. The first answer wins and
+   the rest are aborted. A failure no model can fix (a bad request) ends it. */
+function askGemini(genAI, history, message) {
+  return new Promise((resolve, reject) => {
+    let next = 0, running = 0, done = false, lastErr, hedge
+    const controllers = []
+    const finish = (settle, value) => {
+      if (done) return
+      done = true
+      clearTimeout(hedge)
+      controllers.forEach(c => c.abort())
+      settle(value)
+    }
+    const launch = () => {
+      clearTimeout(hedge)
+      if (done) return
+      if (next >= MODELS.length) { if (!running) finish(reject, lastErr); return }
+      const name = MODELS[next++]
+      const controller = new AbortController()
+      controllers.push(controller)
+      running++
+      if (next < MODELS.length) hedge = setTimeout(launch, HEDGE_AFTER_MS)
+
+      const model = genAI.getGenerativeModel({
+        model: name,
+        systemInstruction: KNOWLEDGE_BASE,
+        generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS },
+      }, { signal: controller.signal, timeout: MODEL_TIMEOUT_MS })
+      model.startChat({ history: toGeminiHistory(history) }).sendMessage(message)
+        .then(result => finish(resolve, { text: result.response.text(), model: name }))
+        .catch(err => {
+          running--
+          if (done) return
+          lastErr = err
+          const timedOut = err?.name === 'AbortError' || /abort|timed? ?out/i.test(err?.message || '')
+          console.warn(`[api/chat] ${name} failed (${timedOut ? 'timeout' : err?.status}); trying the next model`)
+          if (!timedOut && !RETRYABLE.has(err?.status)) return finish(reject, err)
+          launch()
+        })
+    }
+    launch()
+  })
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
@@ -184,30 +232,12 @@ export default async function handler(req, res) {
     return res.status(413).json({ error: 'message_too_long' })
   }
 
-  /* Gemini models get overloaded ("503 ... high demand") or run out of quota, so
-     each message walks a short chain of models, moving on for overload, quota,
-     server errors or a missing model, and giving up at once on anything else */
-  const genAI = new GoogleGenerativeAI(apiKey)
-  let lastErr
-  for (const name of MODELS) {
-    try {
-      const model = genAI.getGenerativeModel({
-        model: name,
-        systemInstruction: KNOWLEDGE_BASE,
-        generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS },
-      }, { timeout: MODEL_TIMEOUT_MS })   // an overloaded model can hang; move on instead
-      const chat = model.startChat({ history: toGeminiHistory(history) })
-      const result = await chat.sendMessage(message)
-      return res.status(200).json({ text: result.response.text() })
-    } catch (err) {
-      lastErr = err
-      const timedOut = err?.name === 'AbortError' || /abort|timed? ?out/i.test(err?.message || '')
-      if (!timedOut && !RETRYABLE.has(err?.status)) break
-      console.warn(`[api/chat] ${name} failed (${timedOut ? 'timeout' : err.status}); trying the next model`)
-    }
+  try {
+    const { text } = await askGemini(new GoogleGenerativeAI(apiKey), history, message)
+    return res.status(200).json({ text })
+  } catch (err) {
+    console.error('[api/chat] Gemini API error:', err)
+    const isQuota = err?.status === 429 || (err?.message || '').toLowerCase().includes('quota')
+    return res.status(isQuota ? 429 : 500).json({ error: isQuota ? 'quota' : 'server_error' })
   }
-  console.error('[api/chat] Gemini API error:', lastErr)
-  const msg = lastErr?.message || ''
-  const isQuota = lastErr?.status === 429 || msg.toLowerCase().includes('quota')
-  return res.status(isQuota ? 429 : 500).json({ error: isQuota ? 'quota' : 'server_error' })
 }
