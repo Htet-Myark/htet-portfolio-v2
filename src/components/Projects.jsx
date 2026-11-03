@@ -49,10 +49,12 @@ export const projects = [
   },
   {
     title: 'Cross-Road Chaos',
-    org: 'Live Demo',
-    link: 'https://cross-road-chaos.vercel.app',
-    desc: 'A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a thief who steals your parcel off the ground. Written in plain JavaScript on HTML5 Canvas with no build step and no dependencies, so it runs straight from a file. It ships with a password-protected analytics dashboard: a serverless collector writes anonymous visit and run statistics to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Node.js', 'Vercel Functions', 'PostgreSQL', 'NeonDB'],
+    links: [
+      { org: 'Live Demo', link: 'https://cross-road-chaos.vercel.app' },
+      { org: 'Watch Autopilot', link: 'https://cross-road-chaos.vercel.app/?autopilot=1' },
+    ],
+    desc: 'A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a thief who steals your parcel off the ground. Written in plain JavaScript on HTML5 Canvas with no build step and no dependencies. Press B and an autopilot takes over: a planning bot that forecasts every vehicle 1.8 s ahead using the game’s own signal and braking rules, then picks the safest heading toward its goal, with an overlay that draws its route and the traffic it is watching. In a headless benchmark against the real game code it never lost a 400-second run. It also ships with a password-protected analytics dashboard: a serverless collector writes anonymous visit and run statistics to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Canvas API', 'Path Planning', 'Node.js', 'Vercel Functions', 'PostgreSQL', 'NeonDB'],
   },
   {
     title: '3-Tier Serverless Web App on AWS',
