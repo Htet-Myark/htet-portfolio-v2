@@ -111,6 +111,8 @@ const MAX_MESSAGE_CHARS = 1000
 const MAX_HISTORY_MESSAGES = 10
 const MAX_HISTORY_TEXT_CHARS = 2000
 const MAX_OUTPUT_TOKENS = 500
+const MODELS = ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-3.5-flash-lite'] // tried in order
+const RETRYABLE = new Set([404, 429, 500, 502, 503, 504])
 const RATE_LIMIT = 10 // requests per IP...
 const RATE_WINDOW_MS = 60_000 // ...per minute
 
@@ -181,20 +183,29 @@ export default async function handler(req, res) {
     return res.status(413).json({ error: 'message_too_long' })
   }
 
-  try {
-    const genAI = new GoogleGenerativeAI(apiKey)
-    const model = genAI.getGenerativeModel({
-      model: 'gemini-3.5-flash',
-      systemInstruction: KNOWLEDGE_BASE,
-      generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS },
-    })
-    const chat = model.startChat({ history: toGeminiHistory(history) })
-    const result = await chat.sendMessage(message)
-    return res.status(200).json({ text: result.response.text() })
-  } catch (err) {
-    console.error('[api/chat] Gemini API error:', err)
-    const msg = err?.message || ''
-    const isQuota = msg.includes('429') || msg.toLowerCase().includes('quota')
-    return res.status(isQuota ? 429 : 500).json({ error: isQuota ? 'quota' : 'server_error' })
+  /* Gemini models get overloaded ("503 ... high demand") or run out of quota, so
+     each message walks a short chain of models, moving on for overload, quota,
+     server errors or a missing model, and giving up at once on anything else */
+  const genAI = new GoogleGenerativeAI(apiKey)
+  let lastErr
+  for (const name of MODELS) {
+    try {
+      const model = genAI.getGenerativeModel({
+        model: name,
+        systemInstruction: KNOWLEDGE_BASE,
+        generationConfig: { maxOutputTokens: MAX_OUTPUT_TOKENS },
+      })
+      const chat = model.startChat({ history: toGeminiHistory(history) })
+      const result = await chat.sendMessage(message)
+      return res.status(200).json({ text: result.response.text() })
+    } catch (err) {
+      lastErr = err
+      if (!RETRYABLE.has(err?.status)) break
+      console.warn(`[api/chat] ${name} failed with ${err.status}; trying the next model`)
+    }
   }
+  console.error('[api/chat] Gemini API error:', lastErr)
+  const msg = lastErr?.message || ''
+  const isQuota = lastErr?.status === 429 || msg.toLowerCase().includes('quota')
+  return res.status(isQuota ? 429 : 500).json({ error: isQuota ? 'quota' : 'server_error' })
 }
