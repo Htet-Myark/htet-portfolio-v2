@@ -84,6 +84,8 @@ export const projects = [
 ]
 
 
+const pad2 = n => String(n).padStart(2, '0')
+
 /* flat cover tones, cycled per card */
 const COVERS = ['cover--blue', 'cover--black', 'cover--sky', 'cover--stone']
 
@@ -95,22 +97,39 @@ const Arrow = ({ dir }) => (
 
 export default function Projects() {
   const trackRef = useRef(null)
-  const [active, setActive] = useState(0)
+  const [shown, setShown] = useState({ first: 0, last: 0 })
   const [atStart, setAtStart] = useState(true)
   const [atEnd, setAtEnd] = useState(false)
 
-  /* which card is leftmost, and whether either end has been reached */
+  /* which cards are actually on screen, and whether either end has been reached.
+     A laptop fits about three cards, so "leftmost card" alone tops out at 06 / 08
+     and the last two never get a number; the range (06-08 / 08) is right on any
+     width or orientation, and collapses to one number when one card fits */
   useEffect(() => {
     const track = trackRef.current
     if (!track) return
     const update = () => {
       const cards = [...track.children]
       const left = track.scrollLeft
-      let nearest = 0
+      const box = track.getBoundingClientRect()
+      const viewL = Math.max(box.left, 0), viewR = Math.min(box.right, window.innerWidth)
+      const visible = []
       cards.forEach((c, i) => {
-        if (Math.abs(c.offsetLeft - track.offsetLeft - left) < Math.abs(cards[nearest].offsetLeft - track.offsetLeft - left)) nearest = i
+        const r = c.getBoundingClientRect()
+        const seen = Math.min(r.right, viewR) - Math.max(r.left, viewL)
+        if (seen >= r.width * 0.9) visible.push(i)              // mostly on screen
       })
-      setActive(nearest)
+      if (!visible.length) {                                    // mid-swipe: take the one most in view
+        let best = 0, bestSeen = -Infinity
+        cards.forEach((c, i) => {
+          const r = c.getBoundingClientRect()
+          const seen = Math.min(r.right, viewR) - Math.max(r.left, viewL)
+          if (seen > bestSeen) { bestSeen = seen; best = i }
+        })
+        visible.push(best)
+      }
+      const first = visible[0], last = visible[visible.length - 1]
+      setShown(prev => (prev.first === first && prev.last === last ? prev : { first, last }))
       setAtStart(left < 8)
       setAtEnd(left + track.clientWidth > track.scrollWidth - 8)
     }
@@ -134,7 +153,10 @@ export default function Projects() {
   const controls = (
     <div className="carousel-controls">
       <span className="carousel-count" aria-live="polite">
-        <strong>{String(active + 1).padStart(2, '0')}</strong> / {String(projects.length).padStart(2, '0')}
+        <strong>
+          {pad2(shown.first + 1)}
+          {shown.last > shown.first && <>&ndash;{pad2(shown.last + 1)}</>}
+        </strong> / {pad2(projects.length)}
       </span>
       <button className="round-btn" onClick={() => step(-1)} disabled={atStart} aria-label="Previous project">
         <Arrow dir="prev" />
