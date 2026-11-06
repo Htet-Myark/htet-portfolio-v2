@@ -51,37 +51,32 @@ Responsibilities:
    Technologies: HTML, CSS, JavaScript, Bootstrap, Node.js, Express, REST API
    Link: https://files-vkom.onrender.com/FOP2
 
-3. Sar Kyi Tite — Library Management System
-   Description: A full-stack library management system with user authentication and session timeout, borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users submit requests and admins reply. The admin panel gives full control over users, books and borrow records.
-   Technologies: React, Vite, React Router, Axios, Node.js, Express, MongoDB, JWT, bcrypt, Nodemailer
-   Link: https://sarkyitite.htetmyarkaung.com/
-
-4. AWS Bedrock Chatbot
+3. AWS Bedrock Chatbot
    Description: A serverless ChatGPT-style chatbot powered by Amazon Nova Lite 2 via AWS Bedrock, with a Python Lambda backend behind API Gateway. Responses are capped at 500 tokens to keep costs low, and AWS Guardrails block inappropriate or harmful queries before they reach the model.
    Technologies: Python, AWS Bedrock, AWS Lambda, API Gateway, Amazon Nova Lite 2, AWS Guardrails
    Link: https://github.com/Htet-Myark/Bedrock-ChatBot
 
-5. EduPlayground
+4. EduPlayground
    Description: A gamified learning platform set on an explorable 3D island. Walk your character into buildings for certification exam practice, an AI bedtime storyteller with a neural voice, 3-minute AI movie recaps, real-time multiplayer word battles, a song-guessing game, sleep sounds and a kids section. No account required.
    Technologies: React, Vite, Three.js, Node.js, Express, WebSockets, Microsoft Foundry, MCP
    Link: https://eduplayground-client-nuia.vercel.app/
 
-6. Cross-Road Chaos
+5. Cross-Road Chaos
    Description: A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a parcel thief. Plain JavaScript on HTML5 Canvas with no build step or dependencies. Has an autopilot (press B, or open the game with ?autopilot=1): a planning bot, not machine learning, that each frame forecasts every vehicle 1.8 seconds ahead using the game's own signal, braking and queueing rules, tries 17 headings against that forecast, and takes the safe one closest to its goal, routing diagonal jobs through the corner whose road is held at a red light. An overlay shows its goal, route and the traffic it is watching. In a headless benchmark against the real game code it never lost a 400-second run, averaging about 1,600 points at level 20. Also includes a password-protected analytics dashboard: a serverless collector writes anonymous visit and run stats to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.
    Technologies: HTML, CSS, JavaScript, Canvas API, Node.js, Vercel Functions, PostgreSQL, NeonDB
    Links: Live demo https://cross-road-chaos.vercel.app · Watch the autopilot play https://cross-road-chaos.vercel.app/?autopilot=1
 
-7. 3-Tier Serverless Web App on AWS
+6. 3-Tier Serverless Web App on AWS
    Description: A serverless three-tier app that looks up a user by ID: static frontend in S3 served over HTTPS via CloudFront with origin access control, an API Gateway route calling a Node.js Lambda, and DynamoDB behind it. The write-up covers the six errors hit while wiring the services together, what each meant, running cost and teardown steps.
    Technologies: AWS S3, CloudFront, API Gateway, AWS Lambda, DynamoDB, Node.js, JavaScript, IAM
    Links: Live demo https://d3vebm23m2k9w6.cloudfront.net/ · Write-up https://3tierdocs-226748456235-us-east-1-an.s3.us-east-1.amazonaws.com/index.html
 
-8. Servio — IT Service Management
+7. Servio — IT Service Management
    Description: A self-hosted ITSM app: agent workspace for incidents, service requests, changes and problems, a self-service portal and a knowledge base. Incident priority is impact × urgency with resolution SLAs (P1 4h to P5 5 days) tracked as on-track, at-risk or breached; categories auto-route to assignment groups; catalog requests go to the requester's manager for approval; changes need Change Advisory Board approval before scheduling; resolving a problem resolves its linked incidents. Every record has an activity stream with customer-visible comments, internal work notes and an automatic audit trail. Server-rendered Python with no JS framework, tested with pytest, deployed on Vercel (Tokyo region) next to its Supabase Postgres database.
    Technologies: Python, FastAPI, Jinja2, PostgreSQL, Supabase, Vercel, pytest
    Links: Live demo https://servio-snowy.vercel.app (demo login: alex / password, or admin / admin) · GitHub https://github.com/Htet-Myark/servio
 
-9. PC Lab Assembly
+8. PC Lab Assembly
    Description: A browser-based 3D simulator for practising hardware assembly before touching real parts. The desktop lab walks through 7 parts and 60 steps: power supply (including the region's voltage setting), ESD vest and wrist strap, CPU with Pin 1 alignment, thermal paste, cooler, RAM, standoffs and motherboard, hard and optical drives, wired NIC, wireless NIC and video card, internal power and data cables, front-panel switches, LEDs, USB and audio, then peripherals and a POST screen on power-up. Separate laptop (39 steps), phone and tablet (28 steps each) labs cover ZIF ribbon cables, heat-sink screw order, M.2 key types, antenna leads, flex connectors and battery adhesive. It catches classic mistakes (handling parts before grounding, backwards RAM, the cooler before thermal paste, a GPU in an x1 slot, reversed LED polarity, the monitor on onboard video) and explains why each one matters on real hardware. A technician in the scene wears the ESD gear and reaches for the part being worked on. Practice mode highlights targets; Challenge mode has scoring, a timer, paid hints and a saved best score. Also has a 2D SVG version for low-end machines. Plain JavaScript and three.js, no build step, MIT licensed, for educational use and not affiliated with any hardware vendor.
    Technologies: JavaScript, Three.js, WebGL, HTML, CSS, SVG, Vercel
    Links: Live demo https://pc-lab-assembly.vercel.app · GitHub https://github.com/Htet-Myark/pc-lab-assembly
