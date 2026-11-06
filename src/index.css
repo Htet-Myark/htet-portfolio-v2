@@ -1009,6 +1009,16 @@ section {
   border-radius: var(--r-md);
   background: var(--bg);
   animation: tile-in 0.4s var(--ease) both;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skill-icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 @keyframes tile-in {
