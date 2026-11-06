@@ -24,34 +24,7 @@ export const projects = [
     desc: 'A self-hosted ITSM app modelled on how a real service desk runs: incidents, service requests, changes and problems, plus a self-service portal and knowledge base. Incident priority comes from impact × urgency with resolution SLAs that go on-track, at-risk and breached; catalog requests route to the requester’s manager for approval; changes need Change Advisory Board sign-off before they can be scheduled. Server-rendered with no JS framework, deployed on Vercel in Tokyo next to its Supabase database. Demo logins are on the sign-in page (e.g. alex / password).',
     tags: ['Python', 'FastAPI', 'Jinja2', 'PostgreSQL', 'Supabase', 'Vercel', 'pytest'],
   },
-  {
-    title: 'Shrtner',
-    image: '/projects/shrtner.jpg',
-    imageAlt: 'Shrtner URL shortener with its terminal-style interface',
-    org: 'Live Demo',
-    link: 'https://shrtner.htetmyarkaung.com/',
-    desc: 'A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. It supports custom aliases. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).',
-    tags: [ 'HTML', 'CSS', 'JavaScript','Node.js', 'Express', 'PostgreSQL', 'NeonDB'],
-  },
-  
-  {
-    title: 'FOP2: University Info System',
-    image: '/projects/fop2.jpg',
-    imageAlt: 'FOP2 university information pages with salary and employment queries',
-    org: 'Live Demo',
-    link: 'https://files-vkom.onrender.com/FOP2',
-    desc: 'A university information project built as part of the Fundamentals of Programming 2 course.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Node.js', 'Express', 'REST API'],
-  },
-  {
-    title: 'Sar Kyi Tite - Library Management System',
-    image: '/projects/sarkyitite.jpg',
-    imageAlt: 'Sar Kyi Tite library management system sign-in page',
-    org: 'Live Demo',
-    link: 'https://sarkyitite.htetmyarkaung.com/',
-    desc: 'A full-stack library management system with user authentication and session timeout, book borrowing and return tracking, bookmarks, automated overdue warnings via email, and a book request system where users can submit requests and admins can reply. The admin panel provides full control over users, books, and borrow records.',
-    tags: ['React', 'Vite', 'React Router', 'Axios', 'Node.js', 'Express', 'MongoDB', 'JWT', 'bcrypt', 'Nodemailer'],
-  },
+ 
   {
     title: 'AWS Bedrock Chatbot',
     image: '/projects/bedrock.jpg',
@@ -91,6 +64,24 @@ export const projects = [
     ],
     desc: 'A serverless three-tier application that looks up a user by ID: a static front end in S3 served over HTTPS through CloudFront with origin access control, an API Gateway route calling a Node.js Lambda, and DynamoDB behind it. The write-up walks through the six errors I hit wiring the services together, what each one actually meant, plus the running cost and the teardown steps.',
     tags: ['AWS S3', 'CloudFront', 'API Gateway', 'AWS Lambda', 'DynamoDB', 'Node.js', 'JavaScript', 'IAM'],
+  },
+  {
+    title: 'FOP2: University Info System',
+    image: '/projects/fop2.jpg',
+    imageAlt: 'FOP2 university information pages with salary and employment queries',
+    org: 'Live Demo',
+    link: 'https://files-vkom.onrender.com/FOP2',
+    desc: 'A university information project built as part of the Fundamentals of Programming 2 course.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'Node.js', 'Express', 'REST API'],
+  },
+   {
+    title: 'Shrtner',
+    image: '/projects/shrtner.jpg',
+    imageAlt: 'Shrtner URL shortener with its terminal-style interface',
+    org: 'Live Demo',
+    link: 'https://shrtner.htetmyarkaung.com/',
+    desc: 'A lightweight URL shortener that generates compact codes starting at 3 characters, scaling to 4 when collisions occur. It supports custom aliases. The frontend is a static terminal-aesthetic UI, backed by NeonDB (serverless PostgreSQL).',
+    tags: [ 'HTML', 'CSS', 'JavaScript','Node.js', 'Express', 'PostgreSQL', 'NeonDB'],
   }
 ]
 
