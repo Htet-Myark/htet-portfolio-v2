@@ -106,6 +106,60 @@ a { color: inherit; text-decoration: none; }
   .scroll-progress { display: none; }
 }
 
+/* ── CIRCUIT TRACE: draws down the left margin on scroll ── */
+main { position: relative; }
+
+.circuit-trace {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 0;
+}
+
+.circuit-track,
+.circuit-line,
+.circuit-branch {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.circuit-track { stroke: rgba(29, 29, 31, 0.1); stroke-width: 2; stroke-dasharray: 2 6; }
+.circuit-line  { stroke: var(--accent); stroke-width: 2.5; }
+
+.circuit-branch {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  transition: stroke-dashoffset 0.5s var(--ease) 0.1s;
+}
+.circuit-node.is-on .circuit-branch { stroke-dashoffset: 0; }
+
+.circuit-via {
+  fill: var(--bg);
+  stroke: rgba(29, 29, 31, 0.22);
+  stroke-width: 2;
+  transition: fill 0.3s var(--ease), stroke 0.3s var(--ease);
+}
+.circuit-node.is-on .circuit-via { fill: var(--accent); stroke: var(--accent); }
+
+.circuit-pad {
+  fill: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease) 0.5s;
+}
+.circuit-node.is-on .circuit-pad { opacity: 1; }
+
+.circuit-tip {
+  fill: #fff;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgba(20, 40, 160, 0.7));
+  transition: opacity 0.2s;
+}
+
 /* ── SCROLL REVEAL: soft rise ───────────────────────────── */
 .reveal, .reveal-left, .reveal-scale, .reveal-clip {
   opacity: 0;
