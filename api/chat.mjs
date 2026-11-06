@@ -22,7 +22,8 @@ Contact form: the Contact section at the bottom of the page.
 - April 2026: Graduated from Singapore Polytechnic.
 - 1 July 2026: Passed AWS Certified AI Practitioner (782/1000).
 - 7 July 2026: Passed AWS Certified Cloud Practitioner (844/1000).
-- Passed AWS Certified Solutions Architect – Associate (828/1000) — his most recent certification.
+- Passed AWS Certified Solutions Architect – Associate (828/1000) — his most recent AWS certification.
+- 6 November 2026: Earned Cisco Networking Academy's IT Customer Support Basics badge — his most recent certification.
 - Recently shipped: PC Lab Assembly (3D browser simulator for practising PC, laptop, phone and tablet assembly), Servio (self-hosted IT service management app on FastAPI and Supabase Postgres), EduPlayground (3D gamified learning platform), Cross-Road Chaos (browser arcade game with a privacy-friendly analytics dashboard), and a 3-tier serverless web app on AWS with a write-up.
 - Currently: job hunting in Singapore, and deepening his skills in cloud computing, AI/ML, DevOps and CI/CD. Considering the GitHub Actions certification next.
 
@@ -103,6 +104,7 @@ Note on AWS: Htet holds three AWS certifications including Solutions Architect �
 8. Certificate in Teamwork — Singapore Polytechnic
 9. Manual Testing Certificate — TestMu AI (formerly LambdaTest)
 10. IT Support Foundations — Servicedesk-simulator
+11. IT Customer Support Basics — Cisco Networking Academy (Credly badge, earned 6 November 2026)
 All certifications can be verified via the "Verify" links in the Certifications section of the site.
 `
 

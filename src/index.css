@@ -1034,11 +1034,35 @@ section {
   padding: 1.6rem 1.75rem 1.75rem;
 }
 
+/* icon tile at the top of each card, echoing the project covers */
+.cert-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  margin: -1.1rem -1.25rem 0.9rem;
+  border-radius: calc(var(--r-lg) - 6px);
+  background: var(--card-alt);
+  overflow: hidden;
+}
+.cert-icon {
+  width: 46%;
+  max-width: 128px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transition: transform 0.5s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cert:hover .cert-icon { transform: scale(1.06); }
+}
+
 .cert-index {
+  position: absolute;
+  top: 0.85rem;
+  left: 1rem;
   font-size: 12px;
   font-weight: 700;
   color: var(--accent);
-  margin-bottom: 0.4rem;
 }
 
 .cert-name {
