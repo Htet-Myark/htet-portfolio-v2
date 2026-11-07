@@ -63,9 +63,9 @@ Responsibilities:
    Link: https://eduplayground-client-nuia.vercel.app/
 
 5. Cross-Road Chaos
-   Description: A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a parcel thief. Plain JavaScript on HTML5 Canvas with no build step or dependencies. Has an autopilot (press B, or open the game with ?autopilot=1): a planning bot, not machine learning, that each frame forecasts every vehicle 1.8 seconds ahead using the game's own signal, braking and queueing rules, tries 17 headings against that forecast, and takes the safe one closest to its goal, routing diagonal jobs through the corner whose road is held at a red light. An overlay shows its goal, route and the traffic it is watching. In a headless benchmark against the real game code it never lost a 400-second run, averaging about 1,600 points at level 20. Also includes a password-protected analytics dashboard: a serverless collector writes anonymous visit and run stats to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.
+   Description: A browser arcade game where you play a courier crossing four lanes of traffic against a clock, dodging rival couriers and a parcel thief. Plain JavaScript on HTML5 Canvas with no build step or dependencies. Also includes a password-protected analytics dashboard: a serverless collector writes anonymous visit and run stats to Neon Postgres, grouping visitors by a daily-rotating hash so no stored row points back at a person.
    Technologies: HTML, CSS, JavaScript, Canvas API, Node.js, Vercel Functions, PostgreSQL, NeonDB
-   Links: Live demo https://cross-road-chaos.vercel.app · Watch the autopilot play https://cross-road-chaos.vercel.app/?autopilot=1
+   Links: Live demo https://cross-road-chaos.vercel.app
 
 6. 3-Tier Serverless Web App on AWS
    Description: A serverless three-tier app that looks up a user by ID: static frontend in S3 served over HTTPS via CloudFront with origin access control, an API Gateway route calling a Node.js Lambda, and DynamoDB behind it. The write-up covers the six errors hit while wiring the services together, what each meant, running cost and teardown steps.
