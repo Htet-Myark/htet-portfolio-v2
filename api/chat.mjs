@@ -23,7 +23,7 @@ Contact form: the Contact section at the bottom of the page.
 - 1 July 2026: Passed AWS Certified AI Practitioner (782/1000).
 - 7 July 2026: Passed AWS Certified Cloud Practitioner (844/1000).
 - Passed AWS Certified Solutions Architect – Associate (828/1000) — his most recent certification.
-- Recently shipped: PC Lab Assembly (3D browser simulator for practising PC, laptop, phone and tablet assembly), Servio (self-hosted IT service management app on FastAPI and Supabase Postgres), EduPlayground (3D gamified learning platform), Cross-Road Chaos (browser arcade game with a privacy-friendly analytics dashboard), and a 3-tier serverless web app on AWS with a write-up.
+- Recently shipped: Device Lab (formerly PC Lab Assembly; 3D browser simulator for practising PC, laptop, phone and tablet assembly), Servio (self-hosted IT service management app on FastAPI and Supabase Postgres), EduPlayground (3D gamified learning platform), Cross-Road Chaos (browser arcade game with a privacy-friendly analytics dashboard), and a 3-tier serverless web app on AWS with a write-up.
 - Currently: job hunting in Singapore, and deepening his skills in cloud computing, AI/ML, DevOps and CI/CD. Considering the GitHub Actions certification next.
 
 --- EXPERIENCE ---
@@ -76,10 +76,10 @@ Responsibilities:
    Technologies: Python, FastAPI, Jinja2, PostgreSQL, Supabase, Vercel, pytest
    Links: Live demo https://servio-snowy.vercel.app (demo login: alex / password, or admin / admin) · GitHub https://github.com/Htet-Myark/servio
 
-8. PC Lab Assembly
+8. Device Lab (formerly PC Lab Assembly)
    Description: A browser-based 3D simulator for practising hardware assembly before touching real parts. The desktop lab walks through 7 parts and 60 steps: power supply (including the region's voltage setting), ESD vest and wrist strap, CPU with Pin 1 alignment, thermal paste, cooler, RAM, standoffs and motherboard, hard and optical drives, wired NIC, wireless NIC and video card, internal power and data cables, front-panel switches, LEDs, USB and audio, then peripherals and a POST screen on power-up. Separate laptop (39 steps), phone and tablet (28 steps each) labs cover ZIF ribbon cables, heat-sink screw order, M.2 key types, antenna leads, flex connectors and battery adhesive. It catches classic mistakes (handling parts before grounding, backwards RAM, the cooler before thermal paste, a GPU in an x1 slot, reversed LED polarity, the monitor on onboard video) and explains why each one matters on real hardware. A technician in the scene wears the ESD gear and reaches for the part being worked on. Practice mode highlights targets; Challenge mode has scoring, a timer, paid hints and a saved best score. Also has a 2D SVG version for low-end machines. Plain JavaScript and three.js, no build step, MIT licensed, for educational use and not affiliated with any hardware vendor.
    Technologies: JavaScript, Three.js, WebGL, HTML, CSS, SVG, Vercel
-   Links: Live demo https://pc-lab-assembly.vercel.app · GitHub https://github.com/Htet-Myark/pc-lab-assembly
+   Links: Live demo https://device-lab-3d.vercel.app · GitHub https://github.com/Htet-Myark/device-lab
 
 --- SKILLS ---
 Frontend: HTML, CSS, JavaScript, React, React Native, Vite, Three.js, UI/UX Design, Figma

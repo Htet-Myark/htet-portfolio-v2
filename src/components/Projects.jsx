@@ -3,12 +3,12 @@ import SectionHead from './SectionHead'
 
 export const projects = [
   {
-    title: 'PC Lab Assembly',
-    image: '/projects/pc-lab-assembly.jpg',
-    imageAlt: 'PC Lab Assembly 3D workbench with a technician in an ESD vest beside an open tower case',
+    title: 'Device Lab: 3D Assembly & Repair Simulator',
+    image: '/projects/device-lab.jpg',
+    imageAlt: 'Device Lab 3D workbench with a technician in an ESD vest beside an open tower case',
     links: [
-      { org: 'Live Demo', link: 'https://pc-lab-assembly.vercel.app' },
-      { org: 'GitHub', link: 'https://github.com/Htet-Myark/pc-lab-assembly' },
+      { org: 'Live Demo', link: 'https://device-lab-3d.vercel.app' },
+      { org: 'GitHub', link: 'https://github.com/Htet-Myark/device-lab' },
     ],
     desc: 'A browser-based 3D simulator for practising hardware assembly before touching real parts. Build a desktop PC in 60 steps (PSU, CPU, cooler, RAM, drives, expansion cards, internal and front-panel cables) and boot it to a POST screen, plus separate laptop, phone and tablet labs. It catches the classic mistakes, such as handling RAM before grounding, misaligned CPU Pin 1, a GPU in an x1 slot or reversed LED polarity, and explains why each one matters in real life. Practice and Challenge modes, with a 2D version for low-end machines. No install, account or build step.',
     tags: ['JavaScript', 'Three.js', 'WebGL', 'HTML', 'CSS', 'SVG', 'Vercel'],
