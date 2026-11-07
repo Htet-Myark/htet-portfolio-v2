@@ -35,6 +35,22 @@ const skillGroups = [
   },
 ]
 
+/* skill name -> icon file in /public/skills (brand logos where one exists, a simple glyph otherwise) */
+const skillIcons = {
+  'HTML': 'html', 'CSS': 'css', 'JavaScript': 'javascript', 'React': 'react', 'React Native': 'react-native',
+  'Vite': 'vite', 'Three.js': 'threejs', 'UI/UX Design': 'uiux', 'Figma': 'figma',
+  'Java': 'java', 'J2EE': 'j2ee', 'C#': 'csharp', 'Python': 'python', 'Node.js': 'nodejs', 'Express': 'express',
+  'REST API': 'rest-api', 'WebSockets': 'websockets',
+  'SQL': 'sql', 'MySQL': 'mysql', 'PostgreSQL': 'postgresql', 'MongoDB': 'mongodb',
+  'AWS': 'aws', 'EC2': 'ec2', 'Lambda': 'lambda', 'S3': 's3', 'CloudFront': 'cloudfront', 'API Gateway': 'api-gateway',
+  'Bedrock': 'bedrock', 'CloudFormation': 'cloudformation', 'Azure Basics': 'azure', 'Docker': 'docker',
+  'Kubernetes Basics': 'kubernetes', 'CI/CD': 'cicd', 'Linux Basics': 'linux',
+  'OWASP Top 10': 'owasp', 'Secure Coding': 'secure-coding',
+  'UiPath': 'uipath', 'Power Automate': 'power-automate', 'Selenium': 'selenium', 'Katalon Studio': 'katalon',
+  'Git': 'git', 'Jira': 'jira', 'Postman': 'postman', 'Power BI': 'power-bi', 'Excel': 'excel',
+  'Data Analysis': 'data-analysis', 'Agile': 'agile',
+}
+
 export default function Skills() {
   const [current, setCurrent] = useState(0)
   const total = skillGroups.reduce((n, g) => n + g.items.length, 0)
@@ -88,7 +104,13 @@ export default function Skills() {
         {/* keyed so the chips replay their entrance on every tab change */}
         <ul className="skill-grid" key={group.label}>
           {group.items.map((skill, i) => (
-            <li className="skill-tile" key={skill} style={{ animationDelay: `${i * 30}ms` }}>{skill}</li>
+            <li className="skill-tile" key={skill} style={{ animationDelay: `${i * 30}ms` }}>
+              {skillIcons[skill] && (
+                <img className="skill-icon" src={`/skills/${skillIcons[skill]}.svg`} alt="" aria-hidden="true"
+                  width="24" height="24" loading="lazy" decoding="async" />
+              )}
+              <span>{skill}</span>
+            </li>
           ))}
         </ul>
       </div>

@@ -1,71 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { certs } from './Certificates'
-import { projects } from './Projects'
+import React from 'react'
 import SectionHead from './SectionHead'
-
-/* Counts derive from the real section data so they can never drift out of sync.
-   Only hand-written figures live here. */
-const stats = [
-  { value: certs.length,    label: 'Certifications' },
-  { value: projects.length, label: 'Projects shipped' },
-  { value: 11,              label: 'Months in industry' },
-]
-
-const format = (n) => n.toLocaleString('en-US')
-
-/* Counts up once, the first time the strip scrolls into view. */
-function useCountUp(target, duration = 1200) {
-  const ref = useRef(null)
-  const [value, setValue] = useState(0)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduced) {
-      setValue(target)
-      return
-    }
-
-    let frame
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return
-        observer.disconnect()
-        const start = performance.now()
-        const tick = (now) => {
-          const t = Math.min((now - start) / duration, 1)
-          const eased = 1 - Math.pow(1 - t, 3)
-          setValue(Math.round(target * eased))
-          if (t < 1) frame = requestAnimationFrame(tick)
-        }
-        frame = requestAnimationFrame(tick)
-      },
-      { threshold: 0.4 }
-    )
-    observer.observe(el)
-    return () => {
-      observer.disconnect()
-      cancelAnimationFrame(frame)
-    }
-  }, [target, duration])
-
-  return [ref, value]
-}
-
-function Stat({ value, suffix, label }) {
-  const [ref, current] = useCountUp(value)
-  return (
-    <div className="stat-cell" ref={ref}>
-      <div className="stat-value">
-        {format(current)}
-        {suffix && <span className="stat-suffix">{suffix}</span>}
-      </div>
-      <div className="stat-label">{label}</div>
-    </div>
-  )
-}
 
 export default function About() {
   return (
@@ -90,12 +24,6 @@ export default function About() {
             Cloud Practitioner certifications. Always learning, always shipping.
           </p>
         </article>
-
-        {stats.map((s, i) => (
-          <article className={`tile tile--stat reveal delay-${i + 1}`} key={s.label}>
-            <Stat {...s} />
-          </article>
-        ))}
 
         <article className="tile tile--dark reveal delay-2">
           <p className="tile-label">Right now</p>

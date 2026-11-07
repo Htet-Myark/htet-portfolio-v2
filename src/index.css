@@ -106,6 +106,60 @@ a { color: inherit; text-decoration: none; }
   .scroll-progress { display: none; }
 }
 
+/* ── CIRCUIT TRACE: draws down the left margin on scroll ── */
+main { position: relative; }
+
+.circuit-trace {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 0;
+}
+
+.circuit-track,
+.circuit-line,
+.circuit-branch {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.circuit-track { stroke: rgba(29, 29, 31, 0.1); stroke-width: 2; stroke-dasharray: 2 6; }
+.circuit-line  { stroke: var(--accent); stroke-width: 2.5; }
+
+.circuit-branch {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  transition: stroke-dashoffset 0.5s var(--ease) 0.1s;
+}
+.circuit-node.is-on .circuit-branch { stroke-dashoffset: 0; }
+
+.circuit-via {
+  fill: var(--bg);
+  stroke: rgba(29, 29, 31, 0.22);
+  stroke-width: 2;
+  transition: fill 0.3s var(--ease), stroke 0.3s var(--ease);
+}
+.circuit-node.is-on .circuit-via { fill: var(--accent); stroke: var(--accent); }
+
+.circuit-pad {
+  fill: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease) 0.5s;
+}
+.circuit-node.is-on .circuit-pad { opacity: 1; }
+
+.circuit-tip {
+  fill: #fff;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgba(20, 40, 160, 0.7));
+  transition: opacity 0.2s;
+}
+
 /* ── SCROLL REVEAL: soft rise ───────────────────────────── */
 .reveal, .reveal-left, .reveal-scale, .reveal-clip {
   opacity: 0;
@@ -473,11 +527,11 @@ section {
 .btn-secondary:hover { background: var(--fg); color: #fff; }
 
 /* ── ABOUT: bento grid ──────────────────────────────── */
-/* 4 columns: the story takes a 2x2 block, facts fill around it */
+/* 4 columns: the story takes a 2x3 block, facts fill the other half */
 .bento {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: minmax(200px, auto);
+  grid-auto-rows: minmax(180px, auto);
   gap: 1rem;
 }
 
@@ -491,9 +545,9 @@ section {
   overflow: hidden;
 }
 
-.tile--story { grid-column: span 2; grid-row: span 2; padding: 2.5rem; gap: 1.5rem; }
+.tile--story { grid-column: span 2; grid-row: span 3; padding: 2.5rem; gap: 1.5rem; }
 .tile--dark  { grid-column: span 2; background: var(--fg); color: #fff; }
-.tile--blue  { background: var(--accent); color: #fff; }
+.tile--blue  { grid-column: span 2; background: var(--accent); color: #fff; }
 
 .tile-label {
   font-size: 13px;
@@ -542,24 +596,6 @@ section {
   0%, 100% { opacity: 1; }
   50%      { opacity: 0.35; }
 }
-
-/* count-up stats */
-.tile--stat { justify-content: flex-end; }
-
-.stat-cell { display: flex; flex-direction: column; gap: 0.35rem; }
-
-.stat-value {
-  font-family: var(--display);
-  font-size: clamp(3.2rem, 6vw, 4.75rem);
-  font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: var(--fg);
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-suffix { color: var(--accent); }
-.stat-label { font-size: 15px; font-weight: 500; color: var(--muted); }
 
 /* ── EXPERIENCE / EDUCATION: job card with metrics ──── */
 .job {
@@ -1009,6 +1045,16 @@ section {
   border-radius: var(--r-md);
   background: var(--bg);
   animation: tile-in 0.4s var(--ease) both;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skill-icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 @keyframes tile-in {
@@ -1034,11 +1080,35 @@ section {
   padding: 1.6rem 1.75rem 1.75rem;
 }
 
+/* icon tile at the top of each card, echoing the project covers */
+.cert-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 9;
+  margin: -1.1rem -1.25rem 0.9rem;
+  border-radius: calc(var(--r-lg) - 6px);
+  background: var(--card-alt);
+  overflow: hidden;
+}
+.cert-icon {
+  width: 46%;
+  max-width: 128px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transition: transform 0.5s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .cert:hover .cert-icon { transform: scale(1.06); }
+}
+
 .cert-index {
+  position: absolute;
+  top: 0.85rem;
+  left: 1rem;
   font-size: 12px;
   font-weight: 700;
   color: var(--accent);
-  margin-bottom: 0.4rem;
 }
 
 .cert-name {
@@ -1513,8 +1583,6 @@ section {
   .tile, .tile--story { padding: 1.6rem 1.4rem; border-radius: var(--r-lg); }
   .tile--blue { grid-column: auto; }
   .tile-label { margin-bottom: 0.75rem; }
-  .tile--stat .stat-cell { flex-direction: row; align-items: baseline; justify-content: space-between; }
-  .stat-value { font-size: 3rem; }
 
   .job { padding: 1.6rem 1.35rem; border-radius: var(--r-lg); }
   .job-head { padding-bottom: 1.5rem; }

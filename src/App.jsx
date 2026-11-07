@@ -12,6 +12,7 @@ import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
 import Drone from './components/Drone'
 import FieldBackground from './components/FieldBackground'
+import CircuitTrace from './components/CircuitTrace'
 import './index.css'
 
 export default function App() {
@@ -52,6 +53,8 @@ export default function App() {
       <Drone />
       <Nav />
       <main>
+        {/* circuit trace in the left margin that draws itself as you scroll */}
+        <CircuitTrace />
         <Hero />
         <About />
         <Education />
