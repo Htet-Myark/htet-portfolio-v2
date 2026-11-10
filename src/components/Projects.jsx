@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import SectionHead from './SectionHead'
 
 export const projects = [
@@ -87,115 +87,48 @@ export const projects = [
 
 const pad2 = n => String(n).padStart(2, '0')
 
-/* flat cover tones, cycled per card */
-const COVERS = ['cover--blue', 'cover--black', 'cover--sky', 'cover--stone']
+/* "Name: what it is" titles split into a name and a subtitle. */
+const splitTitle = (t) => { const i = t.indexOf(': '); return i < 0 ? [t, ''] : [t.slice(0, i), t.slice(i + 2)] }
+/* The first sentence is the pitch; the rest is the detail behind "How it works". */
+const splitDesc = (d) => { const m = d.match(/^.*?[.!?](?=\s|$)/); return m ? [m[0], d.slice(m[0].length).trim()] : [d, ''] }
 
-const Arrow = ({ dir }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    {dir === 'prev' ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
-  </svg>
-)
-
+/* The workshop: every build is shown as what it really is, a screenshot of the
+   running thing in a plain window, with the pitch beside it and the detail one
+   click away. No carousel, so nothing is hidden off-screen. */
 export default function Projects() {
-  const trackRef = useRef(null)
-  const [shown, setShown] = useState({ first: 0, last: 0 })
-  const [atStart, setAtStart] = useState(true)
-  const [atEnd, setAtEnd] = useState(false)
-
-  /* which cards are actually on screen, and whether either end has been reached.
-     A laptop fits about three cards, so "leftmost card" alone tops out at 06 / 08
-     and the last two never get a number; the range (06-08 / 08) is right on any
-     width or orientation, and collapses to one number when one card fits */
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const update = () => {
-      const cards = [...track.children]
-      const left = track.scrollLeft
-      const box = track.getBoundingClientRect()
-      const viewL = Math.max(box.left, 0), viewR = Math.min(box.right, window.innerWidth)
-      const visible = []
-      cards.forEach((c, i) => {
-        const r = c.getBoundingClientRect()
-        const seen = Math.min(r.right, viewR) - Math.max(r.left, viewL)
-        if (seen >= r.width * 0.9) visible.push(i)              // mostly on screen
-      })
-      if (!visible.length) {                                    // mid-swipe: take the one most in view
-        let best = 0, bestSeen = -Infinity
-        cards.forEach((c, i) => {
-          const r = c.getBoundingClientRect()
-          const seen = Math.min(r.right, viewR) - Math.max(r.left, viewL)
-          if (seen > bestSeen) { bestSeen = seen; best = i }
-        })
-        visible.push(best)
-      }
-      const first = visible[0], last = visible[visible.length - 1]
-      setShown(prev => (prev.first === first && prev.last === last ? prev : { first, last }))
-      setAtStart(left < 8)
-      setAtEnd(left + track.clientWidth > track.scrollWidth - 8)
-    }
-    update()
-    track.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
-    return () => {
-      track.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
-  }, [])
-
-  const step = (dir) => {
-    const track = trackRef.current
-    const card = track?.children[0]
-    if (!card) return
-    const gap = parseFloat(getComputedStyle(track).columnGap) || 0
-    track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' })
-  }
-
-  const controls = (
-    <div className="carousel-controls">
-      <span className="carousel-count" aria-live="polite">
-        <strong>
-          {pad2(shown.first + 1)}
-          {shown.last > shown.first && <>&ndash;{pad2(shown.last + 1)}</>}
-        </strong> / {pad2(projects.length)}
-      </span>
-      <button className="round-btn" onClick={() => step(-1)} disabled={atStart} aria-label="Previous project">
-        <Arrow dir="prev" />
-      </button>
-      <button className="round-btn" onClick={() => step(1)} disabled={atEnd} aria-label="Next project">
-        <Arrow dir="next" />
-      </button>
-    </div>
-  )
-
   return (
     <section id="projects">
-      <SectionHead eyebrow="Projects" title="Things I've built and shipped." aside={controls} />
+      <SectionHead eyebrow="Projects" title="Things I've built and shipped."
+        aside={<p className="section-note"><strong>{projects.length}</strong> builds on the bench</p>} />
 
-      <ol className="carousel reveal" ref={trackRef}>
+      <ol className="builds">
         {projects.map((p, i) => {
-          const links = p.links ?? [{ org: p.org, link: p.link }]
+          const links = (p.links ?? [{ org: p.org, link: p.link }]).filter((l) => l.link)
+          const [name, sub] = splitTitle(p.title)
+          const [pitch, detail] = splitDesc(p.desc)
           return (
-            <li className="project" key={i}>
-              <div className={`project-cover ${p.image ? 'has-photo' : COVERS[i % COVERS.length]}`}>
-                {p.image && (
-                  <img className="project-photo" src={p.image} alt={p.imageAlt ?? ''}
-                       width="1200" height="900" loading="lazy" decoding="async" />
+            <li className={`build reveal ${i === 0 ? 'build--lead' : ''}`} key={p.title}>
+              <a className="build-shot" href={links[0]?.link} target="_blank" rel="noopener noreferrer" aria-label={`Open ${name}`}>
+                <span className="build-bar" aria-hidden="true"><i /><i /><i /><em>{links[0]?.link.replace(/^https?:\/\//, '').replace(/\/.*$/, '')}</em></span>
+                {p.image && <img src={p.image} alt={p.imageAlt ?? ''} width="1200" height="900" loading="lazy" decoding="async" />}
+              </a>
+              <div className="build-body">
+                <p className="build-meta"><b>Build {pad2(i + 1)}</b>{p.tags[0]}</p>
+                <h3 className="build-name">{name}</h3>
+                {sub && <p className="build-sub">{sub}</p>}
+                <p className="build-pitch">{pitch}</p>
+                {detail && (
+                  <details className="build-more">
+                    <summary>How it works</summary>
+                    <p>{detail}</p>
+                  </details>
                 )}
-                <span className="project-index">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="project-title">{p.title}</h3>
-                <span className="project-lead">{p.tags[0]}</span>
-              </div>
-              <div className="project-body">
-                <p className="project-desc">{p.desc}</p>
-                <ul className="project-tags">
-                  {p.tags.map((t) => <li className="chip" key={t}>{t}</li>)}
+                <ul className="build-tags">
+                  {p.tags.map((t) => <li key={t}>{t}</li>)}
                 </ul>
-                <div className="project-links">
+                <div className="build-links">
                   {links.map((l, j) => (
-                    l.link
-                      ? <a href={l.link} className={j === 0 ? 'btn-primary btn-sm' : 'btn-secondary btn-sm'} target="_blank" rel="noopener noreferrer" key={j}>{l.org}</a>
-                      : <span className="btn-secondary btn-sm is-off" key={j}>{l.org}</span>
+                    <a href={l.link} className={j === 0 ? 'btn-primary btn-sm' : 'btn-secondary btn-sm'} target="_blank" rel="noopener noreferrer" key={l.link}>{l.org} <span aria-hidden="true">↗</span></a>
                   ))}
                 </div>
               </div>
