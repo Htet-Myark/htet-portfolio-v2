@@ -1908,3 +1908,20 @@ main, #root { counter-reset: sec; }
   .build--lead { display: flex; }
 }
 @media (prefers-reduced-motion: reduce) { .build-shot:hover { transform: none; } }
+
+/* projects: three compact builds per row */
+.builds { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.75rem 1.75rem; }
+.build--lead { grid-column: auto; display: flex; gap: 1.25rem; align-items: stretch; }
+.build { gap: 1rem; }
+.build-shot { box-shadow: 4px 4px 0 var(--fg); border-radius: 6px; }
+.build-bar { padding: 6px 10px; }
+.build-name, .build--lead .build-name { font-size: 1.45rem; letter-spacing: -0.025em; }
+.build-sub { font-size: 12px; }
+.build-pitch { font-size: 0.93rem; margin-top: 0.7rem; }
+.build-meta { font-size: 11px; margin-bottom: 0.45rem; }
+.build-tags { font-size: 11.5px; gap: 0.25rem 0.6rem; }
+.build-tags li + li::before { margin-right: 0.6rem; }
+.build-links { margin-top: 0.9rem; }
+.build-links .btn-sm { padding: 8px 13px; font-size: 13px; }
+@media (max-width: 1000px) { .builds { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .builds { grid-template-columns: 1fr; } }
