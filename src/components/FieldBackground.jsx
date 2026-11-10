@@ -17,7 +17,7 @@ import { loadDays } from './GitHubActivity'
    coarser grid; under prefers-reduced-motion one static frame is rendered. */
 
 const PAPER = [0.114, 0.114, 0.122]   // --text   #1d1d1f (dots on a light page)
-const ACCENT = [0.078, 0.157, 0.627]  // --accent #1428a0
+const ACCENT = [0.839, 0.251, 0.141]  // --accent #d64024
 
 const NEAR_Z = 250     // grid edge closest to the camera
 const DEPTH = 1700     // grid extent away from the camera
@@ -124,7 +124,7 @@ export default function FieldBackground() {
 
       const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: 'high-performance' })
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, mobile ? 1.5 : 2))
-      renderer.setClearColor(0xf7f7f7, 1)
+      renderer.setClearColor(0xf3f0e8, 1)
       container.appendChild(renderer.domElement)
 
       const scene = new THREE.Scene()

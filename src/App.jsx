@@ -10,9 +10,9 @@ import Certificates from './components/Certificates'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ChatBot from './components/ChatBot'
-import Drone from './components/Drone'
 import FieldBackground from './components/FieldBackground'
 import CircuitTrace from './components/CircuitTrace'
+import FlightMap from './components/FlightMap'
 import './index.css'
 
 export default function App() {
@@ -50,11 +50,11 @@ export default function App() {
       {/* GitHub contribution year as 3D terrain; scrolling walks back through it */}
       <FieldBackground />
       {/* 3D drone floating over the whole page (click-through) */}
-      <Drone />
       <Nav />
       <main>
         {/* circuit trace in the left margin that draws itself as you scroll */}
         <CircuitTrace />
+        <FlightMap />
         <Hero />
         <About />
         <Education />

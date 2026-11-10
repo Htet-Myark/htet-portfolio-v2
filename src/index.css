@@ -10,20 +10,20 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #f7f7f7;
-  --card:      #ffffff;
-  --card-alt:  #f0f0f0;
-  --fg:        #000000;
-  --text:      #1d1d1f;
-  --muted:     #555555;
-  --faint:     #8a8a8a;
-  --line:      #e2e2e2;
-  --accent:    #1428a0;     /* deep brand blue */
-  --link:      #2071e8;     /* interactive blue */
-  --r-xl:      28px;
-  --r-lg:      20px;
-  --r-md:      14px;
-  --display:   'Outfit', 'Inter', system-ui, sans-serif;
+  --bg:        #f3f0e8;
+  --card:      #fbfaf5;
+  --card-alt:  #ebe7dc;
+  --fg:        #15140f;
+  --text:      #23221c;
+  --muted:     #5d5a50;
+  --faint:     #8d897c;
+  --line:      #d8d3c5;
+  --accent:    #d64024;     /* deep brand blue */
+  --link:      #b8321a;     /* interactive blue */
+  --r-xl:      10px;
+  --r-lg:      8px;
+  --r-md:      6px;
+  --display:   'Bricolage Grotesque', 'Inter', system-ui, sans-serif;
   --sans:      'Inter', system-ui, sans-serif;
   --ease:      cubic-bezier(0.25, 0.8, 0.25, 1);
   --measure:   1240px;
@@ -156,7 +156,7 @@ main { position: relative; }
   fill: #fff;
   stroke: var(--accent);
   stroke-width: 2.5;
-  filter: drop-shadow(0 0 6px rgba(20, 40, 160, 0.7));
+  filter: drop-shadow(0 0 6px rgba(214, 64, 36, 0.7));
   transition: opacity 0.2s;
 }
 
@@ -349,7 +349,7 @@ section {
   white-space: nowrap;
 }
 
-.chip--blue { color: var(--accent); background: #eef0fb; }
+.chip--blue { color: var(--accent); background: #fbe9e3; }
 
 /* ── HERO: centred product-launch layout ────────────── */
 #hero {
@@ -918,9 +918,9 @@ section {
 
 /* single-hue ramp from the brand blue */
 .lvl-0 { background: #ececec; }
-.lvl-1 { background: rgba(20, 40, 160, 0.25); }
-.lvl-2 { background: rgba(20, 40, 160, 0.48); }
-.lvl-3 { background: rgba(20, 40, 160, 0.74); }
+.lvl-1 { background: rgba(214, 64, 36, 0.25); }
+.lvl-2 { background: rgba(214, 64, 36, 0.48); }
+.lvl-3 { background: rgba(214, 64, 36, 0.74); }
 .lvl-4 { background: var(--accent); }
 
 .gh-grid .gh-day:hover { outline: 2px solid var(--fg); outline-offset: 1px; }
@@ -1630,3 +1630,244 @@ section {
   .reveal, .reveal-left, .reveal-scale, .reveal-clip { opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   FIELD NOTES (makeover layer)
+   An engineer's logbook rather than a product page: warm paper, ink,
+   one vermilion signal colour. A characterful grotesque for headlines,
+   a mono face for labels and data, hairline rules instead of soft
+   floating cards, and numbered sections. Flat fills only.
+   ═══════════════════════════════════════════════════════════ */
+:root { --mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; }
+
+body { counter-reset: sec; }
+main, #root { counter-reset: sec; }
+
+/* numbered, mono section labels with a rule that runs to the edge */
+.section-head { border-top: 1.5px solid var(--fg); padding-top: 1.1rem; align-items: flex-start; }
+.section-eyebrow {
+  font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.1rem;
+}
+.section-eyebrow::before {
+  counter-increment: sec; content: counter(sec, decimal-leading-zero) ' / ';
+  color: var(--accent);
+}
+.section-heading { font-weight: 800; letter-spacing: -0.035em; line-height: 0.98; font-size: clamp(2.4rem, 5.6vw, 4.4rem); }
+
+/* cards sit on the paper with a hairline, not a shadow */
+.chip { border-radius: 4px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.02em; }
+
+/* ── HERO: editorial, left-aligned, with a spec sheet ── */
+#hero { text-align: left; align-items: stretch; padding-top: 8.5rem; }
+.hero-eyebrow {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 2.5rem; justify-content: space-between;
+  font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  border-top: 1.5px solid var(--fg); padding-top: 0.9rem; margin-bottom: 2.5rem;
+}
+.hero-eyebrow span:first-child { color: var(--accent); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr); gap: 3rem 4rem; align-items: end; }
+.hero-name {
+  font-size: clamp(4.2rem, 13.5vw, 11.5rem); font-weight: 800;
+  line-height: 0.86; letter-spacing: -0.04em; margin-bottom: 2.25rem;
+}
+.hero-name i { font-style: normal; color: var(--accent); }
+.hero-lede { max-width: 31em; margin-bottom: 2rem; color: var(--text); }
+.hero-cta { justify-content: flex-start; margin-bottom: 0; }
+
+.hero-sheet { border-top: 1.5px solid var(--fg); }
+.hero-sheet dl > div {
+  display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; align-items: center;
+  padding: 0.8rem 0; border-bottom: 1px solid var(--line);
+}
+.hero-sheet dt { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+.hero-sheet dd { font-size: 15px; font-weight: 600; color: var(--fg); line-height: 1.35; }
+.hero-certs { display: flex; gap: 0.5rem; }
+.hero-certs img { width: 54px; height: 54px; object-fit: contain; transition: transform 0.25s var(--ease); }
+.hero-certs img:hover { transform: translateY(-3px) rotate(-3deg); }
+.hero-status {
+  display: flex; width: 100%; border: 0; border-radius: 0; background: none;
+  padding: 0.8rem 0; border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.hero-status i { animation: live 2s ease-in-out infinite; }
+.hero-links { justify-content: flex-start; margin: 1rem 0 0; gap: 0.4rem 1.4rem; font-size: 14px; }
+.hero-links a { text-decoration-color: var(--accent); }
+.hero-links a:hover { color: var(--accent); }
+.hero-showcase { max-width: none; margin-top: 4rem; }
+
+/* ── BUTTONS: squared, ink, with a hard offset on hover ── */
+.btn-primary, .btn-secondary {
+  border-radius: 6px; font-size: 14.5px; padding: 14px 24px; letter-spacing: 0.01em;
+  transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), background 0.18s var(--ease), color 0.18s var(--ease);
+}
+.btn-primary { color: var(--bg); }
+.btn-primary:hover:not(:disabled) { background: var(--fg); border-color: var(--fg); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--accent); }
+.btn-secondary:hover { background: transparent; color: var(--fg); transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--fg); }
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-eyebrow span:nth-child(2) { display: none; }
+  #hero { padding-top: 7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover, .btn-secondary:hover { transform: none; }
+  .hero-status i { animation: none; }
+}
+
+/* ── PLAYABLE HERO: a small island you fly a drone around ── */
+#hero { max-width: none; padding: 0; height: 100svh; min-height: 620px; display: block; overflow: hidden; }
+.world, .world-canvas { position: absolute; inset: 0; }
+.world-canvas canvas { display: block; cursor: crosshair; }
+.world-label {
+  position: absolute; left: 0; top: 0; pointer-events: none; white-space: nowrap;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg); background: var(--card); border: 1px solid var(--fg); padding: 3px 8px; border-radius: 3px;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.world-label.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.hero-copy { position: absolute; left: clamp(1.25rem, 3vw, 2.5rem); top: 6.25rem; width: min(26rem, calc(100% - 2.5rem)); pointer-events: none; }
+.hero-copy a { pointer-events: auto; }
+.hero-copy .hero-eyebrow { border: 0; padding: 0; margin-bottom: 0.9rem; justify-content: flex-start; gap: 1.25rem; }
+.hero-copy .hero-name { font-size: clamp(2.9rem, 6vw, 4.6rem); line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 1rem; }
+.hero-copy .hero-lede { font-size: 15.5px; line-height: 1.55; margin-bottom: 1.25rem; max-width: 20em; }
+.hero-copy .hero-cta { margin-bottom: 0.5rem; }
+.hero-copy .btn-primary, .hero-copy .btn-secondary { padding: 11px 18px; font-size: 14px; }
+.hero-copy .btn-secondary { background: var(--card); }
+.hero-copy .hero-status { border: 0; width: auto; }
+
+.world-log {
+  position: absolute; right: clamp(1.25rem, 3vw, 2.5rem); top: 6.25rem; width: 15.5rem;
+  background: var(--card); border: 1.5px solid var(--fg); border-radius: 6px; padding: 0.85rem 0.9rem 0.6rem;
+  box-shadow: 5px 5px 0 var(--fg);
+}
+.world-log p { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+.world-log p b { color: var(--accent); font-weight: 500; }
+.world-log ol { list-style: none; }
+.world-log button { width: 100%; display: grid; grid-template-columns: 14px 1fr; column-gap: 0.55rem; align-items: center; text-align: left; background: none; border: 0; border-top: 1px solid var(--line); padding: 0.42rem 0; font: 600 13.5px var(--sans); color: var(--fg); cursor: pointer; }
+.world-log button span { grid-column: 2; font: 400 12px var(--sans); color: var(--faint); }
+.world-log button i { width: 11px; height: 11px; border: 1.5px solid var(--fg); border-radius: 2px; grid-row: span 2; }
+.world-log .seen button i { background: var(--fg); }
+.world-log .here button { color: var(--accent); } .world-log .here button i { background: var(--accent); border-color: var(--accent); }
+.world-log button:hover { color: var(--accent); }
+.world-log .world-done { display: block; margin: 0.5rem 0 0.2rem; color: var(--accent); text-transform: none; letter-spacing: 0; }
+
+.world-hint, .world-prompt { position: absolute; left: 50%; bottom: 1.75rem; transform: translateX(-50%); }
+.world-hint { font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 0.5rem 0.9rem; white-space: nowrap; max-width: calc(100% - 2rem); overflow: hidden; text-overflow: ellipsis; }
+.world-hint kbd { font: inherit; color: var(--fg); border: 1px solid var(--fg); border-bottom-width: 2.5px; border-radius: 4px; padding: 0 5px; margin-right: 3px; }
+.world-prompt { display: grid; gap: 2px; text-align: left; min-width: 17rem; background: var(--fg); color: var(--bg); border: 0; border-radius: 6px; padding: 0.8rem 1.1rem; cursor: pointer; box-shadow: 5px 5px 0 var(--accent); animation: prompt-in 0.25s var(--ease); }
+.world-prompt span { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #f08a74; }
+.world-prompt b { font: 700 1.25rem var(--display); }
+.world-prompt em { font-style: normal; font-size: 12.5px; opacity: 0.75; }
+@keyframes prompt-in { from { opacity: 0; transform: translate(-50%, 10px); } }
+
+.hero-after { padding-top: 3rem; padding-bottom: 2rem; }
+.hero-after .hero-links { margin: 0 0 1.25rem; }
+.hero-after .gh-card { margin-top: 0; }
+
+@media (max-width: 900px) {
+  #hero { padding-top: 0; height: auto; min-height: 0; display: flex; flex-direction: column; }
+  .hero-copy { position: relative; left: auto; top: auto; width: auto; padding: 6rem 1.25rem 0; order: 0; }
+  .world { position: relative; inset: auto; height: 78svh; min-height: 480px; order: 1; }
+  .world-log { position: relative; right: auto; top: auto; width: auto; margin: 1rem 1.25rem 0; order: 2; box-shadow: none; }
+  .world-log ol { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; }
+}
+
+/* the island sits in open water under a pale sky */
+#hero { background: linear-gradient(#bfe4f1 0%, #d9eff5 38%, #d9eff5 100%); }
+.hero-copy .hero-lede { color: var(--fg); }
+.hero-copy .hero-eyebrow { color: #3d4a4f; }
+
+/* flight log: one quiet row of checkpoints instead of a panel */
+@media (min-width: 901px) {
+  .world-log { width: auto; max-width: calc(100% - 33rem); top: 5.4rem; display: flex; align-items: center; gap: 0.6rem; padding: 0.4rem 0.6rem; box-shadow: none; border-width: 1px; background: rgba(251, 250, 245, 0.88); }
+  .world-log p { margin: 0; gap: 0.5rem; white-space: nowrap; }
+  .world-log ol { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .world-log button { display: inline-flex; gap: 0.35rem; width: auto; border: 1px solid var(--line); border-radius: 4px; padding: 0.22rem 0.5rem; font-size: 12px; white-space: nowrap; }
+  .world-log button span { display: none; }
+  .world-log button i { width: 8px; height: 8px; border-radius: 50%; }
+  .world-log .world-done { display: none; }
+}
+
+/* ── ONE STORY: every section is a stop on the flight ── */
+.section-eyebrow::before { content: none; }
+.section-eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; }
+.section-eyebrow b { font-weight: 500; color: #fff; background: var(--accent); padding: 2px 8px; border-radius: 3px; }
+.section-eyebrow span + span { color: var(--faint); }
+.section-eyebrow span + span::before { content: '/ '; }
+.section-story { margin-top: 0.9rem; font-size: 1.05rem; color: var(--muted); max-width: 34em; }
+
+/* route map that follows the reader: the drone moves along it as they scroll */
+.flight-map {
+  position: fixed; left: 1.1rem; bottom: 1.1rem; z-index: 40; width: 8.6rem;
+  background: var(--card); border: 1.5px solid var(--fg); border-radius: 6px; padding: 0.4rem 0.4rem 0.45rem;
+  box-shadow: 4px 4px 0 var(--fg); opacity: 0; transform: translateY(12px); pointer-events: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.flight-map.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.flight-map svg { display: block; width: 100%; }
+.flight-map p { font: 600 12px var(--sans); color: var(--fg); line-height: 1.25; padding: 0.3rem 0.2rem 0; border-top: 1px solid var(--line); margin-top: 0.3rem; }
+.flight-map p b { display: block; font: 500 10.5px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.fm-isle { fill: #cfe6c0; stroke: var(--fg); stroke-width: 0.6; }
+.fm-route { fill: none; stroke: var(--fg); stroke-width: 0.7; stroke-dasharray: 1.6 1.4; opacity: 0.6; }
+.fm-hit { fill: transparent; }
+.fm-stop { fill: var(--card); stroke: var(--fg); stroke-width: 0.8; transition: r 0.2s var(--ease); }
+.fm-stop.done { fill: var(--fg); }
+.fm-stop.here { fill: var(--accent); stroke: var(--accent); }
+.fm-drone { transition: transform 0.25s linear; }
+.fm-drone circle:first-child { fill: none; stroke: var(--accent); stroke-width: 0.9; }
+.fm-drone circle:last-child { fill: var(--accent); }
+@media (max-width: 1100px) { .flight-map { display: none; } }
+@media (prefers-reduced-motion: reduce) { .fm-drone { transition: none; } }
+
+.world-label--gh { border-color: #216e39; color: #216e39; }
+.world-label--gh.on { background: #216e39; border-color: #216e39; color: #fff; }
+.hero-after { padding-top: 1.75rem; padding-bottom: 0; }
+.hero-after .hero-links { margin: 0; }
+
+/* ═══════════════════════════════════════════════════════════
+   ONE THEME: the island's colours carry down the page.
+   The hero is the sea, the page below is the beach (paper = sand),
+   and the footer returns to the water. Sea blue, grass green and
+   the red of the roofs and the drone are the only colours used.
+   ═══════════════════════════════════════════════════════════ */
+:root { --sea: #6fcbd9; --sea-deep: #1d6f7c; --sea-tint: #dff3f6; --grass: #8cc46a; --leaf: #2f7d45; --sand: #e8d5a6; }
+
+/* shoreline: the hero's water breaks onto the page */
+#hero::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 84px; z-index: 2; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 84' preserveAspectRatio='none'%3E%3Cpath d='M0 30 C180 2 320 54 520 30 S860 4 1040 30 1300 52 1440 24 V84 H0Z' fill='%23ffffff' fill-opacity='.6'/%3E%3Cpath d='M0 44 C180 16 320 68 520 44 S860 18 1040 44 1300 66 1440 38 V84 H0Z' fill='%23e8d5a6'/%3E%3Cpath d='M0 60 C180 36 320 80 520 60 S860 38 1040 60 1300 78 1440 56 V84 H0Z' fill='%23f3f0e8'/%3E%3C/svg%3E") bottom / 100% 100% no-repeat;
+}
+@media (min-width: 901px) { .world-hint, .world-prompt { bottom: 5.4rem; } }
+.field-bg::after { background: rgba(243, 240, 232, 0.5); }
+
+/* section heads: the stop badge is the drone's red, the place name is grass */
+.section-eyebrow span:first-of-type { color: var(--leaf); }
+.section-eyebrow span:first-of-type::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--grass); margin-right: 0.45rem; }
+.section-head { border-top-color: var(--fg); }
+.section-story { border-left: 3px solid var(--sea); padding-left: 0.8rem; }
+
+/* small parts pick up sea and grass instead of the old blue and red tints */
+.chip--blue { color: var(--sea-deep); background: var(--sea-tint); }
+.lvl-1 { background: #9be9a8; } .lvl-2 { background: #40c463; } .lvl-3 { background: #30a14e; } .lvl-4 { background: #216e39; }
+.hero-status i { background: #2e9d5a; }
+::selection { background: var(--sea-deep); color: #fff; }
+:focus-visible { outline-color: var(--sea-deep); }
+.flight-map { background: var(--sea-tint); }
+
+/* footer: back to the water */
+.site-footer { position: relative; margin-top: 7rem; background: var(--sea); border-top: 0; }
+.site-footer::before {
+  content: ''; position: absolute; left: 0; right: 0; top: -59px; height: 60px; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 26 C200 4 360 46 560 26 S900 6 1080 28 1320 44 1440 20 V60 H0Z' fill='%23e8d5a6'/%3E%3Cpath d='M0 36 C200 14 360 56 560 36 S900 16 1080 38 1320 54 1440 30 V60 H0Z' fill='%23ffffff' fill-opacity='.7'/%3E%3Cpath d='M0 44 C200 22 360 64 560 44 S900 24 1080 46 1320 62 1440 38 V60 H0Z' fill='%236fcbd9'/%3E%3C/svg%3E") top / 100% 100% no-repeat;
+}
+.footer-name, .footer-links a { color: var(--fg); }
+.footer-links a:hover { color: #fff; }
+@media (min-width: 901px) {
+  .world-hint, .world-prompt { left: clamp(1.25rem, 3vw, 2.5rem); transform: none; }
+  .world-prompt { animation-name: prompt-in-left; }
+}
+@keyframes prompt-in-left { from { opacity: 0; transform: translateY(10px); } }
