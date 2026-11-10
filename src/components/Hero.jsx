@@ -14,10 +14,9 @@ export default function Hero() {
           <h1 className="hero-name">Htet Myark<i aria-hidden="true">.</i></h1>
           <p className="hero-lede">
             I build full-stack web apps, RPA workflows and serverless AI tools on AWS.
-            This island is my story in seven stops, from home base to the radio tower. Fly the route, or just scroll it. The crop field at the front is my real GitHub year.
           </p>
           <div className="hero-cta">
-            <a href="#about" className="btn-primary">Start at stop 1 <span aria-hidden="true">↓</span></a>
+            <a href="#about" className="btn-primary">See my story <span aria-hidden="true">↓</span></a>
             <a href="/Htet_Myark_Aung_Resume.pdf" download="Htet_Myark_Aung_Resume.pdf" className="btn-secondary">Resume</a>
           </div>
           <p className="hero-status"><i aria-hidden="true" />Open to opportunities</p>
