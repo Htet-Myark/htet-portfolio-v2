@@ -1733,7 +1733,7 @@ main, #root { counter-reset: sec; }
 .hero-copy a { pointer-events: auto; }
 .hero-copy .hero-eyebrow { border: 0; padding: 0; margin-bottom: 0.9rem; justify-content: flex-start; gap: 1.25rem; }
 .hero-copy .hero-name { font-size: clamp(2.9rem, 6vw, 4.6rem); line-height: 0.92; letter-spacing: -0.04em; margin-bottom: 1rem; }
-.hero-copy .hero-lede { font-size: 15.5px; line-height: 1.55; margin-bottom: 1.25rem; max-width: 20em; }
+.hero-copy .hero-lede { font-size: 15.5px; line-height: 1.55; margin-bottom: 1.25rem; max-width: 23em; }
 .hero-copy .hero-cta { margin-bottom: 0.5rem; }
 .hero-copy .btn-primary, .hero-copy .btn-secondary { padding: 11px 18px; font-size: 14px; }
 .hero-copy .btn-secondary { background: var(--card); }

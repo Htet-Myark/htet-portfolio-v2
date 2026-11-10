@@ -14,6 +14,8 @@ export default function Hero() {
           <h1 className="hero-name">Htet Myark<i aria-hidden="true">.</i></h1>
           <p className="hero-lede">
             I build full-stack web apps, RPA workflows and serverless AI tools on AWS.
+            AWS Certified Solutions Architect and IT graduate of Singapore Polytechnic,
+            with eleven months shipping automation at PSA.
           </p>
           <div className="hero-cta">
             <a href="#about" className="btn-primary">See my story <span aria-hidden="true">↓</span></a>
